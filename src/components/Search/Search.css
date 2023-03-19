@@ -1,0 +1,25 @@
+.search {
+  color: var(--color);
+  background-color: inherit;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-icon {
+  color: var(--color);
+  background-color: transparent;
+  position: absolute;
+
+  margin-inline-start: 4px;
+}
+
+.search-input {
+  color: var(--color);
+  background-color: var(--background-color);
+
+  border-radius: var(--border-radius);
+  border: 1px solid black;
+
+  padding-inline-start: 1.75rem;
+}
