@@ -11,7 +11,7 @@
 
 .header-nav {
   display: inline-flex;
-  place-items: start;
+  align-items: center;
   background-color: inherit;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .link {
-  color: silver;
+  color: var(--color);
   background-color: blue;
   text-decoration: none;
   border-radius: var(--border-radius);
