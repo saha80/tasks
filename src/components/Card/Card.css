@@ -1,0 +1,93 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 15rem;
+
+  align-items: center;
+
+  padding: 1rem;
+  margin: 1rem;
+
+  border-radius: var(--border-radius);
+  box-shadow: 0px 1px 8px 0px var(--color);
+
+  --card-background-color: cadetblue;
+
+  color: var(--color);
+
+  background-color: var(--card-background-color);
+}
+
+.card p {
+  color: var(--color);
+}
+
+.card div,
+.card span,
+.card p {
+  background-color: var(--card-background-color);
+}
+
+.card-image {
+  width: 100%;
+
+  padding-bottom: 1rem;
+
+  color: var(--color);
+  background-color: var(--card-background-color);
+}
+
+.card-title {
+  font-size: 1.5rem;
+
+  width: 100%;
+
+  color: var(--color);
+  background-color: var(--card-background-color);
+}
+
+.card-description {
+  font-size: 1rem;
+
+  width: 100%;
+
+  color: var(--color);
+  background-color: var(--card-background-color);
+}
+
+.card-creation-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  color: var(--color);
+  background-color: var(--card-background-color);
+}
+
+.card-tags {
+  display: inline-flex;
+  justify-content: space-evenly;
+  align-items: start;
+
+  margin-block: 1rem;
+
+  background-color: var(--card-background-color);
+}
+
+.card-tags > a {
+  background-color: var(--card-background-color);
+
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.card-status {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+
+  color: var(--color);
+  background-color: var(--card-background-color);
+}

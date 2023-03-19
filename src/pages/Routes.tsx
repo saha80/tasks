@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
+
 import { PageNotFound } from '@/components/PageNotFound/PageNotFound';
 import { AboutUs } from '@/components/AboutUs/AboutUs';
+import { Cards } from '@/components/Cards/Cards';
 import { App } from '@/App';
 
 export const ROOT_PATH = '/';
@@ -11,6 +13,7 @@ export const ROOT_CHILDREN: RouteObjectPathRequired[] = [
   {
     path: ROOT_PATH,
     index: true,
+    element: <Cards />,
   },
   {
     path: '/about-us',

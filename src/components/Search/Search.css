@@ -18,8 +18,10 @@
   color: var(--color);
   background-color: var(--background-color);
 
+  height: 2rem;
+
   border-radius: var(--border-radius);
-  border: 1px solid black;
+  border: 1px solid dodgerblue;
 
   padding-inline-start: 1.75rem;
 }
