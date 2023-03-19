@@ -15,7 +15,10 @@
     "jsx": "react-jsx",
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src"
+    // "baseUrl": "./src"
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["./src/**/*", "styled.d.ts"]
 }
