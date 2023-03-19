@@ -1,5 +1,4 @@
 .app {
-  width: 100%;
-  margin: var(--app-margin);
-  background-color: var(--background-color);
+  padding: var(--app-margin);
+  background-color: white;
 }
