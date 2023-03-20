@@ -10,7 +10,9 @@ export class Search extends Component<Record<string, never>, Record<string, neve
   render() {
     return (
       <div className="search">
-        <Icon>🔍</Icon>
+        <Icon>
+          <span className="material-icons">search</span>
+        </Icon>
         <CardsContext.Consumer>
           {({ searchValue, onChange, filterBy }) => (
             <Input value={searchValue} onChange={onChange} filterBy={filterBy} />

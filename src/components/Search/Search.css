@@ -12,6 +12,7 @@
   position: absolute;
 
   margin-inline-start: 4px;
+  margin-block-start: 4px;
 }
 
 .search-input {
