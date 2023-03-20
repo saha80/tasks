@@ -12,18 +12,18 @@
   margin: 1rem;
 
   border-radius: var(--border-radius);
-  box-shadow: 0px 1px 8px 0px var(--color);
 
-  --card-background-color: silver;
+  --card-background-color: #fafafa;
 
   color: var(--color);
 
   background-color: var(--card-background-color);
 
-  border: 1px solid #f0f0f0;
+  border: 2px solid #f0f0f0;
 }
 
 .card:hover {
+  box-shadow: 0px 1px 8px 0px var(--color);
   outline: 2px solid var(--card-background-color);
 }
 
