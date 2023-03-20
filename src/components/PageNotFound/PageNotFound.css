@@ -1,4 +1,17 @@
 .page-not-found {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-self: center;
+  flex-wrap: wrap;
+
   color: var(--color);
   background-color: var(--background-color);
+}
+
+.page-not-found > a {
+  text-align: center;
 }
