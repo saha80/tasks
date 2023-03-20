@@ -13,11 +13,17 @@
   border-radius: var(--border-radius);
   box-shadow: 0px 1px 8px 0px var(--color);
 
-  --card-background-color: cadetblue;
+  --card-background-color: silver;
 
   color: var(--color);
 
   background-color: var(--card-background-color);
+
+  border: 1px solid #f0f0f0;
+}
+
+.card:hover {
+  outline: 2px solid var(--card-background-color);
 }
 
 .card p {
