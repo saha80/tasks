@@ -10,8 +10,8 @@ export class Status extends Component<StatusProps> {
     const { likes, views } = this.props;
     return (
       <div className="card-status">
-        <span>Likes: {likes}</span>
-        <span>Views: {views}</span>
+        <span>👍 {likes}</span>
+        <span>👁 {views}</span>
       </div>
     );
   }
