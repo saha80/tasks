@@ -28,7 +28,7 @@
 }
 
 .link {
-  color: var(--color);
+  color: white;
   background-color: blue;
   text-decoration: none;
   border-radius: var(--border-radius);
