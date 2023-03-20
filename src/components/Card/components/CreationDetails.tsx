@@ -13,8 +13,10 @@ export class CreationDetails extends Component<CreationDetailsProps> {
     return (
       <div className="card-creation-details">
         <div>
-          <p>Created by: {createdBy}</p>
-          <p>{new Date(creationTimestamp).toDateString()}</p>
+          <p className="card-author">
+            Created by: <a>{createdBy}</a>
+          </p>
+          <p>Created at: {new Date(creationTimestamp).toDateString()}</p>
         </div>
         <span className="card-tags">
           <span>Tags: </span>

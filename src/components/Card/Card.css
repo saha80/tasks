@@ -6,6 +6,7 @@
   max-width: 15rem;
 
   align-items: center;
+  justify-content: space-evenly;
 
   padding: 1rem;
   margin: 1rem;
@@ -75,10 +76,18 @@
   background-color: var(--card-background-color);
 }
 
+.card-author a {
+  background-color: lightgreen;
+  border-radius: var(--border-radius);
+  text-decoration: solid underline;
+  text-underline-offset: 2px;
+  padding: 4px;
+}
+
 .card-tags {
   display: inline-flex;
   justify-content: space-evenly;
-  align-items: start;
+  align-items: center;
 
   margin-block: 1rem;
 
@@ -86,7 +95,10 @@
 }
 
 .card-tags > a {
-  background-color: var(--card-background-color);
+  background-color: azure;
+
+  border-radius: var(--border-radius);
+  padding: var(--border-radius);
 
   text-decoration: underline;
   text-underline-offset: 2px;
