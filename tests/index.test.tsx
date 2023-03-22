@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { RouterProvider } from 'react-router-dom';
 
-import { AboutUs } from '../src/components/AboutUs/AboutUs';
-import { Card } from '../src/components/Card/Card';
-import { Cards } from '../src/components/Cards/Cards';
-import { router } from '../src/pages/Routes';
+import { AboutUs } from '@/components/AboutUs/AboutUs';
+import { Card } from '@/components/Card/Card';
+import { Cards } from '@/pages/Cards/Cards';
+import { router } from '@/routes/Routes';
 
-import { getCards } from '../src/service/Card';
+import { getCards } from '@/services/Card';
 
 describe('App', () => {
   test('renders', () => {
