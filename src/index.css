@@ -3,6 +3,7 @@
   --button-focus: slategrey;
 
   --header-height: 5rem;
+  --header-z-index: 1;
 
   --app-margin: var(--header-height);
 }
