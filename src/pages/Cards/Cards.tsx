@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 import { Card, CardProps } from '@/components/Card/Card';
 
-import { getCards } from '@/service/Card';
+import { getCards } from '@/services/Card';
 
 import './Cards.css';
 import { CardsContext } from './CardsContext';

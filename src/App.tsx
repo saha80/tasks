@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Header } from '@/components/Header/Header';
-import { CardsContext, initialCardsContextValue } from '@/components/Cards/CardsContext';
+import { CardsContext, initialCardsContextValue } from '@/pages/Cards/CardsContext';
 
 import './App.css';
 

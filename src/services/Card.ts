@@ -1,4 +1,4 @@
-import { CardProps } from '../components/Card/Card';
+import { CardProps } from '@/components/Card/Card';
 
 export const getCards = (): Promise<Array<CardProps>> =>
   new Promise((resolve) =>
