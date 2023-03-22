@@ -9,6 +9,7 @@
     "coverage": "vitest run --coverage",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "lint": "eslint . && prettier . --check && tsc --noEmit",
     "prepare": "husky install"
   },
   "lint-staged": {
