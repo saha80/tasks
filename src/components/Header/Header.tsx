@@ -1,6 +1,5 @@
 import { Component } from 'react';
 
-import { Search } from '@/components/Search/Search';
 import { ROOT_CHILDREN } from '@/pages/Routes';
 import { withRouter, WithRouterProps } from '@/hoc/withRouter';
 
@@ -16,7 +15,6 @@ class HeaderImpl extends Component<WithRouterProps> {
       <header className="header">
         <Nav routes={ROOT_CHILDREN} />
         {location && <h4>Current path: {pathToLinkName(location?.pathname)}</h4>}
-        <Search />
       </header>
     );
   }

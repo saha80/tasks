@@ -1,9 +1,18 @@
+.search-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
+}
 
+.search-cards,
+.cards {
   background-color: wheat;
   box-shadow: 0 0 var(--app-margin) var(--app-margin) wheat;
 }
