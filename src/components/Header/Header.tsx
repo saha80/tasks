@@ -15,7 +15,7 @@ class HeaderImpl extends Component<WithRouterProps> {
     return (
       <header className="header">
         <Nav routes={ROOT_CHILDREN} />
-        <h4>Current path: {pathToLinkName(location.pathname)}</h4>
+        {location && <h4>Current path: {pathToLinkName(location?.pathname)}</h4>}
         <Search />
       </header>
     );

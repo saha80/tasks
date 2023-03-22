@@ -2,7 +2,7 @@ import { ComponentType } from 'react';
 import { Location, useLocation } from 'react-router-dom';
 
 export interface WithRouterProps {
-  location: Location;
+  location?: Location;
 }
 
 export const withRouter = <Props extends WithRouterProps>(Component: ComponentType<Props>) => {
