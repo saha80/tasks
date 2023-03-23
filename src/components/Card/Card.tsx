@@ -25,7 +25,7 @@ export class Card extends Component<CardProps> {
       description,
       createdBy,
       creationTimestamp,
-      modificatoinTimestamp,
+      modificationTimestamp,
       tags,
       likes,
       views,
@@ -39,7 +39,7 @@ export class Card extends Component<CardProps> {
         <CreationDetails
           createdBy={createdBy}
           creationTimestamp={creationTimestamp}
-          modificatoinTimestamp={modificatoinTimestamp}
+          modificationTimestamp={modificationTimestamp}
           tags={tags}
         />
         <Status likes={likes} views={views} />

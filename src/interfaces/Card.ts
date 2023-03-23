@@ -5,7 +5,7 @@ export interface Card {
   description: string;
   createdBy: string;
   creationTimestamp: number;
-  modificatoinTimestamp: number;
+  modificationTimestamp: number;
   tags: Array<string>;
   likes: number;
   views: number;

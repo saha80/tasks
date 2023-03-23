@@ -3,13 +3,13 @@ import { Component } from 'react';
 export interface CreationDetailsProps {
   createdBy: string;
   creationTimestamp: number;
-  modificatoinTimestamp: number;
+  modificationTimestamp: number;
   tags: Array<string>;
 }
 
 export class CreationDetails extends Component<CreationDetailsProps> {
   render() {
-    const { createdBy, creationTimestamp, tags } = this.props;
+    const { createdBy, creationTimestamp, modificationTimestamp, tags } = this.props;
     return (
       <div className="card-creation-details">
         <div>
