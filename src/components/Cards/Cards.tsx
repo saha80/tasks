@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+import { Search } from '@/components/Search/Search';
 import { Card, CardProps } from '@/components/Card/Card';
 
 import { getCards } from '@/service/Card';
@@ -27,16 +28,19 @@ export class Cards extends Component<Record<string, never>, CardsState> {
   render() {
     const { cards } = this.state;
     return (
-      <div className="cards">
-        <CardsContext.Consumer>
-          {({ filterBy, searchValue }) =>
-            cards
-              .filter((card) =>
-                card[filterBy].toLowerCase().includes((searchValue ?? '').toLowerCase())
-              )
-              .map((card) => <Card key={card.id} {...card} />)
-          }
-        </CardsContext.Consumer>
+      <div className="search-cards">
+        <Search />
+        <div className="cards">
+          <CardsContext.Consumer>
+            {({ filterBy, searchValue }) =>
+              cards
+                .filter((card) =>
+                  card[filterBy].toLowerCase().includes((searchValue ?? '').toLowerCase())
+                )
+                .map((card) => <Card key={card.id} {...card} />)
+            }
+          </CardsContext.Consumer>
+        </div>
       </div>
     );
   }

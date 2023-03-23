@@ -3,6 +3,7 @@
   background-color: var(--header-background-color);
   display: flex;
   position: fixed;
+  z-index: var(--header-z-index);
   justify-content: space-between;
   width: 100%;
   left: 0;
