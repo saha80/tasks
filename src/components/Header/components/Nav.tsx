@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Link } from './Link';
-import { RouteObjectPathRequired } from '@/pages/Routes';
+import { RouteObjectPathRequired } from '@/routes/Routes';
 
 export interface NavProps {
   routes: Array<RouteObjectPathRequired>;

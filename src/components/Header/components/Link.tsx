@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ROOT_PATH } from '@/pages/Routes';
+import { ROOT_PATH } from '@/routes/Routes';
 
 const pathToLinkName = (path: string) =>
   path === ROOT_PATH
@@ -18,6 +18,7 @@ export interface LinkProps {
 export class Link extends Component<LinkProps> {
   render() {
     const { to: path } = this.props;
+
     return (
       <NavLink to={path} className={({ isActive }) => `${isActive ? 'current' : ''} link`}>
         {pathToLinkName(path)}

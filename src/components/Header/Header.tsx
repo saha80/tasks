@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import { Search } from '@/components/Search/Search';
-import { ROOT_CHILDREN } from '@/pages/Routes';
+import { ROOT_CHILDREN } from '@/routes/Routes';
 
 import { Nav } from './components/Nav';
 
