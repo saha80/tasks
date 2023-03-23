@@ -1,6 +1,8 @@
 import { Component } from 'react';
 
 import { Search } from '@/components/Search/Search';
+import { FetchingError } from '@/components/FetchingError/FetchingError';
+import { FetchingSpinner } from '@/components/FetchingSpinner/FetchingSpinner';
 import { Card, CardProps } from '@/components/Card/Card';
 
 import { getCards } from '@/services/Card';
@@ -9,24 +11,43 @@ import './Cards.css';
 import { CardsContext } from './CardsContext';
 
 export interface CardsState {
-  searchValue: string | null;
   cards: Array<CardProps>;
+  loading: boolean;
+  error: boolean;
 }
 
 export class Cards extends Component<Record<string, never>, CardsState> {
   state: CardsState = {
-    searchValue: null,
     cards: [],
+    loading: true, // todo: add hoc withLoading
+    error: false,
   };
 
-  componentDidMount(): void {
-    getCards().then((cards) => {
-      this.setState({ cards });
-    });
+  async componentDidMount() {
+    try {
+      const cards = await getCards();
+
+      this.setState({
+        cards: cards.map(({ imgSrc, ...other }) => ({ src: imgSrc, ...other })),
+      });
+    } catch (_) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false });
+    }
   }
 
   render() {
-    const { cards } = this.state;
+    const { loading, error, cards } = this.state;
+
+    if (loading) {
+      return <FetchingSpinner />;
+    }
+
+    if (error) {
+      return <FetchingError />;
+    }
+
     return (
       <div className="search-cards">
         <Search />
