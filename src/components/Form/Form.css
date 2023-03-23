@@ -1,0 +1,12 @@
+.form {
+  --form-valid-color: greenyellow;
+  --form-invalid-color: red;
+}
+
+.form > *:valid {
+  color: var(--form-valid-color);
+}
+
+.form > *:invalid {
+  color: var(--form-invalid-color);
+}
