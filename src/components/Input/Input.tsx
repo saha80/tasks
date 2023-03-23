@@ -63,6 +63,8 @@ export class Input extends Component<InputProps> {
         </label>
         {type === 'select' ? (
           <Select {...formInput}>{options!.filter((option) => Boolean(option))}</Select>
+        ) : type === 'textarea' ? (
+          <textarea {...formInput} />
         ) : (
           <input type={type} defaultChecked={defaultChecked} accept={acceptType} {...formInput} />
         )}

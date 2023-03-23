@@ -1,4 +1,4 @@
-export type InputType = 'text' | 'date' | 'checkbox' | 'radio' | 'file' | 'select';
+export type InputType = 'text' | 'textarea' | 'date' | 'checkbox' | 'radio' | 'file' | 'select';
 
 export interface FormInput {
   form: string;
