@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
-import { PageNotFound } from '@/components/PageNotFound/PageNotFound';
-import { AboutUs } from '@/components/AboutUs/AboutUs';
+import { PageNotFound } from '@/pages/PageNotFound/PageNotFound';
+import { AboutUs } from '@/pages/AboutUs/AboutUs';
 import { Cards } from '@/pages/Cards/Cards';
 import { CardForm } from '@/pages/CardForm/CardForm';
 import { App } from '@/App';

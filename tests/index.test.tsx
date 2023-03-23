@@ -1,12 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { RouterProvider } from 'react-router-dom';
 
-import { AboutUs } from '@/components/AboutUs/AboutUs';
-import { Card } from '@/components/Card/Card';
+import { AboutUs } from '@/pages/AboutUs/AboutUs';
 import { Cards } from '@/pages/Cards/Cards';
 import { router } from '@/routes/Routes';
-
-import { getCards } from '@/services/Card';
 
 describe('App', () => {
   test('renders', () => {
@@ -22,9 +19,7 @@ describe('App', () => {
   });
 
   test('Card', async () => {
-    for (const card of await getCards()) {
-      render(<Card {...card} />);
-    }
+    render(<Cards />);
 
     screen.debug();
   });
