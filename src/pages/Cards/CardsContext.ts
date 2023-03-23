@@ -3,13 +3,13 @@ import { InputProps } from '@/components/Search/components/Input';
 
 export type SearchBy = 'title';
 
-export interface ICardsContext {
+export interface CardsContext {
   searchValue: string | null;
   filterBy: SearchBy;
   onChange: InputProps['onChange'];
 }
 
-export const initialCardsContextValue: ICardsContext = {
+export const initialCardsContextValue: CardsContext = {
   searchValue: null,
   filterBy: 'title',
   onChange: () => {
@@ -17,4 +17,4 @@ export const initialCardsContextValue: ICardsContext = {
   },
 };
 
-export const CardsContext = createContext<ICardsContext>(initialCardsContextValue);
+export const CardsContext = createContext<CardsContext>(initialCardsContextValue);
