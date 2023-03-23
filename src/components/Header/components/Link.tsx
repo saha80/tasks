@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ROOT_PATH } from '@/routes/Routes';
 
-const pathToLinkName = (path: string) =>
+export const pathToLinkName = (path: string) =>
   path === ROOT_PATH
     ? 'Home'
     : path
