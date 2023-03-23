@@ -17,6 +17,9 @@ export class CreationDetails extends Component<CreationDetailsProps> {
             Created by: <a>{createdBy}</a>
           </p>
           <p>Created at: {new Date(creationTimestamp).toDateString()}</p>
+          {!Object.is(creationTimestamp, modificationTimestamp) && (
+            <p>Modified at: {new Date(modificationTimestamp).toDateString()}</p>
+          )}
         </div>
         <span className="card-tags">
           <span>Tags: </span>
