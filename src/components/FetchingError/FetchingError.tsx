@@ -1,9 +1,5 @@
-import { Component } from 'react';
+import { FC } from 'react';
 
 import './FetchingError.css';
 
-export class FetchingError extends Component {
-  render() {
-    return <div>Error</div>;
-  }
-}
+export const FetchingError: FC = () => <div>Error</div>;

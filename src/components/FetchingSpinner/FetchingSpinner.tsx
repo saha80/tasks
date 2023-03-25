@@ -1,9 +1,5 @@
-import { Component } from 'react';
+import { FC } from 'react';
 
 import './FetchingSpinner.css';
 
-export class FetchingSpinner extends Component {
-  render() {
-    return <div>Loading</div>;
-  }
-}
+export const FetchingSpinner: FC = () => <div>Loading</div>;

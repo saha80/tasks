@@ -9,7 +9,7 @@ export interface InputProps {
   filterBy: string;
 }
 
-export class Input extends Component<InputProps> {
+export class Input extends Component<InputProps, never> {
   setSearchStorageValue = () => {
     const { value } = this.props;
     if (value !== null) {

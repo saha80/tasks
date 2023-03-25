@@ -17,4 +17,6 @@ export const initialCardsContextValue: CardsContext = {
   },
 };
 
-export const CardsContext = createContext<CardsContext>(initialCardsContextValue);
+export const CardsContext = createContext<CardsContext>(
+  initialCardsContextValue
+);

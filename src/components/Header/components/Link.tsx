@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ROOT_PATH } from '@/routes/Routes';
 
@@ -15,14 +15,11 @@ export interface LinkProps {
   to: string;
 }
 
-export class Link extends Component<LinkProps> {
-  render() {
-    const { to: path } = this.props;
-
-    return (
-      <NavLink to={path} className={({ isActive }) => `${isActive ? 'current' : ''} link`}>
-        {pathToLinkName(path)}
-      </NavLink>
-    );
-  }
-}
+export const Link: FC<LinkProps> = ({ to: path }) => (
+  <NavLink
+    to={path}
+    className={({ isActive }) => `${isActive ? 'current' : ''} link`}
+  >
+    {pathToLinkName(path)}
+  </NavLink>
+);
