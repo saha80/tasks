@@ -3,10 +3,10 @@
   --form-invalid-color: red;
 }
 
-.form > *:valid {
+.form *:valid {
   color: var(--form-valid-color);
 }
 
-.form > *:invalid {
+.form *:invalid {
   color: var(--form-invalid-color);
 }
