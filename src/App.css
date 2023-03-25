@@ -1,4 +1,4 @@
 .app {
   padding: var(--app-margin);
-  background-color: white;
+  background-color: var(--background-color);
 }
