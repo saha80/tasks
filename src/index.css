@@ -17,6 +17,9 @@
     --button-hover-outline: darkcyan;
 
     --header-background-color: lightblue;
+
+    --footer-color: lightblue;
+    --footer-background-color: midnightblue;
   }
 }
 
@@ -29,6 +32,9 @@
     --button-hover-outline: lightslategrey;
 
     --header-background-color: midnightblue;
+
+    --footer-color: midnightblue;
+    --footer-background-color: lightblue;
   }
 }
 
