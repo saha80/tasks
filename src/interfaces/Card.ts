@@ -1,3 +1,5 @@
+export type CardVisibilityType = 'only-you' | 'public';
+
 export interface Card {
   id: number;
   imgSrc: string;
@@ -8,7 +10,7 @@ export interface Card {
   modificationTimestamp: number;
   topics: Array<string>;
   tags: Array<string>;
-  visibility: 'only-you' | 'you-and-friends' | 'public';
+  visibility: CardVisibilityType;
   likes: number;
   views: number;
 }

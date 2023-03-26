@@ -1,12 +1,14 @@
 import { FC } from 'react';
 
+import { CardVisibilityType } from '@/interfaces/Card';
+
 export interface CreationDetailsProps {
   createdBy: string;
   creationTimestamp: number;
   modificationTimestamp: number;
   topics: Array<string>;
   tags: Array<string>;
-  visibility: 'only-you' | 'you-and-friends' | 'public';
+  visibility: CardVisibilityType;
 }
 
 export const CreationDetails: FC<CreationDetailsProps> = ({
