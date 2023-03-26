@@ -1,4 +1,4 @@
-import { Component, PropsWithoutRef } from 'react';
+import { Component } from 'react';
 
 import { FetchingSpinner } from '@/components/FetchingSpinner/FetchingSpinner';
 import { FetchingError } from '@/components/FetchingError/FetchingError';
@@ -6,11 +6,11 @@ import { FetchingError } from '@/components/FetchingError/FetchingError';
 export const withService = <
   Props extends object,
   Service,
-  ServiceToProp extends keyof Props
+  ServiceToProps extends keyof Props
 >(
   Wrapped: React.ComponentType<Props>,
   service: () => Promise<Service>,
-  serviceToProp: ServiceToProp
+  mapServiceToProps: (service: Service) => Pick<Props, ServiceToProps>
 ) => {
   type ServiceWrapperState = {
     loading: boolean;
@@ -19,7 +19,7 @@ export const withService = <
   };
 
   return class ServiceWrapper extends Component<
-    Omit<PropsWithoutRef<Props>, ServiceToProp>,
+    Omit<Props, ServiceToProps>,
     ServiceWrapperState
   > {
     state: ServiceWrapperState = {
@@ -51,7 +51,7 @@ export const withService = <
 
       const props = {
         ...this.props,
-        [serviceToProp]: service as Service,
+        ...mapServiceToProps(service as Service),
       } as Props;
 
       return <Wrapped {...props} />;
