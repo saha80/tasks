@@ -18,20 +18,20 @@
   }
 }
 
-.input {
+.input,
+.fieldset {
   display: flex;
   margin-block-start: 1rem;
+}
+
+.fieldset {
+  flex-direction: column;
 }
 
 .input-label {
   color: var(--label-color);
   background-color: var(--label-background-color);
   display: flex;
-}
-
-.group {
-  display: flex;
-  flex-direction: column;
 }
 
 .input input,

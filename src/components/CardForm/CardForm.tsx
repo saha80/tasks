@@ -10,6 +10,11 @@ import './CardForm.css';
 
 const form = 'card-form';
 
+const visibilityName: Record<CardVisibilityType, string> = {
+  'only-you': 'Only for You',
+  public: 'Public',
+};
+
 export interface CardFormProps {
   onSubmit: (card: Omit<CardProps, 'id'>) => void;
 }
@@ -73,6 +78,14 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
   onLoad = (event: ProgressEvent<FileReader>) => {
     const creationTimestamp =
       this.creationDate.current?.valueAsNumber ?? Date.now();
+
+    const mapToVisibility = (name: string | undefined): CardVisibilityType => {
+      const entry = Object.entries(visibilityName).find(
+        ([, value]) => value === name
+      );
+      return entry?.[0] as CardVisibilityType;
+    };
+
     this.props.onSubmit({
       title: this.title.current?.value ?? '',
       description: this.description.current?.value ?? '',
@@ -83,9 +96,7 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
         .split(',')
         .map((s) => s.trim())
         .filter(Boolean),
-      visibility:
-        (this.visibility.current?.value as CardVisibilityType | undefined) ??
-        'only-you',
+      visibility: mapToVisibility(this.visibility.current?.value) ?? 'only-you',
       creationTimestamp,
       modificationTimestamp: creationTimestamp,
       likes: 0,
@@ -126,15 +137,25 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
           id={form}
           name="card-form"
         >
-          <Input type="text" label="Title" required ref={this.title} />
+          <Input type="text" label="Enter title:" required ref={this.title} />
           <div className="red">{this.state.title}</div>
 
-          <Input type="textarea" label="Description" ref={this.description} />
+          <Input
+            type="textarea"
+            label="Enter description:"
+            ref={this.description}
+          />
           <div className="red">{this.state.description}</div>
 
           <Input
             type="text"
-            label="Created By"
+            label={
+              <span>
+                Enter Your name.
+                <br />
+                It will be on created card:
+              </span>
+            }
             required
             pattern="([A-Z][a-z]+\s?){2}"
             ref={this.createdBy}
@@ -143,7 +164,7 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
 
           <Input
             type="file"
-            label="Card image file"
+            label="Upload image file:"
             required
             accept="image"
             ref={this.imgFile}
@@ -152,7 +173,7 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
 
           <Input
             type="select"
-            label="Select topics"
+            label="Select topic:"
             values={['programming', 'travelling']}
             required
             ref={this.topics}
@@ -161,7 +182,13 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
 
           <Input
             type="text"
-            label="Select tags"
+            label={
+              <span>
+                Enter tags,
+                <br />
+                separate using comma:
+              </span>
+            }
             required
             pattern="(.+(, )?)+"
             ref={this.tags}
@@ -171,7 +198,7 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
           <Input
             type="radio-group"
             label="Choose visibility"
-            values={['only-you', 'public']}
+            values={[visibilityName['only-you'], visibilityName['public']]}
             name="visibility"
             ref={this.visibility}
           />
@@ -179,7 +206,7 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
 
           <Input
             type="date"
-            label="Enter publication date"
+            label="Pick publication date:"
             required
             min={toDateInputMinFormat(new Date())}
             ref={this.creationDate}

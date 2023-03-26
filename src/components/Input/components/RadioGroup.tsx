@@ -13,22 +13,20 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
     <fieldset disabled={disabled} className="fieldset">
       <legend className="input-legend">{legend}</legend>
       {children.map((value, index) => (
-        <div key={index} className="group">
-          <Label>
-            {
-              <input
-                className={className}
-                form={form}
-                name={name}
-                type="radio"
-                value={value}
-                required
-                ref={ref}
-              />
-            }
-            {value}
-          </Label>
-        </div>
+        <Label key={index}>
+          {
+            <input
+              className={className}
+              form={form}
+              name={name}
+              type="radio"
+              value={value}
+              required
+              ref={ref}
+            />
+          }
+          {value}
+        </Label>
       ))}
     </fieldset>
   )
