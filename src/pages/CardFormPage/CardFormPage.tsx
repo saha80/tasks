@@ -13,9 +13,11 @@ export class CardFormPage extends Component<
     cards: [],
   };
 
-  onSubmit = (card: CardProps) => {
+  static id = 0;
+
+  onSubmit = (card: Omit<CardProps, 'id'>) => {
     const { cards } = this.state;
-    this.setState({ cards: [card, ...cards] });
+    this.setState({ cards: [{ ...card, id: CardFormPage.id++ }, ...cards] });
   };
 
   render() {
