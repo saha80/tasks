@@ -1,28 +1,27 @@
-import { FC } from 'react';
+import { forwardRef } from 'react';
 import { FormInput } from './interfaces';
 import { Option } from './Option';
 
-export interface SelectProps extends FormInput {
+interface SelectProps extends FormInput {
   children: Array<string>;
-  ref?: React.LegacyRef<HTMLSelectElement>;
 
   /** @default false */
   multiple?: boolean;
 }
 
-export const Select: FC<SelectProps> = ({
-  children,
-  ref,
-  multiple,
-  ...selectProps
-}) => {
-  return (
-    <select multiple={multiple} ref={ref} defaultValue="" {...selectProps}>
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  ({ children, multiple = false, ...formProps }, ref) => (
+    <select
+      multiple={multiple}
+      ref={ref}
+      defaultValue={multiple ? [] : ''}
+      {...formProps}
+    >
       {!multiple && <Option defaultValue="" />}
 
       {children.map((option, index) => (
         <Option key={index} defaultValue={option} />
       ))}
     </select>
-  );
-};
+  )
+);

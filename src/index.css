@@ -80,3 +80,7 @@ header {
 a {
   font-weight: 500;
 }
+
+.red {
+  color: red;
+}

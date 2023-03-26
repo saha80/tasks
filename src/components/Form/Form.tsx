@@ -1,4 +1,4 @@
-import { FC, FormEventHandler, ReactElement, RefObject } from 'react';
+import { FC, FormEventHandler, ReactNode, RefObject } from 'react';
 
 import './Form.css';
 
@@ -6,7 +6,9 @@ export interface FormProps {
   id: string;
   name: string;
   fromRef?: RefObject<HTMLFormElement>;
-  children: ReactElement | Array<ReactElement>;
+  /** @default false */
+  noValidate?: boolean;
+  children: ReactNode;
   onSubmit: FormEventHandler<HTMLFormElement>;
 }
 
@@ -16,11 +18,12 @@ export const Form: FC<FormProps> = ({
   fromRef,
   onSubmit,
   children,
+  noValidate = false,
 }) => (
   <form
     className="form"
     autoComplete="on"
-    noValidate={false}
+    noValidate={noValidate}
     method="dialog"
     id={id}
     ref={fromRef}

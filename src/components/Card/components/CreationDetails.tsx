@@ -11,6 +11,14 @@ export interface CreationDetailsProps {
   visibility: CardVisibilityType;
 }
 
+const creationMessage = (creationTimestamp: number) => {
+  const now = Date.now();
+  if (creationTimestamp > now) {
+    return 'Created at: ';
+  }
+  return 'Will be created at: ';
+};
+
 export const CreationDetails: FC<CreationDetailsProps> = ({
   createdBy,
   creationTimestamp,
@@ -23,7 +31,10 @@ export const CreationDetails: FC<CreationDetailsProps> = ({
       <p className="card-author">
         Created by: <a>{createdBy}</a>
       </p>
-      <p>Created at: {new Date(creationTimestamp).toDateString()}</p>
+      <p>
+        {creationMessage(creationTimestamp)}
+        {new Date(creationTimestamp).toDateString()}
+      </p>
       {!Object.is(creationTimestamp, modificationTimestamp) && (
         <p>Modified at: {new Date(modificationTimestamp).toDateString()}</p>
       )}
