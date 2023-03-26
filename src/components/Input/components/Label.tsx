@@ -1,12 +1,9 @@
 import { FC, ReactNode } from 'react';
 
-export interface LabelProps {
-  htmlFor?: string;
+interface LabelProps {
   children: ReactNode;
 }
 
-export const Label: FC<LabelProps> = ({ htmlFor, children }) => (
-  <label className="input-label" htmlFor={htmlFor}>
-    {children}
-  </label>
+export const Label: FC<LabelProps> = ({ children }) => (
+  <label className="input-label">{children}</label>
 );

@@ -6,7 +6,6 @@ export type InputType =
   | 'date'
   | 'checkbox'
   | 'radio'
-  | 'checkbox-group'
   | 'radio-group'
   | 'file'
   | 'select';

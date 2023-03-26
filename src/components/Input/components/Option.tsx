@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 const valueToChildren = (value: string) => value;
 
-export interface OptionProps {
+interface OptionProps {
   defaultValue: string;
 }
 
