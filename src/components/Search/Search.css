@@ -11,11 +11,11 @@
   background-color: transparent;
   position: absolute;
 
-  margin-inline-start: 4px;
+  margin-inline-start: calc(4px + 1rem);
   margin-block-start: 4px;
 }
 
-.search-input {
+input[type].search-input {
   color: var(--color);
   background-color: var(--background-color);
 

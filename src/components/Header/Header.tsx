@@ -9,6 +9,10 @@ import './Header.css';
 export const Header = withRouter(({ location }) => (
   <header className="header">
     <Nav routes={ROOT_CHILDREN} />
-    {location && <h4>Current path: {pathToLinkName(location.pathname)}</h4>}
+    {location && (
+      <h4 className="current-path">
+        Current path: {pathToLinkName(location.pathname)}
+      </h4>
+    )}
   </header>
 ));
