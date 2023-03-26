@@ -14,6 +14,7 @@ export const Cards: FC<CardsProps> = ({ cards }) => (
   <div className="cards">
     <CardsContext.Consumer>
       {({ filterBy, searchValue }) =>
+        // todo move this logic to page
         cards
           .filter((card) =>
             card[filterBy]

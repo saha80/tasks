@@ -6,10 +6,18 @@ import { CardProps } from '@/components/Card/Card';
 import { CardVisibilityType } from '@/interfaces/Card';
 import { toDateInputMinFormat } from '@/utils/date';
 
+import { TextArea } from '@/components/TextArea/TextArea';
+import { FilePicker } from '@/components/FilePicker/FilePicker';
+import { Select } from '@/components/Select/Select';
+import { RadioGroup } from '@/components/RadioGroup/RadioGroup';
+import { DatePicker } from '../DatePicker/DatePicker';
+import { CheckBox } from '../CheckBox/CheckBox';
+
 import './CardForm.css';
 
 const form = 'card-form';
 
+// todo use enum instead
 const visibilityName: Record<CardVisibilityType, string> = {
   'only-you': 'Only for You',
   public: 'Public',
@@ -26,7 +34,7 @@ interface CardFormState {
   imgUrl: string | undefined;
   topics: string | undefined;
   tags: string | undefined;
-  visibility: string | undefined;
+  visibility: string | undefined; // enum
   creationDate: string | undefined;
   allowProcessData: string | undefined;
 }
@@ -77,7 +85,7 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
 
   onLoad = (event: ProgressEvent<FileReader>) => {
     const creationTimestamp =
-      this.creationDate.current?.valueAsNumber ?? Date.now();
+      this.creationDate.current?.valueAsNumber || Date.now();
 
     const mapToVisibility = (name: string | undefined): CardVisibilityType => {
       const entry = Object.entries(visibilityName).find(
@@ -87,16 +95,16 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
     };
 
     this.props.onSubmit({
-      title: this.title.current?.value ?? '',
-      description: this.description.current?.value ?? '',
-      createdBy: this.createdBy.current?.value.trim() ?? '',
-      src: (event.target?.result as string) ?? '',
-      topics: [this.topics.current?.value ?? ''],
-      tags: (this.tags.current?.value ?? '')
+      title: this.title.current?.value || '',
+      description: this.description.current?.value || '',
+      createdBy: this.createdBy.current?.value.trim() || '',
+      src: (event.target?.result as string) || '',
+      topics: [this.topics.current?.value || ''],
+      tags: (this.tags.current?.value || '')
         .split(',')
         .map((s) => s.trim())
-        .filter(Boolean),
-      visibility: mapToVisibility(this.visibility.current?.value) ?? 'only-you',
+        .filter(Boolean), // move to separate method
+      visibility: mapToVisibility(this.visibility.current?.value) || 'only-you',
       creationTimestamp,
       modificationTimestamp: creationTimestamp,
       likes: 0,
@@ -138,14 +146,10 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
           name="card-form"
         >
           <Input type="text" label="Enter title:" required ref={this.title} />
-          <div className="red">{this.state.title}</div>
+          <div className="validation-message">{this.state.title}</div>
 
-          <Input
-            type="textarea"
-            label="Enter description:"
-            ref={this.description}
-          />
-          <div className="red">{this.state.description}</div>
+          <TextArea label="Enter description:" ref={this.description} />
+          <div className="validation-message">{this.state.description}</div>
 
           <Input
             type="text"
@@ -160,25 +164,20 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
             pattern="([A-Z][a-z]+\s?){2}"
             ref={this.createdBy}
           />
-          <div className="red">{this.state.createdBy}</div>
+          <div className="validation-message">{this.state.createdBy}</div>
 
-          <Input
-            type="file"
+          <FilePicker
             label="Upload image file:"
             required
             accept="image"
             ref={this.imgFile}
           />
-          <div className="red">{this.state.imgUrl}</div>
+          <div className="validation-message">{this.state.imgUrl}</div>
 
-          <Input
-            type="select"
-            label="Select topic:"
-            values={['programming', 'travelling']}
-            required
-            ref={this.topics}
-          />
-          <div className="red">{this.state.topics}</div>
+          <Select label="Select topic:" required ref={this.topics}>
+            {['programming', 'travelling']}
+          </Select>
+          <div className="validation-message">{this.state.topics}</div>
 
           <Input
             type="text"
@@ -193,35 +192,34 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
             pattern="(.+(, )?)+"
             ref={this.tags}
           />
-          <div className="red">{this.state.tags}</div>
+          <div className="validation-message">{this.state.tags}</div>
 
-          <Input
-            type="radio-group"
-            label="Choose visibility"
-            values={[visibilityName['only-you'], visibilityName['public']]}
+          <RadioGroup
+            legend="Choose visibility"
             name="visibility"
             ref={this.visibility}
-          />
-          <div className="red">{this.state.visibility}</div>
+          >
+            {[visibilityName['only-you'], visibilityName['public']]}
+          </RadioGroup>
+          <div className="validation-message">{this.state.visibility}</div>
 
-          <Input
-            type="date"
+          <DatePicker
             label="Pick publication date:"
             required
             min={toDateInputMinFormat(new Date())}
             ref={this.creationDate}
           />
-          <div className="red">{this.state.creationDate}</div>
+          <div className="validation-message">{this.state.creationDate}</div>
 
-          <Input
-            type="checkbox"
+          <CheckBox
             label="Allow process the data?"
             required
             defaultChecked
-            min={toDateInputMinFormat(new Date())}
             ref={this.allowProcessData}
           />
-          <div className="red">{this.state.allowProcessData}</div>
+          <div className="validation-message">
+            {this.state.allowProcessData}
+          </div>
         </Form>
       </div>
     );
