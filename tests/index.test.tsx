@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from '@/routes/Routes';
@@ -7,6 +7,7 @@ import { AboutUs } from '@/pages/AboutUs/AboutUs';
 import { Card } from '@/components/Card/Card';
 import { Cards } from '@/components/Cards/Cards';
 import { card, cards } from './mockData';
+import { CardFormPage } from '@/pages/CardFormPage/CardFormPage';
 
 describe('App', () => {
   test('renders', async () => {
@@ -38,6 +39,26 @@ describe('App', () => {
 
   test('AboutUs', () => {
     render(<AboutUs />);
+
+    screen.debug();
+  });
+
+  test('CardFormPage', async () => {
+    render(<CardFormPage />);
+
+    const submit = await screen.findByText('Submit');
+
+    expect(submit.innerHTML).toEqual('Submit');
+
+    fireEvent.submit(submit);
+
+    const partialFailureText = 'Examples: John Doe, Jane Doe.';
+
+    const [failure] = await screen.findAllByText(partialFailureText, {
+      exact: false,
+    });
+
+    expect(failure.innerHTML).toContain(partialFailureText);
 
     screen.debug();
   });
