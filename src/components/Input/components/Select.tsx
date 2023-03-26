@@ -1,23 +1,28 @@
-import { Component } from 'react';
+import { FC } from 'react';
 import { FormInput } from './interfaces';
 import { Option } from './Option';
 
 export interface SelectProps extends FormInput {
   children: Array<string>;
+  ref?: React.LegacyRef<HTMLSelectElement>;
+
+  /** @default false */
+  multiple?: boolean;
 }
 
-export class Select extends Component<SelectProps> {
-  render() {
-    const { children, multiple, ...selectProps } = this.props;
+export const Select: FC<SelectProps> = ({
+  children,
+  ref,
+  multiple,
+  ...selectProps
+}) => {
+  return (
+    <select multiple={multiple} ref={ref} defaultValue="" {...selectProps}>
+      {!multiple && <Option defaultValue="" />}
 
-    return (
-      <select multiple={multiple} {...selectProps}>
-        {!multiple && <Option value="" selected={true} />}
-
-        {children.map((option, index) => (
-          <Option key={index} value={option} selected={false} />
-        ))}
-      </select>
-    );
-  }
-}
+      {children.map((option, index) => (
+        <Option key={index} defaultValue={option} />
+      ))}
+    </select>
+  );
+};

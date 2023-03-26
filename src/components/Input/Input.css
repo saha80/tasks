@@ -18,17 +18,26 @@
   }
 }
 
+.input {
+  display: flex;
+  margin-block: 1rem;
+}
+
 .input-label {
   color: var(--label-color);
   background-color: var(--label-background-color);
+  margin-inline-end: 1rem;
 }
 
-input[type='text'],
-input[type='date'],
-input[type='checkbox'],
-input[type='radio'],
-input[type='file'],
-input.input-inner-select {
+.input-inner-text,
+.input-inner-textarea,
+.input-inner-email,
+.input-inner-url,
+.input-inner-date,
+.input-inner-checkbox,
+.input-inner-radio,
+.input-inner-file,
+.input-inner-select {
   color: var(--input-color);
   background-color: var(--input-background-color);
 }

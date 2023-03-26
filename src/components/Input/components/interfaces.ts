@@ -1,13 +1,25 @@
-export type InputType = 'text' | 'textarea' | 'date' | 'checkbox' | 'radio' | 'file' | 'select';
+export type InputType =
+  | 'text'
+  | 'textarea'
+  | 'email'
+  | 'url'
+  | 'date'
+  | 'checkbox'
+  | 'radio'
+  | 'checkbox-group'
+  | 'radio-group'
+  | 'file'
+  | 'select';
 
 export interface FormInput {
-  form: string;
-  name: string;
-  /** when `id` is not provided `name` is used. */
-  id?: string;
-  title: string;
-  required: boolean;
-  disabled: boolean;
-  multiple?: boolean;
+  form?: string;
+  name?: string;
+
+  /** @default false */
+  required?: boolean;
+
+  /** @default false */
+  disabled?: boolean;
+
   className: `input-inner-${InputType}`;
 }
