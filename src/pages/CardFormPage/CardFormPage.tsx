@@ -25,9 +25,10 @@ export class CardFormPage extends Component<
 
     return (
       <div className="card-form-page">
+        <h1>Card Form</h1>
         <CardForm onSubmit={this.onSubmit} />
         <hr />
-        <Cards cards={cards} />
+        {cards.length ? <Cards cards={cards} /> : 'No cards submited.'}
       </div>
     );
   }
