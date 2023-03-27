@@ -2,8 +2,6 @@ import { FC } from 'react';
 
 import { Card, CardProps } from '@/components/Card/Card';
 
-import { CardsContext } from './CardsContext';
-
 import './Cards.css';
 
 export interface CardsProps {
@@ -12,17 +10,8 @@ export interface CardsProps {
 
 export const Cards: FC<CardsProps> = ({ cards }) => (
   <div className="cards">
-    <CardsContext.Consumer>
-      {({ filterBy, searchValue }) =>
-        // todo move this logic to page
-        cards
-          .filter((card) =>
-            card[filterBy]
-              .toLowerCase()
-              .includes((searchValue ?? '').toLowerCase())
-          )
-          .map((card) => <Card key={card.id} {...card} />)
-      }
-    </CardsContext.Consumer>
+    {cards.map((card) => (
+      <Card key={card.id} {...card} />
+    ))}
   </div>
 );
