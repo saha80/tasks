@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Cards as BaseCards, CardsProps } from '@/components/Cards/Cards';
-import { CardsContext } from '@/components/Cards/CardsContext';
+import { CardsContext } from '@/context/CardsContext';
 import { withService } from '@/hoc/withService';
 import { getCards } from '@/services/Card';
 

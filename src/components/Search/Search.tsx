@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { CardsContext } from '@/components/Cards/CardsContext';
+import { CardsContext } from '@/context/CardsContext';
 
 import { Input } from './components/Input';
 import { Icon } from './components/Icon';

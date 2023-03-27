@@ -3,10 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { Header } from '@/components/Header/Header';
 import { Footer } from '@/components/Footer/Footer';
-import {
-  CardsContext,
-  initialCardsContextValue,
-} from '@/components/Cards/CardsContext';
+import { CardsContext, initialCardsContextValue } from '@/context/CardsContext';
 
 import './App.css';
 

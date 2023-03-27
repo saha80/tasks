@@ -10,8 +10,8 @@ import { TextArea } from '@/components/TextArea/TextArea';
 import { FilePicker } from '@/components/FilePicker/FilePicker';
 import { Select } from '@/components/Select/Select';
 import { RadioGroup } from '@/components/RadioGroup/RadioGroup';
-import { DatePicker } from '../DatePicker/DatePicker';
-import { CheckBox } from '../CheckBox/CheckBox';
+import { DatePicker } from '@/components/DatePicker/DatePicker';
+import { CheckBox } from '@/components/CheckBox/CheckBox';
 
 import './CardForm.css';
 
