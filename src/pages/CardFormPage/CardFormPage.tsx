@@ -1,9 +1,11 @@
 import { CardProps } from '@/components/Card/Card';
-import { Cards, CardsProps } from '@/components/Cards/Cards';
+import { CardList, CardListProps } from '@/components/CardList/CardList';
 import { Component } from 'react';
 import { CardForm } from '@/components/CardForm/CardForm';
 
-export type CardFormPageSate = CardsProps;
+interface CardFormPageSate {
+  cards: CardListProps['children'];
+}
 
 export class CardFormPage extends Component<
   Record<string, never>,
@@ -28,7 +30,7 @@ export class CardFormPage extends Component<
         <h1>Card Form</h1>
         <CardForm onSubmit={this.onSubmit} />
         <hr />
-        {cards.length ? <Cards cards={cards} /> : 'No cards submited.'}
+        {cards.length ? <CardList>{cards}</CardList> : 'No cards submited.'}
       </div>
     );
   }

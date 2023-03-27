@@ -1,24 +1,31 @@
 import { FC } from 'react';
 
-import { Cards as BaseCards, CardsProps } from '@/components/Cards/Cards';
+import { CardList, CardListProps } from '@/components/CardList/CardList';
 import { CardsContext } from '@/context/CardsContext';
 import { withService } from '@/hoc/withService';
-import { getCards } from '@/services/Card';
+import { CardService } from '@/services/card.servise';
 
-const CardsWithContext: FC<CardsProps> = ({ cards }) => (
+const CardsWithContext: FC<CardListProps> = ({ children }) => (
   <CardsContext.Consumer>
     {({ filterBy, searchValue }) => (
-      <BaseCards
-        cards={cards.filter((card) =>
+      <CardList>
+        {children.filter((card) =>
           card[filterBy]
             .toLowerCase()
             .includes((searchValue ?? '').toLowerCase())
         )}
-      />
+      </CardList>
     )}
   </CardsContext.Consumer>
 );
 
-export const Cards = withService(CardsWithContext, getCards, (service) => ({
-  cards: service.map(({ imgSrc, ...other }) => ({ src: imgSrc, ...other })),
-}));
+export const Cards = withService(
+  CardsWithContext,
+  CardService.get,
+  (service) => ({
+    children: service.map(({ imgSrc, ...other }) => ({
+      src: imgSrc,
+      ...other,
+    })),
+  })
+);

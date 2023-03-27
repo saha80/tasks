@@ -1,5 +1,5 @@
 import { CardProps } from '@/components/Card/Card';
-import { CardsProps } from '@/components/Cards/Cards';
+import { CardListProps } from '@/components/CardList/CardList';
 import { CardVisibilityType } from '@/interfaces/Card';
 
 export const card: CardProps = {
@@ -17,8 +17,8 @@ export const card: CardProps = {
   views: 10,
 };
 
-export const cards: CardsProps = {
-  cards: [
+export const cards: CardListProps = {
+  children: [
     card,
     {
       id: 2,
