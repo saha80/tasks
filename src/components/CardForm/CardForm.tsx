@@ -17,12 +17,6 @@ import './CardForm.css';
 
 const form = 'card-form';
 
-// todo use enum instead
-const visibilityName: Record<CardVisibilityType, string> = {
-  'only-you': 'Only for You',
-  public: 'Public',
-};
-
 export interface CardFormProps {
   onSubmit: (card: Omit<CardProps, 'id'>) => void;
 }
@@ -87,13 +81,6 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
     const creationTimestamp =
       this.creationDate.current?.valueAsNumber || Date.now();
 
-    const mapToVisibility = (name: string | undefined): CardVisibilityType => {
-      const entry = Object.entries(visibilityName).find(
-        ([, value]) => value === name
-      );
-      return entry?.[0] as CardVisibilityType;
-    };
-
     this.props.onSubmit({
       title: this.title.current?.value || '',
       description: this.description.current?.value || '',
@@ -104,7 +91,9 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
         .split(',')
         .map((s) => s.trim())
         .filter(Boolean), // move to separate method
-      visibility: mapToVisibility(this.visibility.current?.value) || 'only-you',
+      visibility:
+        (this.visibility.current?.value as CardVisibilityType | undefined) ||
+        CardVisibilityType.ONLY_YOU,
       creationTimestamp,
       modificationTimestamp: creationTimestamp,
       likes: 0,
@@ -199,7 +188,10 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
             name="visibility"
             ref={this.visibility}
           >
-            {[visibilityName['only-you'], visibilityName['public']]}
+            {[
+              { value: CardVisibilityType.ONLY_YOU, label: 'Only for You' },
+              { value: CardVisibilityType.PUBLIC, label: 'Public' },
+            ]}
           </RadioGroup>
           <div className="validation-message">{this.state.visibility}</div>
 

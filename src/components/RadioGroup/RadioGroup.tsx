@@ -9,18 +9,18 @@ export interface RadioGroupProps {
   /** @default false */
   disabled?: boolean;
 
-  children: Array<string>;
+  children: Array<{ label: ReactNode; value: string }>;
 }
 
 export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
   ({ legend, name, children, disabled = false }, ref) => (
     <fieldset disabled={disabled} className="radiogroup">
       <legend className="legend">{legend}</legend>
-      {children.map((value, index) => (
+      {children.map(({ value, label }, index) => (
         <label className="label" key={index}>
           <input name={name} type="radio" value={value} required ref={ref} />
 
-          {value}
+          {label}
         </label>
       ))}
     </fieldset>

@@ -1,4 +1,7 @@
-export type CardVisibilityType = 'only-you' | 'public';
+export enum CardVisibilityType {
+  ONLY_YOU = 'only-you',
+  PUBLIC = 'public',
+}
 
 export interface Card {
   id: number;

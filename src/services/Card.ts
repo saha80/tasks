@@ -1,4 +1,4 @@
-import { Card } from '@/interfaces/Card';
+import { Card, CardVisibilityType } from '@/interfaces/Card';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -16,7 +16,7 @@ export const getCards = async (): Promise<Array<Card>> => {
       description: 'Very long card description about created card',
       topics: ['programming'],
       tags: ['react', 'card', 'first card'],
-      visibility: 'only-you',
+      visibility: CardVisibilityType.ONLY_YOU,
       likes: 10,
       views: 10,
     },
@@ -30,7 +30,7 @@ export const getCards = async (): Promise<Array<Card>> => {
       description: 'Very long card description about created card',
       topics: ['programming'],
       tags: ['Redux', 'card'],
-      visibility: 'only-you',
+      visibility: CardVisibilityType.ONLY_YOU,
       likes: 10,
       views: 10,
     },
@@ -44,7 +44,7 @@ export const getCards = async (): Promise<Array<Card>> => {
       description: 'Very long card description about created card',
       topics: ['programming'],
       tags: ['Typescript', 'card'],
-      visibility: 'only-you',
+      visibility: CardVisibilityType.ONLY_YOU,
       likes: 10,
       views: 10,
     },
@@ -58,7 +58,7 @@ export const getCards = async (): Promise<Array<Card>> => {
       description: 'Very long card description about created card',
       topics: ['travelling'],
       tags: ['forest', 'card', 'nature'],
-      visibility: 'only-you',
+      visibility: CardVisibilityType.ONLY_YOU,
       likes: 10,
       views: 10,
     },
@@ -72,7 +72,7 @@ export const getCards = async (): Promise<Array<Card>> => {
       description: 'Very long card description about created card',
       topics: ['travelling'],
       tags: ['mountains', 'card', 'nature'],
-      visibility: 'only-you',
+      visibility: CardVisibilityType.ONLY_YOU,
       likes: 10,
       views: 10,
     },
