@@ -5,7 +5,7 @@ import { Card, CardProps } from '@/components/Card/Card';
 import './CardList.css';
 
 export interface CardListProps {
-  children: Array<CardProps>;
+  children: ReadonlyArray<CardProps>;
 }
 
 export const CardList: FC<CardListProps> = ({ children }) => (
