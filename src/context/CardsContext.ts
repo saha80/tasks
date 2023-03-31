@@ -1,12 +1,12 @@
 import { createContext } from 'react';
-import { InputProps } from '@/components/Search/components/Input';
+import { SearchProps } from '@/components/Search/Search';
 
 export type SearchBy = 'title';
 
 export interface CardsContext {
   searchValue: string | null;
   filterBy: SearchBy;
-  onChange: InputProps['onChange'];
+  onChange: SearchProps['onChange'];
 }
 
 export const initialCardsContextValue: CardsContext = {

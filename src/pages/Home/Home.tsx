@@ -1,14 +1,13 @@
 import { FC } from 'react';
 
-import { Search } from '@/components/Search/Search';
-
+import { Search } from './components/Search';
 import { Cards } from './components/Cards';
 
-import './Home.css';
+import styles from './Home.module.css';
 
 export const Home: FC = () => (
-  <div className="search-cards">
-    <Search />
+  <div className={styles.home}>
+    <Search className={styles.search} />
     <Cards />
   </div>
 );
