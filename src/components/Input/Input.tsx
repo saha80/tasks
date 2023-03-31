@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react';
+import { ReactNode, forwardRef, ForwardRefRenderFunction } from 'react';
 
 import './Input.css';
 
@@ -23,22 +23,23 @@ export interface InputProps {
   disabled?: boolean;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, label, pattern, disabled, required }, ref) => {
-    return (
-      <div className="input">
-        <label className="label">
-          {label}
+const InputRender: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { type, label, pattern, disabled, required },
+  ref
+) => (
+  <div className="input">
+    <label className="label">
+      {label}
 
-          <input
-            ref={ref}
-            type={type}
-            pattern={pattern}
-            disabled={disabled}
-            required={required}
-          />
-        </label>
-      </div>
-    );
-  }
+      <input
+        ref={ref}
+        type={type}
+        pattern={pattern}
+        disabled={disabled}
+        required={required}
+      />
+    </label>
+  </div>
 );
+
+export const Input = forwardRef(InputRender);

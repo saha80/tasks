@@ -11,8 +11,8 @@ export interface Card {
   createdBy: string;
   creationTimestamp: number;
   modificationTimestamp: number;
-  topics: Array<string>;
-  tags: Array<string>;
+  topics: string[];
+  tags: string[];
   visibility: CardVisibilityType;
   likes: number;
   views: number;

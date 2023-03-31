@@ -3,7 +3,7 @@ import { Card, CardVisibilityType } from '@/interfaces/Card';
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export const CardService = {
-  get: async (): Promise<Array<Card>> => {
+  get: async (): Promise<Card[]> => {
     await sleep(1000 * Math.random());
     return [
       {

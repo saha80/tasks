@@ -3,7 +3,7 @@ import { Link } from './Link';
 import { RouteObjectPathRequired } from '@/routes/Routes';
 
 export interface NavProps {
-  routes: Array<RouteObjectPathRequired>;
+  routes: RouteObjectPathRequired[];
 }
 
 export const Nav: FC<NavProps> = ({ routes }) => (

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, ForwardRefRenderFunction } from 'react';
 
 import './CheckBox.css';
 
@@ -15,23 +15,26 @@ export interface CheckBoxProps {
   defaultChecked?: boolean;
 }
 
-export const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>(
-  (
-    { label, required = false, disabled = false, defaultChecked = false },
-    ref
-  ) => (
-    <div className="checkbox">
-      <label className="label">
-        {label}
+const CheckBoxRender: ForwardRefRenderFunction<
+  HTMLInputElement,
+  CheckBoxProps
+> = (
+  { label, required = false, disabled = false, defaultChecked = false },
+  ref
+) => (
+  <div className="checkbox">
+    <label className="label">
+      {label}
 
-        <input
-          ref={ref}
-          type="checkbox"
-          required={required}
-          disabled={disabled}
-          defaultChecked={defaultChecked}
-        />
-      </label>
-    </div>
-  )
+      <input
+        ref={ref}
+        type="checkbox"
+        required={required}
+        disabled={disabled}
+        defaultChecked={defaultChecked}
+      />
+    </label>
+  </div>
 );
+
+export const CheckBox = forwardRef(CheckBoxRender);

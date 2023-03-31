@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, ForwardRefRenderFunction } from 'react';
 
 import './FilePicker.css';
 
@@ -17,20 +17,23 @@ export interface FilePickerProps {
   accept?: AcceptType;
 }
 
-export const FilePicker = forwardRef<HTMLInputElement, FilePickerProps>(
-  ({ label, required, multiple, accept }, ref) => (
-    <div className="file-picker">
-      <label className="label">
-        {label}
+const FilePickerRender: ForwardRefRenderFunction<
+  HTMLInputElement,
+  FilePickerProps
+> = ({ label, required, multiple, accept }, ref) => (
+  <div className="file-picker">
+    <label className="label">
+      {label}
 
-        <input
-          ref={ref}
-          type="file"
-          accept={accept}
-          multiple={multiple}
-          required={required}
-        />
-      </label>
-    </div>
-  )
+      <input
+        ref={ref}
+        type="file"
+        accept={accept}
+        multiple={multiple}
+        required={required}
+      />
+    </label>
+  </div>
 );
+
+export const FilePicker = forwardRef(FilePickerRender);

@@ -9,7 +9,7 @@
     "coverage": "vitest run --coverage",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . && prettier . --check --ignore-path ./.gitignore && tsc --noEmit",
+    "lint": "eslint . --ignore-path ./.gitignore && prettier . --check --ignore-path ./.gitignore && tsc --noEmit",
     "prepare": "husky install"
   },
   "lint-staged": {

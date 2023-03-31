@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+/* eslint-disable react/destructuring-assignment */
 import { Component, createRef, FormEvent } from 'react';
 
 import { Form } from '@/components/Form/Form';
@@ -164,7 +166,10 @@ export class CardForm extends Component<CardFormProps, CardFormState> {
           <div className="validation-message">{this.state.imgUrl}</div>
 
           <Select label="Select topic:" required ref={this.topics}>
-            {['programming', 'travelling']}
+            {[
+              { value: 'programming', label: 'Programming' },
+              { value: 'travelling', label: 'Travelling' },
+            ]}
           </Select>
           <div className="validation-message">{this.state.topics}</div>
 

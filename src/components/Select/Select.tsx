@@ -1,9 +1,9 @@
-import { forwardRef, ReactNode } from 'react';
+import { forwardRef, ReactNode, ForwardRefRenderFunction } from 'react';
 
 import './Select.css';
 
 export interface SelectProps {
-  children: Array<string>;
+  children: { label: ReactNode; value: string }[]; // todo: extract to separate type
 
   label: ReactNode;
 
@@ -17,31 +17,31 @@ export interface SelectProps {
   multiple?: boolean;
 }
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  (
-    { children, label, required = false, disabled = false, multiple = false },
-    ref
-  ) => (
-    <div className="select">
-      <label className="label">
-        {label}
+const SelectRender: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (
+  { children, label, required = false, disabled = false, multiple = false },
+  ref
+) => (
+  <div className="select">
+    <label className="label">
+      {label}
 
-        <select
-          multiple={multiple}
-          ref={ref}
-          defaultValue={multiple ? [] : ''}
-          required={required}
-          disabled={disabled}
-        >
-          {!multiple && <option defaultValue="" />}
+      <select
+        multiple={multiple}
+        ref={ref}
+        defaultValue={multiple ? [] : ''}
+        required={required}
+        disabled={disabled}
+      >
+        {!multiple && <option defaultValue="" />}
 
-          {children.filter(Boolean).map((option, index) => (
-            <option defaultValue={option} key={index} className="select-option">
-              {option}
-            </option>
-          ))}
-        </select>
-      </label>
-    </div>
-  )
+        {children.map(({ value, label }, index) => (
+          <option defaultValue={value} key={index} className="select-option">
+            {label}
+          </option>
+        ))}
+      </select>
+    </label>
+  </div>
 );
+
+export const Select = forwardRef(SelectRender);

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, ForwardRefRenderFunction } from 'react';
 
 import styles from './Search.module.css';
 
@@ -30,44 +30,44 @@ export interface SearchProps {
   readOnly?: boolean;
 }
 
-export const Search = forwardRef<HTMLInputElement, SearchProps>(
-  (
-    {
-      value,
-      onChange,
-      className,
-      placeholder,
-      list,
-      autoComplete,
-      pattern,
-      minLength = 3,
-      maxLength = 120,
-      name = 'q',
-      required = false,
-      readOnly = false,
-    },
-    ref
-  ) => (
-    <div className={styles['search']}>
-      <span className={`${styles['search-icon']} material-icons`}>search</span>
-      <input
-        type="search"
-        role="search"
-        className={`${styles['search-input']} ${className || ''}`}
-        minLength={minLength}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        name={name}
-        spellCheck={true}
-        onChange={(event) => onChange(event.target.value)}
-        value={value ?? ''}
-        list={list}
-        autoComplete={autoComplete}
-        pattern={pattern}
-        required={required}
-        readOnly={readOnly}
-        ref={ref}
-      />
-    </div>
-  )
+const SearchRender: ForwardRefRenderFunction<HTMLInputElement, SearchProps> = (
+  {
+    value,
+    onChange,
+    className = '',
+    placeholder,
+    list,
+    autoComplete,
+    pattern,
+    minLength = 3,
+    maxLength = 120,
+    name = 'q',
+    required = false,
+    readOnly = false,
+  },
+  ref
+) => (
+  <div className={styles.search}>
+    <span className={`${styles['search-icon']} material-icons`}>search</span>
+    <input
+      type="search"
+      role="search"
+      className={`${styles['search-input']} ${className}`}
+      minLength={minLength}
+      maxLength={maxLength}
+      placeholder={placeholder}
+      name={name}
+      spellCheck={true}
+      onChange={(event) => onChange(event.target.value)}
+      value={value ?? ''}
+      list={list}
+      autoComplete={autoComplete}
+      pattern={pattern}
+      required={required}
+      readOnly={readOnly}
+      ref={ref}
+    />
+  </div>
 );
+
+export const Search = forwardRef(SearchRender);
