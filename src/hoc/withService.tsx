@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { FetchingSpinner } from '@/components/FetchingSpinner/FetchingSpinner';
 import { FetchingError } from '@/components/FetchingError/FetchingError';
@@ -9,52 +9,38 @@ export const withService = <
   ServiceToProps extends keyof Props
 >(
   Wrapped: React.ComponentType<Props>,
-  service: () => Promise<Service>,
+  serviceCall: () => Promise<Service>,
   mapServiceToProps: (service: Service) => Pick<Props, ServiceToProps>
 ) => {
-  type ServiceWrapperState = {
-    loading: boolean;
-    error: boolean;
-    service: Service | undefined;
-  };
+  type ServiceWrapperProps = Omit<Props, ServiceToProps>;
 
-  return class ServiceWrapper extends Component<
-    Omit<Props, ServiceToProps>,
-    ServiceWrapperState
-  > {
-    state: ServiceWrapperState = {
-      service: undefined,
-      loading: true,
-      error: false,
-    };
+  const ServiceWrapper: FC<ServiceWrapperProps> = (serviceWrapperProps) => {
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<Error | undefined>(undefined);
+    const [service, setService] = useState<Service | undefined>(undefined);
 
-    async componentDidMount() {
-      try {
-        this.setState({ service: await service() });
-      } catch (_) {
-        this.setState({ error: true });
-      } finally {
-        this.setState({ loading: false });
-      }
+    useEffect(() => {
+      serviceCall()
+        .then(setService)
+        .catch(setError)
+        .finally(() => setLoading(false));
+    }, []);
+
+    if (loading) {
+      return <FetchingSpinner />;
     }
 
-    render() {
-      const { loading, error, service } = this.state;
-
-      if (loading) {
-        return <FetchingSpinner />;
-      }
-
-      if (error) {
-        return <FetchingError />;
-      }
-
-      const props = {
-        ...this.props,
-        ...mapServiceToProps(service as Service),
-      } as Props;
-
-      return <Wrapped {...props} />;
+    if (error) {
+      return <FetchingError />;
     }
+
+    const props = {
+      ...serviceWrapperProps,
+      ...mapServiceToProps(service as Service),
+    } as Props;
+
+    return <Wrapped {...props} />;
   };
+
+  return ServiceWrapper;
 };
