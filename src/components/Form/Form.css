@@ -1,0 +1,4 @@
+.form {
+  --form-valid-color: greenyellow;
+  --form-invalid-color: red;
+}

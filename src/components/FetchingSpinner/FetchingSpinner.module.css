@@ -1,0 +1,14 @@
+.spinner {
+  animation: 1s linear 0s infinite rotate-spinner;
+
+  background-color: transparent;
+}
+
+@keyframes rotate-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
