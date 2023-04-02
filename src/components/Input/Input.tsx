@@ -1,4 +1,12 @@
-import { ReactNode, forwardRef, ForwardRefRenderFunction } from 'react';
+import {
+  ReactNode,
+  forwardRef,
+  ForwardRefRenderFunction,
+  ChangeEventHandler,
+  FocusEventHandler,
+} from 'react';
+
+import { Label } from '@/components/Label/Label';
 
 import './Input.css';
 
@@ -12,34 +20,31 @@ export type InputType =
   | 'url';
 
 export interface InputProps {
-  type: InputType;
   label: ReactNode;
+
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  name?: string;
+  min?: string | number;
+  max?: string | number;
+  maxLength?: number;
+  minLength?: number;
   pattern?: string;
-
-  /** @default false */
   required?: boolean;
-
-  /** @default false */
   disabled?: boolean;
+  /** @default 'text' */
+  type?: InputType;
 }
 
 const InputRender: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { type, label, pattern, disabled, required },
+  { label, required, type = 'text', ...other },
   ref
 ) => (
-  <div className="input">
-    <label className="label">
-      {label}
+  <Label required={required}>
+    {label}
 
-      <input
-        ref={ref}
-        type={type}
-        pattern={pattern}
-        disabled={disabled}
-        required={required}
-      />
-    </label>
-  </div>
+    <input ref={ref} type={type} required={required} {...other} />
+  </Label>
 );
 
-export const Input = forwardRef(InputRender);
+export const Input = forwardRef<HTMLInputElement, InputProps>(InputRender);

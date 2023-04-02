@@ -2,6 +2,10 @@
   margin-block-start: 1rem;
 }
 
+.textarea .label {
+  display: flex;
+}
+
 .textarea textarea {
   color: var(--input-color);
   background-color: var(--input-background-color);

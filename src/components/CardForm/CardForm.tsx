@@ -1,19 +1,20 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-/* eslint-disable react/destructuring-assignment */
-import { Component, createRef, FormEvent } from 'react';
+import { FC, useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Form } from '@/components/Form/Form';
 import { Input } from '@/components/Input/Input';
 import { CardProps } from '@/components/Card/Card';
 import { CardVisibilityType } from '@/interfaces/Card';
 import { toDateInputMinFormat } from '@/utils/date';
-
 import { TextArea } from '@/components/TextArea/TextArea';
 import { FilePicker } from '@/components/FilePicker/FilePicker';
 import { Select } from '@/components/Select/Select';
 import { RadioGroup } from '@/components/RadioGroup/RadioGroup';
 import { DatePicker } from '@/components/DatePicker/DatePicker';
 import { CheckBox } from '@/components/CheckBox/CheckBox';
+import { readAsDataURL } from '@/utils/readAsDataURL';
+
+import { ValidationMessage } from './components/ValidationMessage';
 
 import './CardForm.css';
 
@@ -23,202 +24,163 @@ export interface CardFormProps {
   onSubmit: (card: Omit<CardProps, 'id'>) => void;
 }
 
-interface CardFormState {
-  title: string | undefined;
-  description: string | undefined;
-  createdBy: string | undefined;
-  imgUrl: string | undefined;
-  topics: string | undefined;
-  tags: string | undefined;
-  visibility: string | undefined; // enum
-  creationDate: string | undefined;
-  allowProcessData: string | undefined;
+interface CardFieldValues {
+  title: string;
+  description: string;
+  createdBy: string;
+  imgUrl: FileList;
+  topics: string;
+  tags: string;
+  visibility: CardVisibilityType;
+  creationDate: number;
+  allowProcessData: boolean;
 }
 
-const initCardFormState: CardFormState = {
-  title: undefined,
-  description: undefined,
-  createdBy: undefined,
-  imgUrl: undefined,
-  topics: undefined,
-  tags: undefined,
-  visibility: undefined,
-  creationDate: undefined,
-  allowProcessData: undefined,
-};
+export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CardFieldValues>({
+    mode: 'onSubmit',
+    shouldUseNativeValidation: true,
+  });
 
-export class CardForm extends Component<CardFormProps, CardFormState> {
-  formRef = createRef<HTMLFormElement>();
+  const onSuccess = useCallback(
+    async (data: CardFieldValues) => {
+      const card: Omit<CardProps, 'id'> = {
+        title: data.title,
+        description: data.description,
+        createdBy: data.createdBy.trim(),
+        src: await readAsDataURL(data.imgUrl[0]),
+        topics: [data.topics],
+        tags: data.tags
+          .split(',')
+          .map((s) => s.trim())
+          .filter(Boolean),
+        visibility: data.visibility,
+        creationTimestamp: data.creationDate,
+        modificationTimestamp: data.creationDate,
+        likes: 0,
+        views: 0,
+      };
 
-  title = createRef<HTMLInputElement>();
-  description = createRef<HTMLTextAreaElement>();
-  createdBy = createRef<HTMLInputElement>();
-  imgFile = createRef<HTMLInputElement>();
-  topics = createRef<HTMLSelectElement>();
-  tags = createRef<HTMLInputElement>();
-  visibility = createRef<HTMLInputElement>();
-  creationDate = createRef<HTMLInputElement>();
-  allowProcessData = createRef<HTMLInputElement>();
-
-  state = initCardFormState;
-
-  onError = () => {
-    const createdBy = this.createdBy.current?.validationMessage;
-    this.setState({
-      title: this.title.current?.validationMessage,
-      description: this.description.current?.validationMessage,
-      createdBy: createdBy
-        ? `${createdBy} Examples: John Doe, Jane Doe.` // todo: add i18n
-        : undefined,
-      imgUrl: this.imgFile.current?.validationMessage,
-      topics: this.topics.current?.validationMessage,
-      tags: this.tags.current?.validationMessage,
-      visibility: this.visibility.current?.validationMessage,
-      creationDate: this.creationDate.current?.validationMessage,
-      allowProcessData: this.allowProcessData.current?.validationMessage,
-    });
-  };
-
-  onLoad = (event: ProgressEvent<FileReader>) => {
-    const creationTimestamp =
-      this.creationDate.current?.valueAsNumber || Date.now();
-
-    this.props.onSubmit({
-      title: this.title.current?.value || '',
-      description: this.description.current?.value || '',
-      createdBy: this.createdBy.current?.value.trim() || '',
-      src: (event.target?.result as string) || '',
-      topics: [this.topics.current?.value || ''],
-      tags: (this.tags.current?.value || '')
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean), // move to separate method
-      visibility:
-        (this.visibility.current?.value as CardVisibilityType | undefined) ||
-        CardVisibilityType.ONLY_YOU,
-      creationTimestamp,
-      modificationTimestamp: creationTimestamp,
-      likes: 0,
-      views: 0,
-    });
-    this.setState(initCardFormState);
-    this.formRef.current?.reset();
-  };
-
-  onSuccess = () => {
-    const [imgFile] = this.imgFile.current?.files as FileList;
-    const fr = new FileReader();
-    fr.onload = (event) => {
       if (window.confirm('Add card?')) {
-        this.onLoad(event);
+        onSubmit(card);
+        reset();
       }
-    };
-    fr.readAsDataURL(imgFile);
-  };
+    },
+    [onSubmit, reset]
+  );
 
-  onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  return (
+    <div className="card-form">
+      <Form
+        onSubmit={handleSubmit(onSuccess)}
+        noValidate
+        id={form}
+        name="card-form"
+      >
+        <Input
+          type="text"
+          label="Enter title:"
+          {...register('title', { required: 'Title required.' })}
+        />
+        <ValidationMessage fieldError={errors.title} />
 
-    if (!this.formRef.current?.reportValidity()) {
-      this.onError();
-    } else {
-      this.onSuccess();
-    }
-  };
+        <TextArea label="Enter description:" {...register('description')} />
 
-  render() {
-    return (
-      <div className="card-form">
-        <Form
-          fromRef={this.formRef}
-          onSubmit={this.onSubmit}
-          noValidate={true}
-          id={form}
-          name="card-form"
+        <Input
+          type="text"
+          label={
+            <span>
+              Enter Your name.
+              <br />
+              It will be on created card:
+            </span>
+          }
+          {...register('createdBy', {
+            required: 'Your name required.',
+            pattern: {
+              value: /([A-Z][a-z]+\s?){2}/,
+              message: 'Please match the requested format.',
+            },
+          })}
+        />
+        <ValidationMessage fieldError={errors.createdBy}>
+          Examples: John Doe, Jane Doe.
+        </ValidationMessage>
+
+        <FilePicker
+          label="Upload image file:"
+          accept="image"
+          {...register('imgUrl', { required: 'Please select a file.' })}
+        />
+        <ValidationMessage fieldError={errors.imgUrl} />
+
+        <Select
+          label="Select topic:"
+          {...register('topics', {
+            required: 'Please select an item in the list.',
+          })}
         >
-          <Input type="text" label="Enter title:" required ref={this.title} />
-          <div className="validation-message">{this.state.title}</div>
+          {[
+            { value: 'programming', label: 'Programming' },
+            { value: 'travelling', label: 'Travelling' },
+          ]}
+        </Select>
+        <ValidationMessage fieldError={errors.topics} />
 
-          <TextArea label="Enter description:" ref={this.description} />
-          <div className="validation-message">{this.state.description}</div>
+        <Input
+          type="text"
+          label={
+            <span>
+              Enter tags,
+              <br />
+              separate using comma:
+            </span>
+          }
+          pattern="(.+(, )?)+"
+          {...register('tags', {
+            required: 'Please fill out this field.',
+            pattern: /(.+(, )?)+/,
+          })}
+        />
+        <ValidationMessage fieldError={errors.tags} />
 
-          <Input
-            type="text"
-            label={
-              <span>
-                Enter Your name.
-                <br />
-                It will be on created card:
-              </span>
-            }
-            required
-            pattern="([A-Z][a-z]+\s?){2}"
-            ref={this.createdBy}
-          />
-          <div className="validation-message">{this.state.createdBy}</div>
+        <RadioGroup
+          legend="Choose visibility"
+          {...register('visibility', {
+            required: 'Please select one of these options.',
+          })}
+        >
+          {[
+            { value: CardVisibilityType.ONLY_YOU, label: 'Only for You' },
+            { value: CardVisibilityType.PUBLIC, label: 'Public' },
+          ]}
+        </RadioGroup>
+        <ValidationMessage fieldError={errors.visibility} />
 
-          <FilePicker
-            label="Upload image file:"
-            required
-            accept="image"
-            ref={this.imgFile}
-          />
-          <div className="validation-message">{this.state.imgUrl}</div>
+        <DatePicker
+          label="Pick publication date:"
+          {...register('creationDate', {
+            min: toDateInputMinFormat(new Date()),
+            required: 'Please fill out this field.',
+            valueAsNumber: true,
+          })}
+        />
+        <ValidationMessage fieldError={errors.creationDate} />
 
-          <Select label="Select topic:" required ref={this.topics}>
-            {[
-              { value: 'programming', label: 'Programming' },
-              { value: 'travelling', label: 'Travelling' },
-            ]}
-          </Select>
-          <div className="validation-message">{this.state.topics}</div>
-
-          <Input
-            type="text"
-            label={
-              <span>
-                Enter tags,
-                <br />
-                separate using comma:
-              </span>
-            }
-            required
-            pattern="(.+(, )?)+"
-            ref={this.tags}
-          />
-          <div className="validation-message">{this.state.tags}</div>
-
-          <RadioGroup
-            legend="Choose visibility"
-            name="visibility"
-            ref={this.visibility}
-          >
-            {[
-              { value: CardVisibilityType.ONLY_YOU, label: 'Only for You' },
-              { value: CardVisibilityType.PUBLIC, label: 'Public' },
-            ]}
-          </RadioGroup>
-          <div className="validation-message">{this.state.visibility}</div>
-
-          <DatePicker
-            label="Pick publication date:"
-            required
-            min={toDateInputMinFormat(new Date())}
-            ref={this.creationDate}
-          />
-          <div className="validation-message">{this.state.creationDate}</div>
-
-          <CheckBox
-            label="Allow process the data?"
-            required
-            defaultChecked
-            ref={this.allowProcessData}
-          />
-          <div className="validation-message">
-            {this.state.allowProcessData}
-          </div>
-        </Form>
-      </div>
-    );
-  }
-}
+        <CheckBox
+          label="Allow process the data?"
+          defaultChecked
+          {...register('allowProcessData', {
+            required: 'Please check this box if you want to proceed.',
+          })}
+        />
+        <ValidationMessage fieldError={errors.allowProcessData} />
+      </Form>
+    </div>
+  );
+};

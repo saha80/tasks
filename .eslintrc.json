@@ -37,7 +37,11 @@
     "react/hook-use-state": "warn",
     "react/destructuring-assignment": "warn",
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "@typescript-eslint/non-nullable-type-assertion-style": "off"
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      { "checksVoidReturn": false } // reason: https://github.com/react-hook-form/react-hook-form/discussions/8020
+    ]
   },
   "settings": {
     "react": {

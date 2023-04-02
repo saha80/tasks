@@ -3,33 +3,22 @@ import { forwardRef, ReactNode, ForwardRefRenderFunction } from 'react';
 interface RadioProps {
   label: ReactNode;
 
-  /** @default false */
+  name: string;
+  value: string;
   required?: boolean;
-
-  /** @default false */
   disabled?: boolean;
-
-  /** @default false */
   defaultChecked?: boolean;
 }
 
 const RadioRender: ForwardRefRenderFunction<HTMLInputElement, RadioProps> = (
-  { label, required = false, disabled = false, defaultChecked = false },
+  { label, ...other },
   ref
 ) => (
-  <div className="radio">
-    <label className="label">
-      <input
-        type="radio"
-        ref={ref}
-        required={required}
-        disabled={disabled}
-        defaultChecked={defaultChecked}
-      />
+  <label className="label">
+    <input type="radio" ref={ref} {...other} />
 
-      {label}
-    </label>
-  </div>
+    {label}
+  </label>
 );
 
 export const Radio = forwardRef(RadioRender);
