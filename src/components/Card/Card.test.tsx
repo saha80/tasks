@@ -9,7 +9,5 @@ describe('Card', () => {
 
     const [renderedCard] = await screen.findAllByText(card.title);
     expect(renderedCard.innerHTML).toEqual(card.title);
-
-    screen.debug();
   });
 });

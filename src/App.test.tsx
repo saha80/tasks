@@ -7,9 +7,14 @@ describe('App', () => {
   test('renders', async () => {
     render(<RouterProvider router={router} />);
 
-    const [home] = await screen.findAllByText('Home');
-    expect(home.innerHTML).toEqual('Home');
+    const home = await screen.findByText('Home');
+    const cardForm = await screen.findByText('Card Form');
+    const aboutUs = await screen.findByText('About Us');
 
-    screen.debug();
+    expect(home.innerHTML).toEqual('Home');
+    expect(cardForm.innerHTML).toEqual('Card Form');
+    expect(aboutUs.innerHTML).toEqual('About Us');
+
+    expect(screen.getByText(/Current path:/i)).toContain(/Home/i);
   });
 });

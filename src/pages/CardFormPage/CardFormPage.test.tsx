@@ -19,7 +19,12 @@ describe('CardFormPage', () => {
     });
 
     expect(failure.innerHTML).toContain(partialFailureText);
+  });
 
-    screen.debug();
+  test('file upload', async () => {
+    render(<CardFormPage />);
+
+    const fileUpload = await screen.findByText('Upload image file:');
+    fireEvent.click(fileUpload);
   });
 });
