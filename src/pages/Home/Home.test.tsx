@@ -24,7 +24,6 @@ describe('Home', () => {
     await userEvent.click(search);
     await userEvent.keyboard(title);
 
-    const cards = screen.queryAllByText('Typescript');
-    expect(cards.length).toEqual(0);
+    expect(screen.queryAllByText('Typescript')).toHaveLength(0);
   });
 });
