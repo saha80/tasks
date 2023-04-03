@@ -23,5 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-.husky
-/coverage/
+coverage

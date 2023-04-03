@@ -9,11 +9,11 @@
     "coverage": "vitest run --coverage",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ignore-path ./.gitignore && prettier . --check --ignore-path ./.gitignore && tsc --noEmit",
+    "lint": "eslint . --ignore-path ./.gitignore && tsc --noEmit && prettier . --check --ignore-unknown --ignore-path ./.gitignore",
     "prepare": "husky install"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "yarn lint"
   },
   "dependencies": {
     "react": "^18.2.0",
