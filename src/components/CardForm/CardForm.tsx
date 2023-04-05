@@ -87,7 +87,9 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
         <Input
           type="text"
           label="Enter title:"
-          {...register('title', { required: 'Title required.' })}
+          {...register('title', {
+            validate: (title) => (title.trim() ? true : 'Title required.'),
+          })}
         />
         <ValidationMessage fieldError={errors.title} />
 
