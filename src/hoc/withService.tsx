@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import { FetchingSpinner } from '@/components/FetchingSpinner/FetchingSpinner';
-import { FetchingError } from '@/components/FetchingError/FetchingError';
+import { FetchingSpinner, FetchingError } from '@/components';
 
 export const withService = <
   Props extends object,

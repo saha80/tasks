@@ -1,9 +1,4 @@
-import {
-  forwardRef,
-  ForwardRefRenderFunction,
-  ChangeEventHandler,
-  FocusEventHandler,
-} from 'react';
+import { forwardRef, ChangeEventHandler, FocusEventHandler } from 'react';
 
 import { Label } from '@/components/Label/Label';
 
@@ -20,17 +15,14 @@ export interface CheckBoxProps {
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
-const CheckBoxRender: ForwardRefRenderFunction<
-  HTMLInputElement,
-  CheckBoxProps
-> = ({ label, required, ...other }, ref) => (
-  <div className="checkbox">
-    <Label required={required}>
-      {label}
+export const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>(
+  ({ label, required, ...other }, ref) => (
+    <div className="checkbox">
+      <Label required={required}>
+        {label}
 
-      <input ref={ref} type="checkbox" required={required} {...other} />
-    </Label>
-  </div>
+        <input ref={ref} type="checkbox" required={required} {...other} />
+      </Label>
+    </div>
+  )
 );
-
-export const CheckBox = forwardRef(CheckBoxRender);

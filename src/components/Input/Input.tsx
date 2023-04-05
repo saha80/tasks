@@ -1,7 +1,6 @@
 import {
   ReactNode,
   forwardRef,
-  ForwardRefRenderFunction,
   ChangeEventHandler,
   FocusEventHandler,
 } from 'react';
@@ -36,15 +35,12 @@ export interface InputProps {
   type?: InputType;
 }
 
-const InputRender: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { label, required, type = 'text', ...other },
-  ref
-) => (
-  <Label required={required}>
-    {label}
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, required, type = 'text', ...other }, ref) => (
+    <Label required={required}>
+      {label}
 
-    <input ref={ref} type={type} required={required} {...other} />
-  </Label>
+      <input ref={ref} type={type} required={required} {...other} />
+    </Label>
+  )
 );
-
-export const Input = forwardRef<HTMLInputElement, InputProps>(InputRender);

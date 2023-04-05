@@ -1,7 +1,6 @@
 import {
   forwardRef,
   ReactNode,
-  ForwardRefRenderFunction,
   ChangeEventHandler,
   FocusEventHandler,
 } from 'react';
@@ -22,17 +21,14 @@ export interface TextAreaProps {
   disabled?: boolean;
 }
 
-const TextAreaRender: ForwardRefRenderFunction<
-  HTMLTextAreaElement,
-  TextAreaProps
-> = ({ label, required, ...other }, ref) => (
-  <div className="textarea">
-    <Label required={required}>
-      {label}
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
+  ({ label, required, ...other }, ref) => (
+    <div className="textarea">
+      <Label required={required}>
+        {label}
 
-      <textarea ref={ref} required={required} {...other} />
-    </Label>
-  </div>
+        <textarea ref={ref} required={required} {...other} />
+      </Label>
+    </div>
+  )
 );
-
-export const TextArea = forwardRef(TextAreaRender);

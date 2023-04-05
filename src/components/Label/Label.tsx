@@ -15,7 +15,7 @@ export interface LabelProps {
 }
 
 export const Label: FC<LabelProps> = ({
-  required = false,
+  required,
   children: [label, input],
 }) => (
   <label className={`${styles.label} label`}>

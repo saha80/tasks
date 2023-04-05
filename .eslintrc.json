@@ -1,14 +1,14 @@
 {
   "parser": "@typescript-eslint/parser",
   "extends": [
-    "plugin:react/recommended",
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:@typescript-eslint/strict",
-    "prettier",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended"
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime", // If you are using the new JSX transform from React 17
+    "plugin:react-hooks/recommended", // https://github.com/facebook/react/blob/main/packages/eslint-plugin-react-hooks/src/index.js
+    "plugin:prettier/recommended" // added as last extension: https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
   ],
   "env": {
     "browser": true,
@@ -25,11 +25,23 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "prettier", "react-hooks"],
+  "plugins": [],
   "rules": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "comma-dangle": ["error", "only-multiline"],
+    "react/display-name": "off",
+    "react/jsx-no-leaked-render": "error",
+    "react/jsx-no-constructed-context-values": "warn",
+    "react/jsx-no-useless-fragment": "warn",
+    "react/button-has-type": "warn",
+    "react/no-multi-comp": "warn",
+    "react/no-array-index-key": "warn",
+    "react/function-component-definition": [
+      "warn",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
     "react/self-closing-comp": "warn",
     "react/prefer-read-only-props": "warn",
     "react/no-invalid-html-attribute": "warn",

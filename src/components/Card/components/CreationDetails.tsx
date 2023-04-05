@@ -41,14 +41,14 @@ export const CreationDetails: FC<CreationDetailsProps> = ({
     </div>
     <span className="card-topics">
       <span>topics: </span>
-      {topics.map((tag, index) => (
-        <a key={index}>{tag}</a>
+      {topics.map((tag) => (
+        <a key={tag}>{tag}</a>
       ))}
     </span>
     <span className="card-tags">
       <span>Tags: </span>
-      {tags.map((tag, index) => (
-        <a key={index}>{tag}</a>
+      {tags.map((tag) => (
+        <a key={tag}>{tag}</a>
       ))}
     </span>
   </div>

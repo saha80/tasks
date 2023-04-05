@@ -1,17 +1,19 @@
 import { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Form } from '@/components/Form/Form';
-import { Input } from '@/components/Input/Input';
-import { CardProps } from '@/components/Card/Card';
+import {
+  CardProps,
+  CheckBox,
+  DatePicker,
+  FilePicker,
+  Form,
+  Input,
+  RadioGroup,
+  Select,
+  TextArea,
+} from '@/components';
 import { CardVisibilityType } from '@/interfaces/Card';
 import { toDateInputMinFormat } from '@/utils/date';
-import { TextArea } from '@/components/TextArea/TextArea';
-import { FilePicker } from '@/components/FilePicker/FilePicker';
-import { Select } from '@/components/Select/Select';
-import { RadioGroup } from '@/components/RadioGroup/RadioGroup';
-import { DatePicker } from '@/components/DatePicker/DatePicker';
-import { CheckBox } from '@/components/CheckBox/CheckBox';
 import { readAsDataURL } from '@/utils/readAsDataURL';
 
 import { ValidationMessage } from './components/ValidationMessage';

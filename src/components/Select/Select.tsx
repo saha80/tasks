@@ -1,7 +1,6 @@
 import {
   forwardRef,
   ReactNode,
-  ForwardRefRenderFunction,
   ChangeEventHandler,
   FocusEventHandler,
 } from 'react';
@@ -19,35 +18,31 @@ export interface SelectProps {
   name?: string;
   required?: boolean;
   disabled?: boolean;
-  /** @default false */
   multiple?: boolean;
 }
 
-const SelectRender: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (
-  { children, label, required, multiple = false, ...other },
-  ref
-) => (
-  <div className="select">
-    <Label required={required}>
-      {label}
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  ({ children, label, required, multiple = false, ...other }, ref) => (
+    <div className="select">
+      <Label required={required}>
+        {label}
 
-      <select
-        multiple={multiple}
-        ref={ref}
-        defaultValue={multiple ? [] : ''}
-        required={required}
-        {...other}
-      >
-        {!multiple && <option defaultValue="" />}
+        <select
+          multiple={multiple}
+          ref={ref}
+          defaultValue={multiple ? [] : ''}
+          required={required}
+          {...other}
+        >
+          {!multiple && <option defaultValue="" />}
 
-        {children.map(({ value, label }, index) => (
-          <option defaultValue={value} key={index} className="select-option">
-            {label}
-          </option>
-        ))}
-      </select>
-    </Label>
-  </div>
+          {children.map(({ value, label }) => (
+            <option defaultValue={value} key={value} className="select-option">
+              {label}
+            </option>
+          ))}
+        </select>
+      </Label>
+    </div>
+  )
 );
-
-export const Select = forwardRef(SelectRender);

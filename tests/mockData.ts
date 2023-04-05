@@ -1,5 +1,4 @@
-import { CardProps } from '@/components/Card/Card';
-import { CardListProps } from '@/components/CardList/CardList';
+import { CardProps, CardListProps } from '@/components';
 import { CardVisibilityType } from '@/interfaces/Card';
 
 export const card: CardProps = {

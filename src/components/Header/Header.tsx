@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { ROOT_CHILDREN } from '@/routes/Routes';
 import { useLocation } from 'react-router-dom';
 
@@ -6,7 +7,7 @@ import { pathToLinkName } from './components/Link';
 
 import './Header.css';
 
-export const Header = () => {
+export const Header: FC = () => {
   const location = useLocation();
 
   return (

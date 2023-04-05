@@ -1,6 +1,6 @@
-import { forwardRef, ReactNode, ForwardRefRenderFunction } from 'react';
+import { forwardRef, ReactNode } from 'react';
 
-interface RadioProps {
+export interface RadioProps {
   label: ReactNode;
 
   name: string;
@@ -10,15 +10,12 @@ interface RadioProps {
   defaultChecked?: boolean;
 }
 
-const RadioRender: ForwardRefRenderFunction<HTMLInputElement, RadioProps> = (
-  { label, ...other },
-  ref
-) => (
-  <label className="label">
-    <input type="radio" ref={ref} {...other} />
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  ({ label, ...other }, ref) => (
+    <label className="label">
+      <input type="radio" ref={ref} {...other} />
 
-    {label}
-  </label>
+      {label}
+    </label>
+  )
 );
-
-export const Radio = forwardRef(RadioRender);

@@ -9,8 +9,8 @@ export interface NavProps {
 export const Nav: FC<NavProps> = ({ routes }) => (
   <nav className="header-nav">
     <ul className="header-route-list">
-      {routes.map(({ path }, index) => (
-        <li key={index} className="list-item">
+      {routes.map(({ path }) => (
+        <li key={path} className="list-item">
           <Link to={path} />
         </li>
       ))}

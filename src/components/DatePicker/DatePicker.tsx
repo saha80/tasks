@@ -1,9 +1,4 @@
-import {
-  forwardRef,
-  ForwardRefRenderFunction,
-  ChangeEventHandler,
-  FocusEventHandler,
-} from 'react';
+import { forwardRef, ChangeEventHandler, FocusEventHandler } from 'react';
 
 import { Label } from '@/components/Label/Label';
 
@@ -21,14 +16,12 @@ export interface DatePickerProps {
   disabled?: boolean;
 }
 
-const DatePickerRender: ForwardRefRenderFunction<
-  HTMLInputElement,
-  DatePickerProps
-> = ({ label, required, ...other }, ref) => (
-  <Label required={required}>
-    {label}
-    <input ref={ref} type="date" required={required} {...other} />
-  </Label>
-);
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
+  ({ label, required, ...other }, ref) => (
+    <Label required={required}>
+      {label}
 
-export const DatePicker = forwardRef(DatePickerRender);
+      <input ref={ref} type="date" required={required} {...other} />
+    </Label>
+  )
+);
