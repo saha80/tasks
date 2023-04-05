@@ -46,6 +46,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
     formState: { errors },
   } = useForm<CardFieldValues>({
     mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
     shouldUseNativeValidation: true,
   });
 
@@ -88,7 +89,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
           type="text"
           label="Enter title:"
           {...register('title', {
-            validate: (title) => (title.trim() ? true : 'Title required.'),
+            validate: (title) => Boolean(title.trim()) || 'Title required.',
           })}
         />
         <ValidationMessage fieldError={errors.title} />
