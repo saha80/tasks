@@ -11,16 +11,13 @@ import {
   RadioGroup,
   Select,
   TextArea,
+  ValidationMessage,
 } from '@/components';
 import { CardVisibilityType } from '@/interfaces/Card';
 import { toDateInputMinFormat } from '@/utils/date';
 import { readAsDataURL } from '@/utils/readAsDataURL';
 
-import { ValidationMessage } from './components/ValidationMessage';
-
-import './CardForm.css';
-
-const form = 'card-form';
+import styles from './CardForm.module.css';
 
 export interface CardFormProps {
   onSubmit: (card: Omit<CardProps, 'id'>) => void;
@@ -82,13 +79,16 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
       <Form
         onSubmit={handleSubmit(onSuccess)}
         noValidate
-        id={form}
+        className={styles['card-form']}
+        submitMessage="Submit"
+        method="get"
         name="card-form"
       >
         <Input
           type="text"
           label="Enter title:"
           {...register('title', {
+            required: true,
             validate: (title) => Boolean(title.trim()) || 'Title required.',
           })}
         />

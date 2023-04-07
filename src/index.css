@@ -6,6 +6,9 @@
   --header-z-index: 1;
 
   --app-margin: var(--header-height);
+
+  --form-valid-color: greenyellow;
+  --form-invalid-color: red;
 }
 
 @media (prefers-color-scheme: light) {

@@ -1,0 +1,5 @@
+.card-form {
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+}
