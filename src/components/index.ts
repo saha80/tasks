@@ -8,6 +8,7 @@ export { CardForm } from './CardForm/CardForm';
 export { CardList } from './CardList/CardList';
 export { CheckBox } from './CheckBox/CheckBox';
 export { DatePicker } from './DatePicker/DatePicker';
+export { Dialog } from './Dialog/Dialog';
 export { FetchingError } from './FetchingError/FetchingError';
 export { FetchingSpinner } from './FetchingSpinner/FetchingSpinner';
 export { FilePicker } from './FilePicker/FilePicker';
@@ -32,7 +33,8 @@ export type { CardFormProps } from './CardForm/CardForm';
 export type { CardListProps } from './CardList/CardList';
 export type { CheckBoxProps } from './CheckBox/CheckBox';
 export type { DatePickerProps } from './DatePicker/DatePicker';
-// export type { FetchingErrorProps } from './FetchingError/FetchingError'; todo: make commented components more customizable
+export type { DialogProps } from './Dialog/Dialog';
+// export type { FetchingErrorProps } from './FetchingError/FetchingError';
 // export type { FetchingSpinnerProps } from './FetchingSpinner/FetchingSpinner';
 export type { FilePickerProps } from './FilePicker/FilePicker';
 // export type { FooterProps } from './Footer/Footer';

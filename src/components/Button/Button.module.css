@@ -2,4 +2,6 @@
   display: flex;
   appearance: auto;
   border-radius: var(--border-radius);
+  margin: 0;
+  padding: revert;
 }
