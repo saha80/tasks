@@ -10,6 +10,7 @@ export interface LabelProps {
       | ReactElement<HTMLInputElement>
       | ReactElement<HTMLSelectElement>
       | ReactElement<HTMLTextAreaElement>
+      | ReactElement<HTMLProgressElement>
     )
   ];
 }
