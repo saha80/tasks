@@ -8,8 +8,10 @@ describe('CardList', () => {
   test('renders', async () => {
     const { container } = render(<CardList {...cards} />);
 
-    const [renderedCard] = await screen.findAllByText(cards.children[2].title);
-    expect(renderedCard.innerHTML).toEqual(cards.children[2].title);
+    const [renderedCard] = await screen.findAllByText(
+      cards.children[2].description
+    );
+    expect(renderedCard.innerHTML).toEqual(cards.children[2].description);
 
     expect(container.getElementsByClassName('card')).toHaveLength(
       cards.children.length

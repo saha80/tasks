@@ -2,16 +2,17 @@ import { FC } from 'react';
 
 import { Card, CardProps } from '@/components/Card/Card';
 
-import './CardList.css';
+import styles from './CardList.module.css';
 
 export interface CardListProps {
-  children: readonly CardProps[];
+  onCardClick?: (id: CardProps['id']) => void;
+  children: readonly Omit<CardProps, 'onClick'>[];
 }
 
-export const CardList: FC<CardListProps> = ({ children }) => (
-  <div className="cards">
+export const CardList: FC<CardListProps> = ({ onCardClick, children }) => (
+  <div className={styles.cardList}>
     {children.map((card) => (
-      <Card key={card.id} {...card} />
+      <Card key={card.id} onClick={onCardClick} {...card} />
     ))}
   </div>
 );
