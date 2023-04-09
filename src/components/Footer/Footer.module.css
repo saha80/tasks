@@ -13,7 +13,14 @@
   background-color: var(--footer-background-color);
 }
 
-.footer .github-link {
+.githubLink {
   color: inherit;
-  background-color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.githubIcon {
+  fill: var(--background-color);
+  font-size: 24px;
+  margin-inline-end: 8px;
 }

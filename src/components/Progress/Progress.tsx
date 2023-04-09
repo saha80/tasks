@@ -9,16 +9,17 @@ export interface ProgressProps {
   label: ReactNode;
   value: number;
   max: number;
+  className?: string;
 }
 
 export const Progress = forwardRef<HTMLProgressElement, ProgressProps>(
-  ({ label, value, max }, ref) => (
+  ({ label, value, max, className = '' }, ref) => (
     <Label>
       {label}
 
       <progress
         ref={ref}
-        className={`${styles.progress} progress`}
+        className={`${styles.progress} progress ${className}`}
         max={max}
         value={clamp(value, 0, max)}
       >

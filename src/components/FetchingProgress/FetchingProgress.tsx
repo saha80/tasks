@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { MdRotateRight } from 'react-icons/md';
+
 import { Progress, ProgressProps } from '@/components/Progress/Progress';
 import { Optional } from '@/utils/types';
 
@@ -11,15 +13,14 @@ export const FetchingProgress: FC<FetchingProgressProps> = ({
   label,
   value,
   max,
+  className = '',
 }) =>
   typeof value == 'number' && typeof max == 'number' ? (
-    <Progress label={label} value={value} max={max} />
+    <Progress label={label} value={value} max={max} className={className} />
   ) : (
-    <div>
+    <div className={`${styles.progress} ${className}`}>
       {label}
 
-      <p role="progressbar" className={`${styles.spinner} material-icons`}>
-        rotate_right
-      </p>
+      <MdRotateRight role="progressbar" className={styles.spinner} />
     </div>
   );

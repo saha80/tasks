@@ -1,11 +1,11 @@
-import { forwardRef } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
+
+import { MdSearch } from 'react-icons/md';
 
 import styles from './Search.module.css';
 
-export interface SearchProps {
-  value: string | null;
-  onChange: (value: string) => void;
-
+export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
+  value?: string;
   autoComplete?: string;
   className?: string;
   list?: string;
@@ -19,16 +19,13 @@ export interface SearchProps {
 }
 
 export const Search = forwardRef<HTMLInputElement, SearchProps>(
-  ({ value, onChange, className = '', ...other }, ref) => (
+  ({ className = '', ...other }, ref) => (
     <div className={styles.search}>
-      <span className={`${styles['search-icon']} material-icons`}>search</span>
+      <MdSearch className={styles.searchIcon} />
       <input
         type="search"
-        role="search"
-        className={`${styles['search-input']} ${className}`}
+        className={`${styles.searchInput} search ${className}`}
         spellCheck={true}
-        onChange={(event) => onChange(event.target.value)}
-        value={value ?? ''}
         ref={ref}
         {...other}
       />

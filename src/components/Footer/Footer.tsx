@@ -1,10 +1,13 @@
 import { FC } from 'react';
 
-import './Footer.css';
+import { GoMarkGithub } from 'react-icons/go';
+
+import styles from './Footer.module.css';
 
 export const Footer: FC = () => (
-  <footer className="footer">
-    <a className="github-link" href="https://github.com/saha80/tasks">
+  <footer className={`${styles.footer} footer`}>
+    <a className={styles.githubLink} href="https://github.com/saha80/tasks">
+      <GoMarkGithub className={styles.githubIcon} />
       GitHub
     </a>
   </footer>

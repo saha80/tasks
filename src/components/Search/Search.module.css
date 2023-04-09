@@ -1,28 +1,27 @@
 .search {
   color: var(--color);
-  background-color: inherit;
   display: inline-flex;
   align-items: center;
   position: relative;
+  border-radius: var(--border-radius);
 }
 
-.search-icon {
+.searchIcon {
   color: var(--color);
   background-color: transparent;
+  font-size: 24px;
   position: absolute;
-
-  margin-inline-start: calc(4px + 1rem);
-  margin-block-start: 4px;
+  margin-inline-start: 5px;
 }
 
-input[type].search-input {
+.searchInput {
   color: var(--color);
   background-color: var(--background-color);
 
   height: 2rem;
 
-  border-radius: var(--border-radius);
+  border-radius: inherit;
   border: 1px solid dodgerblue;
 
-  padding-inline-start: 1.75rem;
+  padding-inline-start: 2rem;
 }
