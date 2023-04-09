@@ -13,14 +13,20 @@ import {
   TextArea,
   ValidationMessage,
 } from '@/components';
-import { CardVisibilityType } from '@/interfaces/Card';
 import { toDateInputMinFormat } from '@/utils/date';
 import { readAsDataURL } from '@/utils/readAsDataURL';
 
 import styles from './CardForm.module.css';
 
+type InputCard = Omit<CardProps, 'id' | 'createdByURL'>;
+
 export interface CardFormProps {
-  onSubmit: (card: Omit<CardProps, 'id'>) => void;
+  onSubmit: (card: InputCard) => void;
+}
+
+enum CardVisibilityType {
+  ONLY_YOU = 'only-you',
+  PUBLIC = 'public',
 }
 
 interface CardFieldValues {
@@ -28,7 +34,7 @@ interface CardFieldValues {
   description: string;
   createdBy: string;
   imgUrl: FileList;
-  topics: string;
+  collections: string;
   tags: string;
   visibility: CardVisibilityType;
   creationDate: number;
@@ -49,21 +55,13 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
 
   const onSuccess = useCallback(
     async (data: CardFieldValues) => {
-      const card: Omit<CardProps, 'id'> = {
-        title: data.title,
+      const card: InputCard = {
         description: data.description,
         createdBy: data.createdBy.trim(),
-        src: await readAsDataURL(data.imgUrl[0]),
-        topics: [data.topics],
-        tags: data.tags
-          .split(',')
-          .map((s) => s.trim())
-          .filter(Boolean),
-        visibility: data.visibility,
+        imgSrc: await readAsDataURL(data.imgUrl[0]),
         creationTimestamp: data.creationDate,
         modificationTimestamp: data.creationDate,
         likes: 0,
-        views: 0,
       };
 
       if (window.confirm('Add card?')) {
@@ -126,7 +124,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
 
         <Select
           label="Select topic:"
-          {...register('topics', {
+          {...register('collections', {
             required: 'Please select an item in the list.',
           })}
         >
@@ -135,7 +133,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
             { value: 'travelling', label: 'Travelling' },
           ]}
         </Select>
-        <ValidationMessage fieldError={errors.topics} />
+        <ValidationMessage fieldError={errors.collections} />
 
         <Input
           type="text"
@@ -179,7 +177,6 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
 
         <CheckBox
           label="Allow process the data?"
-          defaultChecked
           {...register('allowProcessData', {
             required: 'Please check this box if you want to proceed.',
           })}
