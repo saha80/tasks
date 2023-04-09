@@ -7,7 +7,7 @@ describe('Card', () => {
   test('renders', async () => {
     render(<Card {...card} />);
 
-    const [renderedCard] = await screen.findAllByText(card.title);
-    expect(renderedCard.innerHTML).toEqual(card.title);
+    const [renderedCard] = await screen.findAllByText(card.description);
+    expect(renderedCard.innerHTML).toEqual(card.description);
   });
 });

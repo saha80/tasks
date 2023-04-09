@@ -1,50 +1,46 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
+import { MdThumbUp } from 'react-icons/md';
 
-import { Image, ImageProps } from './components/Image';
-import { Title, TitleProps } from './components/Title';
-import { Description, DescriptionProps } from './components/Description';
-import {
-  CreationDetails,
-  CreationDetailsProps,
-} from './components/CreationDetails';
-import { Status, StatusProps } from './components/Status';
+import { Card as CardType } from '@/interfaces/Card';
 
-import './Card.css';
+import { CreationDetails } from './components/CreationDetails';
 
-export interface CardProps
-  extends ImageProps,
-    TitleProps,
-    DescriptionProps,
-    CreationDetailsProps,
-    StatusProps {
-  id: number;
+import styles from './Card.module.css';
+
+export interface CardProps extends CardType {
+  onClick?: (id: CardType['id']) => void;
 }
 
 export const Card: FC<CardProps> = ({
-  src,
-  title,
+  id,
+  imgSrc,
+  imgAlt,
   description,
   createdBy,
   creationTimestamp,
   modificationTimestamp,
-  topics,
-  tags,
-  visibility,
   likes,
-  views,
-}) => (
-  <div className="card">
-    <Image src={src} />
-    <Title title={title} />
-    <Description description={description} />
-    <CreationDetails
-      createdBy={createdBy}
-      creationTimestamp={creationTimestamp}
-      modificationTimestamp={modificationTimestamp}
-      topics={topics}
-      tags={tags}
-      visibility={visibility}
-    />
-    <Status likes={likes} views={views} />
-  </div>
-);
+  onClick,
+}) => {
+  const onCardClick = useCallback(() => {
+    onClick?.(id);
+  }, [id, onClick]);
+
+  return (
+    <div className={`${styles.card} card`} onClick={onCardClick}>
+      <img className={styles.image} src={imgSrc} alt={imgAlt} />
+      <div className={styles.description}>{description}</div>
+      <CreationDetails
+        createdBy={createdBy}
+        creationTimestamp={creationTimestamp}
+        modificationTimestamp={modificationTimestamp}
+      />
+      <div className={styles.status}>
+        <span>
+          <MdThumbUp />
+          {likes}
+        </span>
+      </div>
+    </div>
+  );
+};
