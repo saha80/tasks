@@ -1,0 +1,35 @@
+.twoSideContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.image {
+  margin-inline-end: 1rem;
+  max-height: 35rem;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 24px;
+  margin-inline-end: 1rem;
+}
+
+.link {
+  border-radius: var(--border-radius);
+  padding: 5px;
+  margin-inline: 4px;
+}
+
+@media (prefers-color-scheme: light) {
+  .link {
+    background-color: lightgrey;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .link {
+    background-color: dimgray;
+  }
+}
