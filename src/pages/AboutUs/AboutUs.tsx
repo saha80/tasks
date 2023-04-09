@@ -10,5 +10,9 @@ export const AboutUs: FC = () => (
       conducted by <a href="https://rollingscopes.com/">The Rolling Scopes</a>{' '}
       developer community since 2013.
     </p>
+    <p>
+      This application is powered by the{' '}
+      <a href="https://unsplash.com/developers">Unsplash API</a>.
+    </p>
   </div>
 );
