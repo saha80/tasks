@@ -4,6 +4,7 @@
 
 export { Button } from './Button/Button';
 export { Card } from './Card/Card';
+export { CardDetails } from './CardDetails/CardDetails';
 export { CardForm } from './CardForm/CardForm';
 export { CardList } from './CardList/CardList';
 export { CheckBox } from './CheckBox/CheckBox';
@@ -34,7 +35,7 @@ export type { CardListProps } from './CardList/CardList';
 export type { CheckBoxProps } from './CheckBox/CheckBox';
 export type { DatePickerProps } from './DatePicker/DatePicker';
 export type { DialogProps } from './Dialog/Dialog';
-// export type { FetchingErrorProps } from './FetchingError/FetchingError';
+export type { FetchingErrorProps } from './FetchingError/FetchingError';
 export type { FetchingProgressProps } from './FetchingProgress/FetchingProgress';
 export type { FilePickerProps } from './FilePicker/FilePicker';
 // export type { FooterProps } from './Footer/Footer';

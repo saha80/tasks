@@ -2,21 +2,28 @@ import {
   FC,
   MouseEventHandler,
   ReactEventHandler,
-  ReactNode,
   RefCallback,
   forwardRef,
   useCallback,
   useEffect,
   useRef,
+  ReactComponentElement,
 } from 'react';
 
-import { Form } from '@/components/Form/Form';
+import { MdClose } from 'react-icons/md';
+
+import { Button } from '@/components/Button/Button';
+
+import { DialogTitle, DialogTitleProps } from './DialogTitle';
+import { DialogContent, DialogContentProps } from './DialogContent';
 
 import styles from './Dialog.module.css';
 
 export interface DialogProps {
-  children: ReactNode;
-  header?: ReactNode;
+  children: [
+    ReactComponentElement<typeof DialogTitle, DialogTitleProps>,
+    ReactComponentElement<typeof DialogContent, DialogContentProps>
+  ];
   onClose?: ReactEventHandler<HTMLDialogElement>;
   open?: boolean;
 }
@@ -24,7 +31,7 @@ export interface DialogProps {
 export const Dialog: FC<DialogProps> = forwardRef<
   HTMLDialogElement,
   DialogProps
->(({ header, children, open, onClose }, forwardedRef) => {
+>(({ children, open, onClose }, forwardedRef) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const refCallback: RefCallback<HTMLDialogElement> = useCallback(
@@ -54,6 +61,12 @@ export const Dialog: FC<DialogProps> = forwardRef<
     }
   }, []);
 
+  const onCloseButtonClick = useCallback(() => {
+    dialogRef.current?.close();
+  }, []);
+
+  const [title, ...otherChildren] = children;
+
   return (
     <dialog
       className={`${styles.dialog} dialog`}
@@ -62,27 +75,19 @@ export const Dialog: FC<DialogProps> = forwardRef<
       onClose={onClose}
     >
       <div className={styles['dialog-inner']}>
-        <div
-          className={`${styles['dialog-header']} ${
-            header ? '' : styles['dialog-without-header']
-          } dialog-header`}
-        >
-          {header}
-          <Form
-            method="dialog"
-            submitClassName={`${styles['close-button']}`}
-            submitMessage={
-              <span className={`${styles['close-icon']} material-icons`}>
-                close
-              </span>
-            }
+        <div className={`${styles['dialog-header']} dialog-header`}>
+          {title}
+          <Button
+            type="button"
+            onClick={onCloseButtonClick}
+            className={`${styles['close-button']}`}
           >
-            {null}
-          </Form>
+            <MdClose className={styles['close-icon']} />
+          </Button>
         </div>
         <hr className={styles['horizontal-line']} />
         <div className={`${styles['dialog-content']} dialog-content`}>
-          {children}
+          {otherChildren}
         </div>
       </div>
     </dialog>
