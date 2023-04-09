@@ -2,7 +2,7 @@ import { forwardRef, ChangeEventHandler, FocusEventHandler } from 'react';
 
 import { Label } from '@/components/Label/Label';
 
-import './DatePicker.css';
+import styles from './DatePicker.module.css';
 
 export interface DatePickerProps {
   label: string;
@@ -21,7 +21,13 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     <Label required={required}>
       {label}
 
-      <input ref={ref} type="date" required={required} {...other} />
+      <input
+        className={styles.datePicker}
+        ref={ref}
+        type="date"
+        required={required}
+        {...other}
+      />
     </Label>
   )
 );

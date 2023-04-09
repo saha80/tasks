@@ -7,7 +7,7 @@ import {
 
 import { Label } from '@/components/Label/Label';
 
-import './Input.css';
+import styles from './Input.module.css';
 
 export type InputType =
   | 'email'
@@ -40,7 +40,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     <Label required={required}>
       {label}
 
-      <input ref={ref} type={type} required={required} {...other} />
+      <input
+        className={styles.input}
+        ref={ref}
+        type={type}
+        required={required}
+        {...other}
+      />
     </Label>
   )
 );
