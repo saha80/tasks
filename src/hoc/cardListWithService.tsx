@@ -49,6 +49,10 @@ export const cardListWithService = (
       return <FetchingError />;
     }
 
+    if (!cardList.length) {
+      return <div>Your search - {searchValue} - did not match any photo.</div>;
+    }
+
     return <Wrapped {...props}>{cardList}</Wrapped>;
   };
 
