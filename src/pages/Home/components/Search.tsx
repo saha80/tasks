@@ -55,6 +55,7 @@ export const Search: FC<Pick<SearchProps, 'className'>> = ({ className }) => {
         }}
         {...registerSearch}
         className={(className ?? '') + ' ' + styles.search}
+        placeholder="Search..."
       />
     </Form>
   );

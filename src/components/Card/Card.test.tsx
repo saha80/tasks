@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 
 import { Card } from './Card';
-import { card } from 'tests/mockData';
+import { cardDetails } from 'tests/mockData';
 
 describe('Card', () => {
   test('renders', async () => {
-    render(<Card {...card} />);
+    render(<Card {...cardDetails} />);
 
-    const [renderedCard] = await screen.findAllByText(card.description);
-    expect(renderedCard.innerHTML).toEqual(card.description);
+    const [renderedCard] = await screen.findAllByText(cardDetails.description);
+    expect(renderedCard.innerHTML).toEqual(cardDetails.description);
   });
 });

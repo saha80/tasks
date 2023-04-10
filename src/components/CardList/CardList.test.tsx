@@ -1,20 +1,20 @@
 import { render, screen } from '@testing-library/react';
 
-import { cards } from 'tests/mockData';
+import { cardDetailsList } from 'tests/mockData';
 
 import { CardList } from './CardList';
 
 describe('CardList', () => {
   test('renders', async () => {
-    const { container } = render(<CardList {...cards} />);
+    const { container } = render(<CardList>{cardDetailsList}</CardList>);
 
     const [renderedCard] = await screen.findAllByText(
-      cards.children[2].description
+      cardDetailsList[2].description
     );
-    expect(renderedCard.innerHTML).toEqual(cards.children[2].description);
+    expect(renderedCard.innerHTML).toEqual(cardDetailsList[2].description);
 
     expect(container.getElementsByClassName('card')).toHaveLength(
-      cards.children.length
+      cardDetailsList.length
     );
   });
 });

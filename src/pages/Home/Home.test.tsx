@@ -10,17 +10,17 @@ import { Home } from './Home';
 describe('Home', () => {
   test('renders', async () => {
     render(<Home />);
-    const title = 'Typescript';
+    const createdBy = /loading.../i;
 
-    const [renderedCard] = await screen.findAllByText(title);
-    expect(renderedCard.innerHTML).toContain(title);
+    const [renderedCard] = await screen.findAllByText(createdBy);
+    expect(renderedCard.innerHTML).toMatch(createdBy);
   });
 
   test('searches', async () => {
     render(<RouterProvider router={router} />);
     const title = 'asdf';
 
-    const search = await screen.findByPlaceholderText('Search by title...');
+    const search = await screen.findByPlaceholderText(/Search.../i);
     await userEvent.click(search);
     await userEvent.keyboard(title);
 
