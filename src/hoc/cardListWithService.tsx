@@ -41,12 +41,12 @@ export const cardListWithService = (
       };
     }, [searchValue]);
 
-    if (loading || !cardList) {
-      return <FetchingProgress label="Progressing..." />;
-    }
-
     if (error) {
       return <FetchingError />;
+    }
+
+    if (loading || !cardList) {
+      return <FetchingProgress label="Progressing..." />;
     }
 
     if (!cardList.length) {
