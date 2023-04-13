@@ -1,13 +1,13 @@
 import {
-  forwardRef,
-  ReactNode,
   ChangeEventHandler,
   FocusEventHandler,
+  ReactNode,
+  forwardRef,
 } from 'react';
 
 import { Label } from '@/components/Label/Label';
 
-import './Select.css';
+import styles from './Select.module.css';
 
 export interface SelectProps {
   label: ReactNode;
@@ -23,26 +23,25 @@ export interface SelectProps {
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ children, label, required, multiple = false, ...other }, ref) => (
-    <div className="select">
-      <Label required={required}>
-        {label}
+    <Label required={required}>
+      {label}
 
-        <select
-          multiple={multiple}
-          ref={ref}
-          defaultValue={multiple ? [] : ''}
-          required={required}
-          {...other}
-        >
-          {!multiple && <option defaultValue="" />}
+      <select
+        className={`${styles.select} select`}
+        multiple={multiple}
+        ref={ref}
+        defaultValue={multiple ? [] : ''}
+        required={required}
+        {...other}
+      >
+        {!multiple && <option defaultValue="" />}
 
-          {children.map(({ value, label }) => (
-            <option defaultValue={value} key={value} className="select-option">
-              {label}
-            </option>
-          ))}
-        </select>
-      </Label>
-    </div>
+        {children.map(({ value, label }) => (
+          <option defaultValue={value} key={value} className="select-option">
+            {label}
+          </option>
+        ))}
+      </select>
+    </Label>
   )
 );

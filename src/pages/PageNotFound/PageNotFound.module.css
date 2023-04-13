@@ -1,4 +1,4 @@
-.page-not-found {
+.pageNotFound {
   height: 100vh;
 
   display: flex;
@@ -12,6 +12,6 @@
   background-color: var(--background-color);
 }
 
-.page-not-found > a {
+.pageNotFound > a {
   text-align: center;
 }

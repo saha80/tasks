@@ -1,0 +1,9 @@
+.select {
+  font: inherit;
+  margin: 0;
+  padding: 7px;
+  box-sizing: content-box;
+  cursor: pointer;
+  border: var(--border);
+  border-radius: var(--border-radius);
+}

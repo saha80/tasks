@@ -2,15 +2,14 @@ import { FC, useCallback, useContext, useEffect, useRef } from 'react';
 import { useBeforeUnload } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { Form, Search as BaseSearch, SearchProps } from '@/components';
+import { Search as BaseSearch, Form, SearchProps } from '@/components';
 import { CardsContext } from '@/context/CardsContext';
-
 import { searchLocalStorage } from '@/utils/searchLocalStorage';
 
 import styles from './Search.module.css';
 
 export const Search: FC<Pick<SearchProps, 'className'>> = ({ className }) => {
-  const { onSearch } = useContext(CardsContext);
+  const { searchValue, onSearch } = useContext(CardsContext);
 
   const ref = useRef<HTMLInputElement | null>(null);
 
@@ -29,7 +28,7 @@ export const Search: FC<Pick<SearchProps, 'className'>> = ({ className }) => {
 
   const { register, handleSubmit } = useForm<{ query: string }>({
     defaultValues: {
-      query: '',
+      query: searchValue ?? '',
     },
   });
 
@@ -43,6 +42,7 @@ export const Search: FC<Pick<SearchProps, 'className'>> = ({ className }) => {
       onSubmit={handleSubmit(({ query }) => {
         if (query) {
           onSearch(query);
+          searchLocalStorage.set(query);
         }
       })}
       submitClassName={styles.submitButton}

@@ -1,10 +1,7 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { RouteObject, createBrowserRouter } from 'react-router-dom';
 
-import { PageNotFound } from '@/pages/PageNotFound/PageNotFound';
-import { AboutUs } from '@/pages/AboutUs/AboutUs';
-import { Home } from '@/pages/Home/Home';
-import { CardFormPage } from '@/pages/CardFormPage/CardFormPage';
 import { App } from '@/App';
+import { AboutUs, CardFormPage, Home, PageNotFound } from '@/pages';
 
 export const ROOT_PATH = '/';
 

@@ -15,60 +15,52 @@
   opacity: 0.25;
 }
 
-.dialog-inner {
+.inner {
   display: flex;
   flex-direction: column;
 }
 
-.dialog-header {
+.header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 1rem;
 }
 
-.dialog-without-header {
-  flex-direction: column;
-}
-
-.dialog-without-header .close-button {
-  align-self: flex-end;
-}
-
-.close-button {
+.closeButton {
   padding: 0;
   border: none;
   background: transparent;
   border-radius: var(--border-radius);
 }
 
-.close-button:focus-visible {
+.closeButton:focus-visible {
   outline: var(--color) solid 0.5px;
 }
 
-.close-icon {
+.closeIcon {
   font-size: 24px;
   border-radius: inherit;
 }
 
 @media (prefers-color-scheme: light) {
-  .close-icon:hover {
+  .closeIcon:hover {
     background: rgba(var(--color-rgb), 0.1);
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .close-icon:hover {
+  .closeIcon:hover {
     background: rgba(var(--color-rgb), 0.3);
   }
 }
 
-.horizontal-line {
+.horizontalLine {
   margin-block: 0;
   width: calc(100% - 1rem);
 }
 
-.dialog-content {
+.content {
   margin: 1rem;
   min-block-size: 20rem;
   min-inline-size: 20rem;

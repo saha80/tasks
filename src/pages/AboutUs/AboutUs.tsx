@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import './AboutUs.css';
+import styles from './AboutUs.module.css';
 
 export const AboutUs: FC = () => (
-  <div className="about-us">
+  <div className={styles.aboutUs}>
     <h1>About Us</h1>
     <p>
       RS School is free-of-charge and community-based education program

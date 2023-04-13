@@ -1,6 +1,6 @@
-import { useState, FC, useCallback } from 'react';
+import { FC, useCallback, useState } from 'react';
 
-import { CardList, CardListProps, CardForm, CardFormProps } from '@/components';
+import { CardForm, CardFormProps, CardList, CardListProps } from '@/components';
 
 export const CardFormPage: FC = () => {
   const [cards, setCards] = useState<CardListProps['children']>([]);

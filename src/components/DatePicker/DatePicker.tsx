@@ -1,4 +1,4 @@
-import { forwardRef, ChangeEventHandler, FocusEventHandler } from 'react';
+import { ChangeEventHandler, FocusEventHandler, forwardRef } from 'react';
 
 import { Label } from '@/components/Label/Label';
 

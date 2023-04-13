@@ -77,8 +77,9 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
       <Form
         onSubmit={handleSubmit(onSuccess)}
         noValidate
-        className={styles['card-form']}
+        className={styles.cardForm}
         submitMessage="Submit"
+        submitClassName={styles.submit}
         method="get"
         name="card-form"
       >

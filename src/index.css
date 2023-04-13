@@ -1,6 +1,11 @@
 :root {
+  --font-size: 1rem;
+
+  --font: 1rem sans-serif;
+  --input-font: 15px monospace;
+
+  --border: 1px solid var(--color);
   --border-radius: 6px;
-  --button-focus: slategrey;
 
   --header-height: 5rem;
   --header-z-index: 1;
@@ -23,19 +28,12 @@
     --color: #000;
     --color-rgb: 0, 0, 0;
 
-    --button-background-color: lightcyan;
-    --button-hover-outline: darkcyan;
+    --button-hover-background-color: lightgrey;
 
     --header-background-color: lightblue;
 
     --footer-color: lightblue;
     --footer-background-color: midnightblue;
-
-    --label-color: #000;
-    --label-background-color: #fff;
-
-    --input-color: #000;
-    --input-background-color: #fff;
   }
 
   ::backdrop {
@@ -51,19 +49,12 @@
     --color: #fff;
     --color-rgb: 255, 255, 255;
 
-    --button-background-color: darkslategrey;
-    --button-hover-outline: lightslategrey;
+    --button-hover-background-color: dimgray;
 
     --header-background-color: midnightblue;
 
     --footer-color: midnightblue;
     --footer-background-color: lightblue;
-
-    --label-color: #fff;
-    --label-background-color: #000;
-
-    --input-color: #fff;
-    --input-background-color: #000;
   }
 
   ::backdrop {
@@ -75,20 +66,6 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
-
-* {
-  font-style: normal;
-  font-variant-ligatures: no-common-ligatures;
-  font-stretch: normal;
-  line-height: 1.5;
-  font-synthesis: none;
-
-  text-decoration-thickness: from-font;
-  text-decoration-skip-ink: all;
-  text-emphasis-position: under left;
-  text-overflow: ellipsis;
-  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -108,16 +85,4 @@ header {
 
 a {
   font-weight: 500;
-}
-
-.label {
-  color: var(--label-color);
-  background-color: var(--label-background-color);
-  display: flex;
-
-  margin-block-start: 1rem;
-}
-
-.material-icons {
-  user-select: none;
 }

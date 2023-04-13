@@ -1,5 +1,10 @@
-.card-form {
+.cardForm {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: flex-start;
+}
+
+.submit {
+  margin-block: 1rem;
+  font-size: 1rem;
 }

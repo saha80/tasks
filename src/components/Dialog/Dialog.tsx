@@ -1,22 +1,20 @@
 import {
   FC,
   MouseEventHandler,
+  ReactComponentElement,
   ReactEventHandler,
   RefCallback,
   forwardRef,
   useCallback,
   useEffect,
   useRef,
-  ReactComponentElement,
 } from 'react';
-
 import { MdClose } from 'react-icons/md';
 
 import { Button } from '@/components/Button/Button';
 
-import { DialogTitle, DialogTitleProps } from './DialogTitle';
 import { DialogContent, DialogContentProps } from './DialogContent';
-
+import { DialogTitle, DialogTitleProps } from './DialogTitle';
 import styles from './Dialog.module.css';
 
 export interface DialogProps {
@@ -74,19 +72,19 @@ export const Dialog: FC<DialogProps> = forwardRef<
       onClick={onClick}
       onClose={onClose}
     >
-      <div className={styles['dialog-inner']}>
-        <div className={`${styles['dialog-header']} dialog-header`}>
+      <div className={styles.inner}>
+        <div className={`${styles.header} dialog-header`}>
           {title}
           <Button
             type="button"
             onClick={onCloseButtonClick}
-            className={`${styles['close-button']}`}
+            className={`${styles.closeButton}`}
           >
-            <MdClose className={styles['close-icon']} />
+            <MdClose className={styles.closeIcon} />
           </Button>
         </div>
-        <hr className={styles['horizontal-line']} />
-        <div className={`${styles['dialog-content']} dialog-content`}>
+        <hr className={styles.horizontalLine} />
+        <div className={`${styles.content} dialog-content`}>
           {otherChildren}
         </div>
       </div>

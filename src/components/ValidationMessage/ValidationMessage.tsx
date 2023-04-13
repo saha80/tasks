@@ -16,7 +16,10 @@ export const ValidationMessage: FC<ValidationMessageProps> = ({
   children,
 }) =>
   message ? (
-    <div className={`${styles['validation-message']} validation-message`}>
+    <div
+      role="alert"
+      className={`${styles.validationMessage} validation-message`}
+    >
       {message} {children}
     </div>
   ) : null;

@@ -21,6 +21,6 @@ export const Label: FC<LabelProps> = ({
 }) => (
   <label className={`${styles.label} label`}>
     {label} {required ? <span className={styles.required}>*</span> : null}
-    {input}
+    <div className={styles.input}>{input}</div>
   </label>
 );

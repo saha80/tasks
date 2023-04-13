@@ -1,8 +1,12 @@
 .button {
   display: flex;
-  appearance: auto;
+  border: var(--border);
   border-radius: var(--border-radius);
   margin: 0;
-  padding: revert;
-  background-color: var(--background-color);
+  padding: 6px;
+  background-color: field;
+}
+
+.button:hover {
+  background-color: var(--button-hover-background-color);
 }

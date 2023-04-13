@@ -1,0 +1,13 @@
+.textarea {
+  font: inherit;
+
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 8px;
+
+  min-height: 2rem;
+  max-height: 100vmin;
+
+  min-width: 3rem;
+  max-width: 100vmin;
+}

@@ -4,13 +4,13 @@
 }
 
 .spinner {
-  animation: 1s linear 0s infinite rotate-spinner;
+  animation: 1s linear 0s infinite rotateSpinner;
 
   background-color: transparent;
   font-size: 24px;
 }
 
-@keyframes rotate-spinner {
+@keyframes rotateSpinner {
   from {
     transform: rotate(0deg);
   }
