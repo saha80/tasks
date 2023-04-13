@@ -1,4 +1,4 @@
-import { CardDetails, Card } from './Card';
+import { Card, CardDetails } from './Card';
 
 export interface CardService {
   getCardById: (signal: AbortSignal, id: string) => Promise<CardDetails>;

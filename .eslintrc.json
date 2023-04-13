@@ -27,6 +27,7 @@
   },
   "plugins": [],
   "rules": {
+    "curly": "error",
     "comma-dangle": ["error", "only-multiline"],
     "react/display-name": "off",
     "react/jsx-no-leaked-render": "error",

@@ -1,8 +1,8 @@
 import { FC, useContext, useEffect, useState } from 'react';
 
-import { FetchingProgress, FetchingError, CardListProps } from '@/components';
-import { CardService } from '@/interfaces/CardService';
+import { CardListProps, FetchingError, FetchingProgress } from '@/components';
 import { Card } from '@/interfaces/Card';
+import { CardService } from '@/interfaces/CardService';
 import { CardsContext } from '@/context/CardsContext';
 
 export type CardListWithServiceProps = Omit<CardListProps, 'children'>;

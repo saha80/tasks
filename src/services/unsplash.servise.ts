@@ -1,15 +1,15 @@
 import { Card, CardDetails } from '@/interfaces/Card';
-import { CardService } from '@/interfaces/CardService';
 import {
+  ErrorMessages,
+  PhotoByIdResponse,
   PhotoRequestParams,
   PhotoResponse,
   SearchPhotosParams,
   SearchPhotosResponse,
-  ErrorMessages,
-  PhotoByIdResponse,
 } from '@/interfaces/Unsplash';
-import { pathnameWithSearch } from '@/utils/URL';
+import { CardService } from '@/interfaces/CardService';
 import { jsonAs } from '@/utils/types';
+import { pathnameWithSearch } from '@/utils/URL';
 
 type Method = 'GET';
 
