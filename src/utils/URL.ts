@@ -1,10 +1,6 @@
-/** @returns `pathname` | \``${pathname}?${URLSearchParams}`\` */
+/** @returns \``${pathname}?${URLSearchParams}`\` */
 export const pathnameWithSearch = <SearchParams extends object>(
-  pathname: string | URL,
-  searchParams: SearchParams | undefined
+  pathname: string,
+  searchParams: SearchParams
 ) =>
-  searchParams
-    ? `${pathname.toString()}?${new URLSearchParams(
-        Object.entries(searchParams)
-      ).toString()}`
-    : pathname;
+  `${pathname}?${new URLSearchParams(Object.entries(searchParams)).toString()}`;

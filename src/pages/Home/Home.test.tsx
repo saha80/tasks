@@ -6,10 +6,16 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from '@/routes/Routes';
 
 import { Home } from './Home';
+import { Provider } from 'react-redux';
+import { store } from '@/app/store';
 
 describe('Home', () => {
   test('renders', async () => {
-    render(<Home />);
+    render(
+      <Provider store={store}>
+        <Home />
+      </Provider>
+    );
     const createdBy = /loading.../i;
 
     const [renderedCard] = await screen.findAllByText(createdBy);

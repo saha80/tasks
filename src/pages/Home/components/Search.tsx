@@ -1,38 +1,24 @@
-import { FC, useCallback, useContext, useEffect, useRef } from 'react';
-import { useBeforeUnload } from 'react-router-dom';
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
+import { RootState } from '@/app/store';
 import { Search as BaseSearch, Form, SearchProps } from '@/components';
-import { CardsContext } from '@/context/CardsContext';
-import { searchLocalStorage } from '@/utils/searchLocalStorage';
 
 import styles from './Search.module.css';
+import { search } from './searchSlice';
 
-export const Search: FC<Pick<SearchProps, 'className'>> = ({ className }) => {
-  const { searchValue, onSearch } = useContext(CardsContext);
-
-  const ref = useRef<HTMLInputElement | null>(null);
-
-  useBeforeUnload(
-    useCallback(() => {
-      searchLocalStorage.set(ref.current?.value ?? '');
-    }, [])
-  );
-
-  useEffect(() => {
-    const { current } = ref;
-    return () => {
-      searchLocalStorage.set(current?.value ?? '');
-    };
-  }, []);
+export const Search: FC<Pick<SearchProps, 'className'>> = ({
+  className = '',
+}) => {
+  const dispatch = useDispatch();
+  const { searchValue } = useSelector((state: RootState) => state.search);
 
   const { register, handleSubmit } = useForm<{ query: string }>({
     defaultValues: {
-      query: searchValue ?? '',
+      query: searchValue,
     },
   });
-
-  const { ref: registerRef, ...registerSearch } = register('query');
 
   return (
     <Form
@@ -40,21 +26,14 @@ export const Search: FC<Pick<SearchProps, 'className'>> = ({ className }) => {
       className={styles.searchForm}
       method="get"
       onSubmit={handleSubmit(({ query }) => {
-        if (query) {
-          onSearch(query);
-          searchLocalStorage.set(query);
-        }
+        dispatch(search.actions.onSearch(query));
       })}
       submitClassName={styles.submitButton}
       submitMessage="Search"
     >
       <BaseSearch
-        ref={(instance) => {
-          registerRef(instance);
-          ref.current = instance;
-        }}
-        {...registerSearch}
-        className={(className ?? '') + ' ' + styles.search}
+        {...register('query')}
+        className={`${className} ${styles.search}`}
         placeholder="Search..."
       />
     </Form>

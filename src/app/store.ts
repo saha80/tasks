@@ -1,13 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
-import getCardById from '@/features/home/getCardById';
-import getCardList from '@/features/home/getCardList';
-import getCardListByQuery from '@/features/home/getCardListByQuery';
+import { unsplashApi } from '@/features/unsplash.servise';
+
+import { rootReducer } from './rootReducer';
 
 export const store = configureStore({
-  reducer: {
-    getCardById,
-    getCardList,
-    getCardListByQuery,
-  },
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(unsplashApi.middleware),
 });
+
+setupListeners(store.dispatch);
+
+export type RootState = ReturnType<typeof store.getState>;
