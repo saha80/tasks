@@ -18,7 +18,7 @@ import { readAsDataURL } from '@/utils/readAsDataURL';
 
 import styles from './CardForm.module.css';
 
-type InputCard = Omit<CardProps, 'id' | 'createdByURL'>;
+export type InputCard = Omit<CardProps, 'id' | 'createdByURL'>;
 
 export interface CardFormProps {
   onSubmit: (card: InputCard) => void;

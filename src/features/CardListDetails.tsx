@@ -12,7 +12,7 @@ import { useLazyGetCardById } from '@/features/unsplash.servise';
 import { CardList } from './CardList';
 
 export const CardListDetails: FC = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // todo: move to redux slice?
 
   const [trigger, { isError, isFetching, currentData }] = useLazyGetCardById();
 

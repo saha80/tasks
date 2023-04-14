@@ -1,24 +1,19 @@
-import { FC, useCallback, useState } from 'react';
+import { FC } from 'react';
 
-import { CardForm, CardFormProps, CardList, CardListProps } from '@/components';
+import { CardForm, CardList } from '@/components';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/app/store';
+
+import { cardFormPage } from './cardFormPageSlice';
 
 export const CardFormPage: FC = () => {
-  const [cards, setCards] = useState<CardListProps['children']>([]);
-
-  const onSubmit: CardFormProps['onSubmit'] = useCallback((card) => {
-    setCards((prevCards) => [
-      {
-        ...card,
-        id: String(Math.max(...prevCards.map(({ id }) => Number(id))) + 1),
-      },
-      ...prevCards,
-    ]);
-  }, []);
+  const dispatch = useDispatch();
+  const { cards } = useSelector((store: RootState) => store.cardFormPage);
 
   return (
     <div className="card-form-page">
       <h1>Card Form</h1>
-      <CardForm onSubmit={onSubmit} />
+      <CardForm onSubmit={dispatch(cardFormPage.actions.onSubmit)} />
       <hr />
       {cards.length ? <CardList>{cards}</CardList> : 'No cards submited.'}
     </div>
