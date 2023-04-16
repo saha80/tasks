@@ -2,11 +2,11 @@ import { FC } from 'react';
 
 import { MdOutlineVisibility, MdThumbUp } from 'react-icons/md';
 
-import { CardDetails as CardDetailsType } from '@/interfaces/Card';
+import { CardDetails as BaseCardDetails } from '@/interfaces/Card';
 
 import styles from './CardDetails.module.css';
 
-export type CardDetailsProps = CardDetailsType;
+export type CardDetailsProps = BaseCardDetails;
 
 export const CardDetails: FC<CardDetailsProps> = ({
   imgSrc,

@@ -1,30 +1,23 @@
-import { ReactNode, forwardRef } from 'react';
+import { FC } from 'react';
 
-import { Label } from '@/components/Label/Label';
-import { clamp } from '@/utils/math';
+import { MdRotateRight } from 'react-icons/md';
 
 import styles from './Progress.module.css';
 
 export interface ProgressProps {
-  label: ReactNode;
-  value: number;
-  max: number;
+  message?: string;
   className?: string;
 }
 
-export const Progress = forwardRef<HTMLProgressElement, ProgressProps>(
-  ({ label, value, max, className = '' }, ref) => (
-    <Label>
-      {label}
+const defaultMessage = 'Progressing...';
 
-      <progress
-        ref={ref}
-        className={`${styles.progress} progress ${className}`}
-        max={max}
-        value={clamp(value, 0, max)}
-      >
-        {label}
-      </progress>
-    </Label>
-  )
+export const Progress: FC<ProgressProps> = ({
+  message = defaultMessage,
+  className = '',
+}) => (
+  <div role="progressbar" className={`${styles.progress} ${className}`}>
+    {message}
+
+    <MdRotateRight className={styles.spinner} />
+  </div>
 );

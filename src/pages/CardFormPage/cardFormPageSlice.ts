@@ -6,12 +6,14 @@ const initialState = {
   cards: [] as CardListProps['children'],
 };
 
-export const cardFormPage = createSlice({
+export const cardFormPageSlice = createSlice({
   name: 'cardFormPage',
   initialState,
   reducers: {
-    onSubmit: (state, action: PayloadAction<InputCard>) => {
-      state.cards.unshift({ ...action.payload, id: nanoid() });
+    onSubmit: (state, { payload }: PayloadAction<InputCard>) => {
+      state.cards = [{ ...payload, id: nanoid() }, ...state.cards];
     },
   },
 });
+
+export const { onSubmit } = cardFormPageSlice.actions;

@@ -1,14 +1,12 @@
 import { FC, useCallback } from 'react';
 import { MdThumbUp } from 'react-icons/md';
 
-import { Card as CardType } from '@/interfaces/Card';
-
-import { CreationDetails } from './components/CreationDetails';
+import { Card as BaseCard } from '@/interfaces/Card';
 
 import styles from './Card.module.css';
 
-export interface CardProps extends CardType {
-  onClick?: (id: CardType['id']) => void;
+export interface CardProps extends BaseCard {
+  onClick?: (id: BaseCard['id']) => void;
 }
 
 export const Card: FC<CardProps> = ({
@@ -30,11 +28,17 @@ export const Card: FC<CardProps> = ({
     <div className={`${styles.card} card`} onClick={onCardClick}>
       <img className={styles.image} src={imgSrc} alt={imgAlt} />
       <div className={styles.description}>{description}</div>
-      <CreationDetails
-        createdBy={createdBy}
-        creationTimestamp={creationTimestamp}
-        modificationTimestamp={modificationTimestamp}
-      />
+      <div className={styles.creationDetails}>
+        <div>
+          <p className={styles.createdBy}>
+            Created by: <a>{createdBy}</a>
+          </p>
+          <p>Created at: {new Date(creationTimestamp).toDateString()}</p>
+          {!Object.is(creationTimestamp, modificationTimestamp) && (
+            <p>Modified at: {new Date(modificationTimestamp).toDateString()}</p>
+          )}
+        </div>
+      </div>
       <div className={styles.status}>
         <span>
           <MdThumbUp />

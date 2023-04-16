@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Card, CardProps } from '@/components/Card/Card';
+import { Card, CardProps } from '@/components';
 
 import styles from './CardList.module.css';
 

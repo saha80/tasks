@@ -5,7 +5,7 @@ import {
   forwardRef,
 } from 'react';
 
-import { Label } from '@/components/Label/Label';
+import { Label } from '@/components';
 
 import styles from './Select.module.css';
 
@@ -18,23 +18,21 @@ export interface SelectProps {
   name?: string;
   required?: boolean;
   disabled?: boolean;
-  multiple?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ children, label, required, multiple = false, ...other }, ref) => (
+  ({ children, label, required, ...other }, ref) => (
     <Label required={required}>
       {label}
 
       <select
         className={`${styles.select} select`}
-        multiple={multiple}
         ref={ref}
-        defaultValue={multiple ? [] : ''}
+        defaultValue=""
         required={required}
         {...other}
       >
-        {!multiple && <option defaultValue="" />}
+        {<option defaultValue="" />}
 
         {children.map(({ value, label }) => (
           <option defaultValue={value} key={value} className="select-option">

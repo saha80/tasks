@@ -1,13 +1,13 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { unsplashApi } from '@/features/unsplash.servise';
+import { unsplashApiSlice } from '@/services/unsplash.service';
 
-import { search } from '@/pages/Home/components/searchSlice';
+import { searchSlice } from '@/pages/Home/components/searchSlice';
 
-import { cardFormPage } from '@/pages/CardFormPage/cardFormPageSlice';
+import { cardFormPageSlice } from '@/pages/CardFormPage/cardFormPageSlice';
 
 export const rootReducer = combineReducers({
-  [unsplashApi.reducerPath]: unsplashApi.reducer,
-  search: search.reducer,
-  cardFormPage: cardFormPage.reducer,
+  [unsplashApiSlice.reducerPath]: unsplashApiSlice.reducer,
+  search: searchSlice.reducer,
+  cardFormPage: cardFormPageSlice.reducer,
 });

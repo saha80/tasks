@@ -1,10 +1,6 @@
 import { FC } from 'react';
-import {
-  CardList as BaseCardList,
-  FetchingError,
-  FetchingProgress,
-} from '@/components';
-import { useGetCardListByQuery } from '@/features/unsplash.servise';
+import { CardList as BaseCardList, Error, Progress } from '@/components';
+import { useGetCardListByQuery } from '@/services/unsplash.service';
 
 import { CardListProps } from './CardList';
 
@@ -21,11 +17,11 @@ export const CardListByQuery: FC<CardListByQueryProps> = ({
   });
 
   if (isError) {
-    return <FetchingError />;
+    return <Error />;
   }
 
   if (isFetching || !currentData) {
-    return <FetchingProgress label="Progressing..." />;
+    return <Progress />;
   }
 
   if (!currentData.length) {

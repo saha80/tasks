@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FocusEventHandler, forwardRef } from 'react';
 
-import { Label } from '@/components/Label/Label';
+import { Label } from '@/components';
 
 import styles from './DatePicker.module.css';
 

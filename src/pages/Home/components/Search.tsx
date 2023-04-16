@@ -1,18 +1,17 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { RootState } from '@/app/store';
+import { useDispatch, useSelector } from '@/app/store';
 import { Search as BaseSearch, Form, SearchProps } from '@/components';
 
 import styles from './Search.module.css';
-import { search } from './searchSlice';
+import { searchSlice } from './searchSlice';
 
 export const Search: FC<Pick<SearchProps, 'className'>> = ({
   className = '',
 }) => {
   const dispatch = useDispatch();
-  const { searchValue } = useSelector((state: RootState) => state.search);
+  const { searchValue } = useSelector((state) => state.search);
 
   const { register, handleSubmit } = useForm<{ query: string }>({
     defaultValues: {
@@ -26,7 +25,7 @@ export const Search: FC<Pick<SearchProps, 'className'>> = ({
       className={styles.searchForm}
       method="get"
       onSubmit={handleSubmit(({ query }) => {
-        dispatch(search.actions.onSearch(query));
+        dispatch(searchSlice.actions.onSearch(query));
       })}
       submitClassName={styles.submitButton}
       submitMessage="Search"

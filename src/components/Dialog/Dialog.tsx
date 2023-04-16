@@ -1,17 +1,7 @@
-import {
-  FC,
-  MouseEventHandler,
-  ReactComponentElement,
-  ReactEventHandler,
-  RefCallback,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useRef,
-} from 'react';
+import { FC, ReactComponentElement } from 'react';
 import { MdClose } from 'react-icons/md';
 
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components';
 
 import { DialogContent, DialogContentProps } from './DialogContent';
 import { DialogTitle, DialogTitleProps } from './DialogTitle';
@@ -22,62 +12,28 @@ export interface DialogProps {
     ReactComponentElement<typeof DialogTitle, DialogTitleProps>,
     ReactComponentElement<typeof DialogContent, DialogContentProps>
   ];
-  onClose?: ReactEventHandler<HTMLDialogElement>;
+  onClose?: () => void;
   open?: boolean;
 }
 
-export const Dialog: FC<DialogProps> = forwardRef<
-  HTMLDialogElement,
-  DialogProps
->(({ children, open, onClose }, forwardedRef) => {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
+export const Dialog: FC<DialogProps> = ({ children, open, onClose }) => {
+  const [dialogTitle, dialogContent] = children;
 
-  const refCallback: RefCallback<HTMLDialogElement> = useCallback(
-    (instance) => {
-      if (typeof forwardedRef === 'function') {
-        forwardedRef(instance);
-      }
-      if (typeof forwardedRef === 'object' && forwardedRef) {
-        forwardedRef.current = instance;
-      }
-      dialogRef.current = instance;
-    },
-    [forwardedRef]
-  );
-
-  useEffect(() => {
-    if (open && !dialogRef.current?.open) {
-      dialogRef.current?.showModal();
-    } else {
-      dialogRef.current?.close();
-    }
-  }, [open]);
-
-  const onClick: MouseEventHandler<HTMLDialogElement> = useCallback((event) => {
-    if (event.target === dialogRef.current) {
-      dialogRef.current.close();
-    }
-  }, []);
-
-  const onCloseButtonClick = useCallback(() => {
-    dialogRef.current?.close();
-  }, []);
-
-  const [title, ...otherChildren] = children;
+  if (!open) {
+    return null;
+  }
 
   return (
-    <dialog
-      className={`${styles.dialog} dialog`}
-      ref={refCallback}
-      onClick={onClick}
-      onClose={onClose}
-    >
-      <div className={styles.inner}>
+    <div className={styles.backdrop} onClick={onClose}>
+      <div
+        className={`${styles.dialog} dialog`}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className={`${styles.header} dialog-header`}>
-          {title}
+          {dialogTitle}
           <Button
             type="button"
-            onClick={onCloseButtonClick}
+            onClick={onClose}
             className={`${styles.closeButton}`}
           >
             <MdClose className={styles.closeIcon} />
@@ -85,9 +41,9 @@ export const Dialog: FC<DialogProps> = forwardRef<
         </div>
         <hr className={styles.horizontalLine} />
         <div className={`${styles.content} dialog-content`}>
-          {otherChildren}
+          {dialogContent}
         </div>
       </div>
-    </dialog>
+    </div>
   );
-});
+};

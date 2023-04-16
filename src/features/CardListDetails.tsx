@@ -1,18 +1,13 @@
 import { FC, useCallback, useRef, useState } from 'react';
-import {
-  CardDetails,
-  Dialog,
-  FetchingError,
-  FetchingProgress,
-} from '@/components';
+import { CardDetails, Dialog, Error, Progress } from '@/components';
 import { DialogContent } from '@/components/Dialog/DialogContent';
 import { DialogTitle } from '@/components/Dialog/DialogTitle';
-import { useLazyGetCardById } from '@/features/unsplash.servise';
+import { useLazyGetCardById } from '@/services/unsplash.service';
 
 import { CardList } from './CardList';
 
 export const CardListDetails: FC = () => {
-  const [open, setOpen] = useState(false); // todo: move to redux slice?
+  const [open, setOpen] = useState(false);
 
   const [trigger, { isError, isFetching, currentData }] = useLazyGetCardById();
 
@@ -44,9 +39,9 @@ export const CardListDetails: FC = () => {
         </DialogTitle>
         <DialogContent>
           {isError ? (
-            <FetchingError />
+            <Error />
           ) : isFetching || !currentData ? (
-            <FetchingProgress label="Please, wait a bit while loading..." />
+            <Progress message="Please, wait a bit while loading..." />
           ) : (
             <CardDetails {...currentData} />
           )}

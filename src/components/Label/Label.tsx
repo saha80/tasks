@@ -6,12 +6,7 @@ export interface LabelProps {
   required?: boolean;
   children: [
     ReactNode,
-    (
-      | ReactElement<HTMLInputElement>
-      | ReactElement<HTMLSelectElement>
-      | ReactElement<HTMLTextAreaElement>
-      | ReactElement<HTMLProgressElement>
-    )
+    ReactElement<HTMLInputElement> | ReactElement<HTMLSelectElement>
   ];
 }
 

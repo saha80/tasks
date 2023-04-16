@@ -1,3 +1,4 @@
+/** @returns YYYY-MM-DD */
 export const toDateInputMinFormat = (date: Date): string => {
   const millisecondsInMinute = 60 * 1000;
 

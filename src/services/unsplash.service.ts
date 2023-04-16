@@ -39,7 +39,7 @@ const mapToCardDetails = (photo: PhotoByIdResponse): CardDetails => {
 const mapToCardList = (photos: PhotoResponse[] | SearchPhotosResponse) =>
   Array.isArray(photos) ? photos.map(mapToCard) : photos.results.map(mapToCard);
 
-export const unsplashApi = createApi({
+export const unsplashApiSlice = createApi({
   reducerPath: 'unsplash',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
@@ -69,4 +69,4 @@ export const {
   useGetCardByIdQuery: useGetCardById,
   useLazyGetCardByIdQuery: useLazyGetCardById,
   useGetCardListByQueryQuery: useGetCardListByQuery,
-} = unsplashApi;
+} = unsplashApiSlice;

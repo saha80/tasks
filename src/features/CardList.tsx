@@ -1,21 +1,20 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import {
   CardList as BaseCardList,
   CardListProps as BaseCardListProps,
-  FetchingError,
-  FetchingProgress,
+  Error,
+  Progress,
 } from '@/components';
-import { useGetCardList } from '@/features/unsplash.servise';
-import { RootState } from '@/app/store';
+import { useGetCardList } from '@/services/unsplash.service';
+import { useSelector } from '@/app/store';
 
 import { CardListByQuery } from './CardListByQuery';
 
 export type CardListProps = Required<Pick<BaseCardListProps, 'onCardClick'>>;
 
 export const CardList: FC<CardListProps> = ({ onCardClick }) => {
-  const { searchValue } = useSelector((store: RootState) => store.search);
+  const { searchValue } = useSelector((store) => store.search);
 
   const { isUninitialized, isError, isFetching, currentData } = useGetCardList(
     undefined,
@@ -31,11 +30,11 @@ export const CardList: FC<CardListProps> = ({ onCardClick }) => {
   }
 
   if (isError) {
-    return <FetchingError />;
+    return <Error />;
   }
 
   if (isFetching || !currentData) {
-    return <FetchingProgress label="Progressing..." />;
+    return <Progress message="Progressing..." />;
   }
 
   return <BaseCardList onCardClick={onCardClick}>{currentData}</BaseCardList>;

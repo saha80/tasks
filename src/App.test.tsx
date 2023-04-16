@@ -1,20 +1,42 @@
 import { render, screen } from '@testing-library/react';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
-import { router } from '@/routes/Routes';
+import { routeObject } from '@/routes/Routes';
 
 describe('App', () => {
-  test('renders', async () => {
+  test('renders', () => {
+    const router = createMemoryRouter(routeObject);
     render(<RouterProvider router={router} />);
 
-    const home = await screen.findByText('Home');
-    const cardForm = await screen.findByText('Card Form');
-    const aboutUs = await screen.findByText('About Us');
-
-    expect(home.innerHTML).toEqual('Home');
-    expect(cardForm.innerHTML).toEqual('Card Form');
-    expect(aboutUs.innerHTML).toEqual('About Us');
+    expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Card Form' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'About Us' })).toBeInTheDocument();
 
     expect(screen.getByText(/Current path:/i)).toContain(/Home/i);
+  });
+
+  test('navigates', async () => {
+    const router = createMemoryRouter(routeObject);
+    render(<RouterProvider router={router} />);
+
+    expect(screen.getByText(/Current path:/i)).toContain(/Home/i);
+
+    await userEvent.click(screen.getByRole('link', { name: 'Card Form' }));
+    expect(screen.getByText(/Current path:/i)).toContain(/Card Form/i);
+
+    await userEvent.click(screen.getByRole('link', { name: 'About Us' }));
+    expect(screen.getByText(/Current path:/i)).toContain(/About Us/i);
+  });
+
+  test('unknown route', () => {
+    const router = createMemoryRouter(routeObject, {
+      initialEntries: ['/this-path-does-not-exist'],
+    });
+
+    render(<RouterProvider router={router} />);
+
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByRole('link')).toBeInTheDocument();
   });
 });

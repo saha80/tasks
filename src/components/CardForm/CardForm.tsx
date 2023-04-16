@@ -10,7 +10,6 @@ import {
   Input,
   RadioGroup,
   Select,
-  TextArea,
   ValidationMessage,
 } from '@/components';
 import { toDateInputMinFormat } from '@/utils/date';
@@ -30,7 +29,6 @@ enum CardVisibilityType {
 }
 
 interface CardFieldValues {
-  title: string;
   description: string;
   createdBy: string;
   imgUrl: FileList;
@@ -64,7 +62,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
         likes: 0,
       };
 
-      if (window.confirm('Add card?')) {
+      if (window.confirm('Information has been saved. Add card?')) {
         onSubmit(card);
         reset();
       }
@@ -80,20 +78,19 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
         className={styles.cardForm}
         submitMessage="Submit"
         submitClassName={styles.submit}
-        method="get"
+        method="post"
         name="card-form"
       >
         <Input
           type="text"
-          label="Enter title:"
-          {...register('title', {
+          label="Enter description:"
+          {...register('description', {
             required: true,
-            validate: (title) => Boolean(title.trim()) || 'Title required.',
+            validate: (description) =>
+              Boolean(description.trim()) || 'Description required.',
           })}
         />
-        <ValidationMessage fieldError={errors.title} />
-
-        <TextArea label="Enter description:" {...register('description')} />
+        <ValidationMessage fieldError={errors.description} />
 
         <Input
           type="text"
