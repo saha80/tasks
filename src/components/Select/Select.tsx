@@ -1,14 +1,13 @@
 import {
-  forwardRef,
-  ReactNode,
-  ForwardRefRenderFunction,
   ChangeEventHandler,
   FocusEventHandler,
+  ReactNode,
+  forwardRef,
 } from 'react';
 
 import { Label } from '@/components/Label/Label';
 
-import './Select.css';
+import styles from './Select.module.css';
 
 export interface SelectProps {
   label: ReactNode;
@@ -19,19 +18,16 @@ export interface SelectProps {
   name?: string;
   required?: boolean;
   disabled?: boolean;
-  /** @default false */
   multiple?: boolean;
 }
 
-const SelectRender: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (
-  { children, label, required, multiple = false, ...other },
-  ref
-) => (
-  <div className="select">
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  ({ children, label, required, multiple = false, ...other }, ref) => (
     <Label required={required}>
       {label}
 
       <select
+        className={`${styles.select} select`}
         multiple={multiple}
         ref={ref}
         defaultValue={multiple ? [] : ''}
@@ -40,14 +36,12 @@ const SelectRender: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (
       >
         {!multiple && <option defaultValue="" />}
 
-        {children.map(({ value, label }, index) => (
-          <option defaultValue={value} key={index} className="select-option">
+        {children.map(({ value, label }) => (
+          <option defaultValue={value} key={value} className="select-option">
             {label}
           </option>
         ))}
       </select>
     </Label>
-  </div>
+  )
 );
-
-export const Select = forwardRef(SelectRender);

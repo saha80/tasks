@@ -1,0 +1,11 @@
+.aboutUs,
+.aboutUs > h1,
+.aboutUs > p {
+  color: var(--color);
+  background-color: var(--background-color);
+}
+
+.aboutUs > p > a {
+  color: blue;
+  background-color: var(--background-color);
+}

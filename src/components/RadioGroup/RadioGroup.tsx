@@ -1,38 +1,35 @@
-import { ReactNode, forwardRef, ForwardRefRenderFunction } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
-import { Radio } from '@/components/Radio/Radio';
-
-import './RadioGroup.css';
+import styles from './RadioGroup.module.css';
 
 export interface RadioGroupProps {
   legend: ReactNode;
-  name: string;
-
-  children: { label: ReactNode; value: string }[];
-
-  /** @default false */
   disabled?: boolean;
+
+  name: string;
+  children: { label: ReactNode; value: string }[];
 }
 
-const RadioGroupRender: ForwardRefRenderFunction<
-  HTMLInputElement,
-  RadioGroupProps
-> = ({ legend, name, children, disabled = false }, ref) => (
-  <fieldset disabled={disabled} className="radiogroup">
-    <legend className="legend">{legend}</legend>
+export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
+  ({ legend, name, children, disabled = false }, ref) => (
+    <fieldset disabled={disabled} className={styles.radiogroup}>
+      <legend className="legend">{legend}</legend>
 
-    {children.map(({ value, label }, index) => (
-      <Radio
-        key={index}
-        name={name}
-        value={value}
-        defaultChecked={index === 0}
-        required
-        ref={ref}
-        label={label}
-      />
-    ))}
-  </fieldset>
+      {children.map(({ value, label }, index) => (
+        <label key={value} className={styles.label}>
+          <input
+            className={styles.radio}
+            type="radio"
+            ref={ref}
+            name={name}
+            value={value}
+            defaultChecked={index === 0}
+            required
+          />
+
+          {label}
+        </label>
+      ))}
+    </fieldset>
+  )
 );
-
-export const RadioGroup = forwardRef(RadioGroupRender);

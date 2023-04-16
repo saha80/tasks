@@ -1,0 +1,10 @@
+.datePicker {
+  font: inherit;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 7px;
+}
+
+.datePicker::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}

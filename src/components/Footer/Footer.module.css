@@ -1,0 +1,26 @@
+.footer {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  padding-inline: 1rem;
+  padding-block: 1rem;
+
+  color: var(--footer-color);
+  background-color: var(--footer-background-color);
+}
+
+.githubLink {
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.githubIcon {
+  fill: var(--background-color);
+  font-size: 24px;
+  margin-inline-end: 8px;
+}

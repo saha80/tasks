@@ -1,0 +1,89 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 15rem;
+
+  align-items: center;
+  justify-content: space-evenly;
+
+  padding: 1rem;
+  margin: 1rem;
+
+  border-radius: var(--border-radius);
+
+  --card-background-color: #afafaf;
+
+  --card-color: #000;
+
+  color: var(--card-color);
+
+  background-color: var(--card-background-color);
+
+  border: 2px solid #a3a3a3;
+}
+
+.card:hover {
+  box-shadow: 0 0 1rem -8px var(--card-color);
+}
+
+.card p {
+  color: var(--card-color);
+}
+
+.card div,
+.card span,
+.card p {
+  background-color: var(--card-background-color);
+}
+
+.image {
+  width: 100%;
+
+  padding-bottom: 1rem;
+  margin-bottom: 8px;
+
+  color: var(--card-color);
+  background-color: var(--card-background-color);
+
+  border-bottom: 1px solid lightgrey;
+}
+
+.description {
+  font-size: 1rem;
+
+  width: 100%;
+
+  color: var(--card-color);
+  background-color: var(--card-background-color);
+}
+
+.creationDetails {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  color: var(--card-color);
+  background-color: var(--card-background-color);
+}
+
+.creationDetails a {
+  color: var(--card-color);
+  background-color: var(--card-background-color);
+}
+
+.createdBy a {
+  background-color: lightgreen;
+  border-radius: var(--border-radius);
+  padding: 4px;
+}
+
+.status {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+
+  color: var(--card-color);
+  background-color: var(--card-background-color);
+}

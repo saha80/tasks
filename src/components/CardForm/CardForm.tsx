@@ -1,27 +1,32 @@
 import { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Form } from '@/components/Form/Form';
-import { Input } from '@/components/Input/Input';
-import { CardProps } from '@/components/Card/Card';
-import { CardVisibilityType } from '@/interfaces/Card';
+import {
+  CardProps,
+  CheckBox,
+  DatePicker,
+  FilePicker,
+  Form,
+  Input,
+  RadioGroup,
+  Select,
+  TextArea,
+  ValidationMessage,
+} from '@/components';
 import { toDateInputMinFormat } from '@/utils/date';
-import { TextArea } from '@/components/TextArea/TextArea';
-import { FilePicker } from '@/components/FilePicker/FilePicker';
-import { Select } from '@/components/Select/Select';
-import { RadioGroup } from '@/components/RadioGroup/RadioGroup';
-import { DatePicker } from '@/components/DatePicker/DatePicker';
-import { CheckBox } from '@/components/CheckBox/CheckBox';
 import { readAsDataURL } from '@/utils/readAsDataURL';
 
-import { ValidationMessage } from './components/ValidationMessage';
+import styles from './CardForm.module.css';
 
-import './CardForm.css';
-
-const form = 'card-form';
+type InputCard = Omit<CardProps, 'id' | 'createdByURL'>;
 
 export interface CardFormProps {
-  onSubmit: (card: Omit<CardProps, 'id'>) => void;
+  onSubmit: (card: InputCard) => void;
+}
+
+enum CardVisibilityType {
+  ONLY_YOU = 'only-you',
+  PUBLIC = 'public',
 }
 
 interface CardFieldValues {
@@ -29,7 +34,7 @@ interface CardFieldValues {
   description: string;
   createdBy: string;
   imgUrl: FileList;
-  topics: string;
+  collections: string;
   tags: string;
   visibility: CardVisibilityType;
   creationDate: number;
@@ -44,26 +49,19 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
     formState: { errors },
   } = useForm<CardFieldValues>({
     mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
     shouldUseNativeValidation: true,
   });
 
   const onSuccess = useCallback(
     async (data: CardFieldValues) => {
-      const card: Omit<CardProps, 'id'> = {
-        title: data.title,
+      const card: InputCard = {
         description: data.description,
         createdBy: data.createdBy.trim(),
-        src: await readAsDataURL(data.imgUrl[0]),
-        topics: [data.topics],
-        tags: data.tags
-          .split(',')
-          .map((s) => s.trim())
-          .filter(Boolean),
-        visibility: data.visibility,
+        imgSrc: await readAsDataURL(data.imgUrl[0]),
         creationTimestamp: data.creationDate,
         modificationTimestamp: data.creationDate,
         likes: 0,
-        views: 0,
       };
 
       if (window.confirm('Add card?')) {
@@ -79,13 +77,19 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
       <Form
         onSubmit={handleSubmit(onSuccess)}
         noValidate
-        id={form}
+        className={styles.cardForm}
+        submitMessage="Submit"
+        submitClassName={styles.submit}
+        method="get"
         name="card-form"
       >
         <Input
           type="text"
           label="Enter title:"
-          {...register('title', { required: 'Title required.' })}
+          {...register('title', {
+            required: true,
+            validate: (title) => Boolean(title.trim()) || 'Title required.',
+          })}
         />
         <ValidationMessage fieldError={errors.title} />
 
@@ -121,7 +125,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
 
         <Select
           label="Select topic:"
-          {...register('topics', {
+          {...register('collections', {
             required: 'Please select an item in the list.',
           })}
         >
@@ -130,7 +134,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
             { value: 'travelling', label: 'Travelling' },
           ]}
         </Select>
-        <ValidationMessage fieldError={errors.topics} />
+        <ValidationMessage fieldError={errors.collections} />
 
         <Input
           type="text"
@@ -174,7 +178,6 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
 
         <CheckBox
           label="Allow process the data?"
-          defaultChecked
           {...register('allowProcessData', {
             required: 'Please check this box if you want to proceed.',
           })}

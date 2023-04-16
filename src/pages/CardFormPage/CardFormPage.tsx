@@ -1,15 +1,16 @@
-import { useState, FC, useCallback } from 'react';
+import { FC, useCallback, useState } from 'react';
 
-import { CardProps } from '@/components/Card/Card';
-import { CardList, CardListProps } from '@/components/CardList/CardList';
-import { CardForm } from '@/components/CardForm/CardForm';
+import { CardForm, CardFormProps, CardList, CardListProps } from '@/components';
 
 export const CardFormPage: FC = () => {
   const [cards, setCards] = useState<CardListProps['children']>([]);
 
-  const onSubmit = useCallback((card: Omit<CardProps, 'id'>) => {
+  const onSubmit: CardFormProps['onSubmit'] = useCallback((card) => {
     setCards((prevCards) => [
-      { ...card, id: Math.max(...prevCards.map(({ id }) => id)) + 1 },
+      {
+        ...card,
+        id: String(Math.max(...prevCards.map(({ id }) => Number(id))) + 1),
+      },
       ...prevCards,
     ]);
   }, []);

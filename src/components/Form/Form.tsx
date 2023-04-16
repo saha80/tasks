@@ -1,38 +1,41 @@
-import { FC, FormEventHandler, ReactNode, RefObject } from 'react';
+import {
+  FormEventHandler,
+  FormHTMLAttributes,
+  ReactNode,
+  forwardRef,
+} from 'react';
 
-import './Form.css';
+import { Button } from '@/components/Button/Button';
 
-export interface FormProps {
-  id: string;
-  name: string;
-  fromRef?: RefObject<HTMLFormElement>;
-  /** @default false */
-  noValidate?: boolean;
+import styles from './Form.module.css';
+
+export type Method = 'get' | 'post' | 'dialog';
+
+export interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactNode;
-  onSubmit: FormEventHandler<HTMLFormElement>;
+  submitMessage: ReactNode;
+  method: Method;
+  submitClassName?: string;
+  className?: string;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
 }
 
-export const Form: FC<FormProps> = ({
-  id,
-  name,
-  fromRef,
-  onSubmit,
-  children,
-  noValidate = false,
-}) => (
-  <form
-    className="form"
-    autoComplete="on"
-    noValidate={noValidate}
-    method="dialog"
-    id={id}
-    ref={fromRef}
-    name={name}
-    onSubmit={onSubmit}
-  >
-    <div className="form-content">{children}</div>
-    <button type="submit" form={id}>
-      Submit
-    </button>
-  </form>
+export const Form = forwardRef<HTMLFormElement, FormProps>(
+  (
+    { id, children, submitMessage, submitClassName, className = '', ...other },
+    ref
+  ) => (
+    <form
+      className={`${styles.form} form ${className}`}
+      autoComplete="on"
+      id={id}
+      ref={ref}
+      {...other}
+    >
+      <div className="form-content">{children}</div>
+      <Button type="submit" form={id} className={submitClassName}>
+        {submitMessage}
+      </Button>
+    </form>
+  )
 );

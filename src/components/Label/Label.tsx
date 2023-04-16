@@ -10,16 +10,17 @@ export interface LabelProps {
       | ReactElement<HTMLInputElement>
       | ReactElement<HTMLSelectElement>
       | ReactElement<HTMLTextAreaElement>
+      | ReactElement<HTMLProgressElement>
     )
   ];
 }
 
 export const Label: FC<LabelProps> = ({
-  required = false,
+  required,
   children: [label, input],
 }) => (
   <label className={`${styles.label} label`}>
     {label} {required ? <span className={styles.required}>*</span> : null}
-    {input}
+    <div className={styles.input}>{input}</div>
   </label>
 );

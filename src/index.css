@@ -1,52 +1,64 @@
 :root {
+  --font-size: 1rem;
+
+  --font: 1rem sans-serif;
+  --input-font: 15px monospace;
+
+  --border: 1px solid var(--color);
   --border-radius: 6px;
-  --button-focus: slategrey;
 
   --header-height: 5rem;
   --header-z-index: 1;
 
   --app-margin: var(--header-height);
+
+  --dialog-z-index: 1;
+
+  --form-valid-color: greenyellow;
+  --form-invalid-color: red;
+
+  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background-color: white;
-    --color: black;
+    --background-color: #fff;
+    --background-color-rgb: 255, 255, 255;
 
-    --button-background-color: lightcyan;
-    --button-hover-outline: darkcyan;
+    --color: #000;
+    --color-rgb: 0, 0, 0;
+
+    --button-hover-background-color: lightgrey;
 
     --header-background-color: lightblue;
 
     --footer-color: lightblue;
     --footer-background-color: midnightblue;
+  }
 
-    --label-color: black;
-    --label-background-color: white;
-
-    --input-color: black;
-    --input-background-color: white;
+  ::backdrop {
+    --color: #000;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #000;
-    --color: #fff;
+    --background-color-rgb: 0, 0, 0;
 
-    --button-background-color: darkslategrey;
-    --button-hover-outline: lightslategrey;
+    --color: #fff;
+    --color-rgb: 255, 255, 255;
+
+    --button-hover-background-color: dimgray;
 
     --header-background-color: midnightblue;
 
     --footer-color: midnightblue;
     --footer-background-color: lightblue;
+  }
 
-    --label-color: white;
-    --label-background-color: black;
-
-    --input-color: white;
-    --input-background-color: black;
+  ::backdrop {
+    --color: #fff;
   }
 }
 
@@ -54,24 +66,6 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
-
-* {
-  font-style: normal;
-  font-variant-ligatures: no-common-ligatures;
-  font-stretch: normal;
-  line-height: 1.5;
-  font-synthesis: none;
-
-  text-decoration-thickness: from-font;
-  text-decoration-skip-ink: all;
-  text-emphasis-position: under left;
-  text-overflow: ellipsis;
-  text-rendering: optimizeLegibility;
-
-  color-scheme: light dark;
-  background-color: var(--background-color);
-  color: var(--color);
 }
 
 body {
@@ -91,27 +85,4 @@ header {
 
 a {
   font-weight: 500;
-}
-
-button {
-  margin-block-start: 1rem;
-}
-
-.label {
-  color: var(--label-color);
-  background-color: var(--label-background-color);
-  display: flex;
-
-  margin-block-start: 1rem;
-}
-
-input[type] {
-  color: var(--input-color);
-  background-color: var(--input-background-color);
-
-  border: 1px solid var(--input-color);
-  border-radius: var(--border-radius);
-  padding: 8px;
-
-  margin-inline: 1rem;
 }

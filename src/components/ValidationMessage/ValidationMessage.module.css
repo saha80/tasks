@@ -1,0 +1,3 @@
+.validationMessage {
+  color: var(--form-invalid-color);
+}

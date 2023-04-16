@@ -1,0 +1,59 @@
+.header {
+  color: var(--color);
+  background-color: var(--header-background-color);
+  display: flex;
+  position: fixed;
+  z-index: var(--header-z-index);
+  justify-content: space-between;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.header .currentPath {
+  background-color: var(--header-background-color);
+  padding-inline-end: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.navigation {
+  display: inline-flex;
+  align-items: center;
+  background-color: inherit;
+}
+
+.routeList {
+  display: inline-flex;
+  list-style: none;
+  background-color: inherit;
+  padding-inline-start: unset;
+}
+
+.listItem {
+  margin-inline-start: 1rem;
+  background-color: inherit;
+}
+
+@media screen and (max-width: 500px) {
+  .routeList {
+    flex-wrap: wrap;
+  }
+
+  .listItem {
+    margin-block: 8px;
+  }
+}
+
+.link {
+  color: white;
+  background-color: blue;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  padding: 8px;
+}
+
+.active.link {
+  text-decoration: inherit;
+  background-color: orange;
+}

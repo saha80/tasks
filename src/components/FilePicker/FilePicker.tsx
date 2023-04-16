@@ -1,39 +1,31 @@
 import {
-  forwardRef,
-  ForwardRefRenderFunction,
   ChangeEventHandler,
   FocusEventHandler,
+  forwardRef,
+  ReactNode,
 } from 'react';
 
 import { Label } from '@/components/Label/Label';
 
-import './FilePicker.css';
+import styles from './FilePicker.module.css';
 
 export type AcceptType = 'audio' | 'video' | 'image';
 
 export interface FilePickerProps {
-  label: string;
+  label: ReactNode;
 
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onBlur?: FocusEventHandler<HTMLInputElement>;
   name?: string;
   required?: boolean;
   disabled?: boolean;
-  /** @default false */
   multiple?: boolean;
-
   /** @default 'image'  */
   accept?: AcceptType;
 }
 
-const FilePickerRender: ForwardRefRenderFunction<
-  HTMLInputElement,
-  FilePickerProps
-> = (
-  { label, required, multiple = false, accept = 'image', ...other },
-  ref
-) => (
-  <div className="file-picker">
+export const FilePicker = forwardRef<HTMLInputElement, FilePickerProps>(
+  ({ label, required, accept = 'image', ...other }, ref) => (
     <Label required={required}>
       {label}
 
@@ -41,12 +33,10 @@ const FilePickerRender: ForwardRefRenderFunction<
         ref={ref}
         type="file"
         accept={`${accept}/*`}
-        multiple={multiple}
+        className={`${styles.filePicker} file-picker`}
         required={required}
         {...other}
       />
     </Label>
-  </div>
+  )
 );
-
-export const FilePicker = forwardRef(FilePickerRender);

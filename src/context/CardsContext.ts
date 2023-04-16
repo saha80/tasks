@@ -1,22 +1,13 @@
 import { createContext } from 'react';
-import { SearchProps } from '@/components/Search/Search';
 
-export type SearchBy = 'title';
-
-export interface CardsContext {
+export interface CardsContextType {
   searchValue: string | null;
-  filterBy: SearchBy;
-  onChange: SearchProps['onChange'];
+  onSearch: (query: string) => void;
 }
 
-export const initialCardsContextValue: CardsContext = {
+export const CardsContext = createContext<CardsContextType>({
   searchValue: null,
-  filterBy: 'title',
-  onChange: () => {
+  onSearch: () => {
     throw new Error('initial onChange must be overwritten');
   },
-};
-
-export const CardsContext = createContext<CardsContext>(
-  initialCardsContextValue
-);
+});

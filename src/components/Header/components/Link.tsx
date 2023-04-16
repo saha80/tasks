@@ -2,6 +2,8 @@ import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ROOT_PATH } from '@/routes/Routes';
 
+import styles from '../Header.module.css';
+
 export const pathToLinkName = (path: string) =>
   path === ROOT_PATH
     ? 'Home'
@@ -18,7 +20,9 @@ export interface LinkProps {
 export const Link: FC<LinkProps> = ({ to: path }) => (
   <NavLink
     to={path}
-    className={({ isActive }) => `${isActive ? 'current' : ''} link`}
+    className={({ isActive }) =>
+      `${isActive ? styles.active : ''} ${styles.link}`
+    }
   >
     {pathToLinkName(path)}
   </NavLink>

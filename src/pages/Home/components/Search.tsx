@@ -1,47 +1,62 @@
 import { FC, useCallback, useContext, useEffect, useRef } from 'react';
-
-import { Search as BaseSearch, SearchProps } from '@/components/Search/Search';
-import { CardsContext } from '@/context/CardsContext';
-
-import { searchLocalStorage } from '@/utils/searchLocalStorage';
 import { useBeforeUnload } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+
+import { Search as BaseSearch, Form, SearchProps } from '@/components';
+import { CardsContext } from '@/context/CardsContext';
+import { searchLocalStorage } from '@/utils/searchLocalStorage';
+
+import styles from './Search.module.css';
 
 export const Search: FC<Pick<SearchProps, 'className'>> = ({ className }) => {
-  const { searchValue, onChange, filterBy } = useContext(CardsContext);
+  const { searchValue, onSearch } = useContext(CardsContext);
 
-  const ref = useRef(searchValue);
-
-  useEffect(() => {
-    ref.current = searchValue;
-  }, [searchValue]);
+  const ref = useRef<HTMLInputElement | null>(null);
 
   useBeforeUnload(
     useCallback(() => {
-      if (ref.current !== null) {
-        searchLocalStorage.set(ref.current);
-      }
+      searchLocalStorage.set(ref.current?.value ?? '');
     }, [])
   );
 
   useEffect(() => {
-    const storageValue = searchLocalStorage.get();
-    if (storageValue !== null) {
-      onChange(storageValue);
-    }
-
+    const { current } = ref;
     return () => {
-      if (ref.current !== null) {
-        searchLocalStorage.set(ref.current);
-      }
+      searchLocalStorage.set(current?.value ?? '');
     };
-  }, [onChange]);
+  }, []);
+
+  const { register, handleSubmit } = useForm<{ query: string }>({
+    defaultValues: {
+      query: searchValue ?? '',
+    },
+  });
+
+  const { ref: registerRef, ...registerSearch } = register('query');
 
   return (
-    <BaseSearch
-      value={searchValue}
-      onChange={onChange}
-      placeholder={`Search by ${filterBy}...`}
-      className={className}
-    />
+    <Form
+      role="search"
+      className={styles.searchForm}
+      method="get"
+      onSubmit={handleSubmit(({ query }) => {
+        if (query) {
+          onSearch(query);
+          searchLocalStorage.set(query);
+        }
+      })}
+      submitClassName={styles.submitButton}
+      submitMessage="Search"
+    >
+      <BaseSearch
+        ref={(instance) => {
+          registerRef(instance);
+          ref.current = instance;
+        }}
+        {...registerSearch}
+        className={(className ?? '') + ' ' + styles.search}
+        placeholder="Search..."
+      />
+    </Form>
   );
 };

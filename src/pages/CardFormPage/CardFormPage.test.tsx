@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { CardFormPage } from '@/pages/CardFormPage/CardFormPage';
 
+// todo add more cases for cardForm on validation
 describe('CardFormPage', () => {
   test('renders', async () => {
     render(<CardFormPage />);
@@ -26,5 +27,7 @@ describe('CardFormPage', () => {
 
     const fileUpload = await screen.findByText('Upload image file:');
     fireEvent.click(fileUpload);
+
+    // todo check the file object
   });
 });

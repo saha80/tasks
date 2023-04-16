@@ -1,0 +1,11 @@
+.radiogroup {
+  margin-block-start: 1rem;
+  max-width: max-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: inline;
+  margin-block-start: 0;
+}

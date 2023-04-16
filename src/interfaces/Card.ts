@@ -1,19 +1,24 @@
-export enum CardVisibilityType {
-  ONLY_YOU = 'only-you',
-  PUBLIC = 'public',
-}
-
 export interface Card {
-  id: number;
+  id: string;
   imgSrc: string;
-  title: string;
+  imgAlt?: string;
   description: string;
   createdBy: string;
+  createdByURL?: string;
+
   creationTimestamp: number;
   modificationTimestamp: number;
-  topics: string[];
-  tags: string[];
-  visibility: CardVisibilityType;
   likes: number;
+}
+
+export interface Location {
+  country?: string;
+}
+
+export interface CardDetails extends Card {
+  collections: string[];
+  tags: string[];
+  publicDomain: boolean;
+  location?: Location;
   views: number;
 }

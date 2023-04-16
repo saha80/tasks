@@ -1,14 +1,13 @@
 import {
-  forwardRef,
-  ReactNode,
-  ForwardRefRenderFunction,
   ChangeEventHandler,
   FocusEventHandler,
+  ReactNode,
+  forwardRef,
 } from 'react';
 
 import { Label } from '@/components/Label/Label';
 
-import './TextArea.css';
+import styles from './TextArea.module.css';
 
 export interface TextAreaProps {
   label: ReactNode;
@@ -22,17 +21,17 @@ export interface TextAreaProps {
   disabled?: boolean;
 }
 
-const TextAreaRender: ForwardRefRenderFunction<
-  HTMLTextAreaElement,
-  TextAreaProps
-> = ({ label, required, ...other }, ref) => (
-  <div className="textarea">
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
+  ({ label, required, ...other }, ref) => (
     <Label required={required}>
       {label}
 
-      <textarea ref={ref} required={required} {...other} />
+      <textarea
+        ref={ref}
+        required={required}
+        className={`${styles.textarea} textarea`}
+        {...other}
+      />
     </Label>
-  </div>
+  )
 );
-
-export const TextArea = forwardRef(TextAreaRender);

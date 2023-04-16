@@ -1,0 +1,11 @@
+.filePicker,
+.filePicker::file-selector-button {
+  font: inherit;
+}
+
+.filePicker::file-selector-button {
+  cursor: pointer;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: field;
+}
