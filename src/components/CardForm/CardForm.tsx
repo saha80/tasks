@@ -35,7 +35,7 @@ interface CardFieldValues {
   collections: string;
   tags: string;
   visibility: CardVisibilityType;
-  creationDate: number;
+  creationDate: Date;
   allowProcessData: boolean;
 }
 
@@ -57,8 +57,8 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
         description: data.description,
         createdBy: data.createdBy.trim(),
         imgSrc: await readAsDataURL(data.imgUrl[0]),
-        creationTimestamp: data.creationDate,
-        modificationTimestamp: data.creationDate,
+        creationTimestamp: data.creationDate.getTime(),
+        modificationTimestamp: data.creationDate.getTime(),
         likes: 0,
       };
 
@@ -168,7 +168,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
           {...register('creationDate', {
             min: toDateInputMinFormat(new Date()),
             required: 'Please fill out this field.',
-            valueAsNumber: true,
+            valueAsDate: true,
           })}
         />
         <ValidationMessage fieldError={errors.creationDate} />
