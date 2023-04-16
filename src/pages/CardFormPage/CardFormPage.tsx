@@ -7,7 +7,7 @@ import { cardFormPageSlice } from './cardFormPageSlice';
 
 export const CardFormPage: FC = () => {
   const dispatch = useDispatch();
-  const cards = useSelector((store) => store.cardFormPage.cards);
+  const { cards } = useSelector((store) => store.cardFormPage);
 
   return (
     <div className="card-form-page">
