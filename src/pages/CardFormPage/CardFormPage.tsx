@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { CardForm, CardList } from '@/components';
 import { useDispatch, useSelector } from '@/app/store';
 
-import { cardFormPageSlice } from './cardFormPageSlice';
+import { onSubmit } from './cardFormPageSlice';
 
 export const CardFormPage: FC = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const CardFormPage: FC = () => {
       <h1>Card Form</h1>
       <CardForm
         onSubmit={(card) => {
-          dispatch(cardFormPageSlice.actions.onSubmit(card));
+          dispatch(onSubmit(card));
         }}
       />
       <hr />

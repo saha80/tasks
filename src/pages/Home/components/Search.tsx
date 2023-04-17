@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from '@/app/store';
 import { Search as BaseSearch, Form, SearchProps } from '@/components';
 
 import styles from './Search.module.css';
-import { searchSlice } from './searchSlice';
+import { onSearch } from './searchSlice';
 
 export const Search: FC<Pick<SearchProps, 'className'>> = ({
   className = '',
@@ -25,7 +25,7 @@ export const Search: FC<Pick<SearchProps, 'className'>> = ({
       className={styles.searchForm}
       method="get"
       onSubmit={handleSubmit(({ query }) => {
-        dispatch(searchSlice.actions.onSearch(query));
+        dispatch(onSearch(query));
       })}
       submitClassName={styles.submitButton}
       submitMessage="Search"
