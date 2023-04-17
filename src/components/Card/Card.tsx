@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, ReactNode, useCallback } from 'react';
 import { MdThumbUp } from 'react-icons/md';
 
 import { Card as BaseCard } from '@/interfaces/Card';
@@ -6,6 +6,7 @@ import { Card as BaseCard } from '@/interfaces/Card';
 import styles from './Card.module.css';
 
 export interface CardProps extends BaseCard {
+  children?: ReactNode;
   onClick?: (id: BaseCard['id']) => void;
 }
 
@@ -17,6 +18,7 @@ export const Card: FC<CardProps> = ({
   createdBy,
   creationTimestamp,
   modificationTimestamp,
+  children,
   likes,
   onClick,
 }) => {
@@ -39,6 +41,7 @@ export const Card: FC<CardProps> = ({
           )}
         </div>
       </div>
+      {children}
       <div className={styles.status}>
         <span>
           <MdThumbUp />

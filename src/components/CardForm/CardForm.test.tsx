@@ -62,7 +62,7 @@ describe('CardForm', () => {
     expect(screen.getByRole('form')).toHaveFormValues({
       description: 'test',
       createdBy: 'John Doe',
-      collections: 'Programming',
+      collection: 'Programming',
       tags: 'tag',
       visibility: 'only-you',
       creationDate: '3023-01-01',

@@ -1,9 +1,8 @@
-import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit';
-import { CardListProps } from '@/components';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { InputCard } from '@/components/CardForm/CardForm';
 
 const initialState = {
-  cards: [] as CardListProps['children'],
+  cards: [] as InputCard[],
 };
 
 export const cardFormPageSlice = createSlice({
@@ -11,7 +10,7 @@ export const cardFormPageSlice = createSlice({
   initialState,
   reducers: {
     onSubmit: (state, { payload }: PayloadAction<InputCard>) => {
-      state.cards = [{ ...payload, id: nanoid() }, ...state.cards];
+      state.cards = [payload, ...state.cards];
     },
   },
 });

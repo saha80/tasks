@@ -1,9 +1,12 @@
 import { FC } from 'react';
 
-import { CardForm, CardList } from '@/components';
+import { CardForm, Card } from '@/components';
 import { useDispatch, useSelector } from '@/app/store';
+import cardListStyles from '@/components/CardList/CardList.module.css';
 
 import { onSubmit } from './cardFormPageSlice';
+
+import styles from './CardFormPage.module.css';
 
 export const CardFormPage: FC = () => {
   const dispatch = useDispatch();
@@ -18,7 +21,24 @@ export const CardFormPage: FC = () => {
         }}
       />
       <hr />
-      {cards.length ? <CardList>{cards}</CardList> : 'No cards submited.'}
+      {cards.length ? (
+        <div className={cardListStyles.cardList}>
+          {cards.map((card) => (
+            <Card key={card.id} {...card}>
+              <div className={styles.card}>
+                <p>Collection: {card.collection}</p>
+                <p>Tags: {card.tags}</p>
+                <p>Visibility: {card.visibility.split('-').join(' ')}</p>
+                <p>
+                  Allow process data: {card.allowProcessData ? 'Yes' : 'No'}
+                </p>
+              </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        'No cards submited.'
+      )}
     </div>
   );
 };
