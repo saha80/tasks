@@ -10,6 +10,9 @@ export default mergeConfig(
       globals: true,
       environment: 'jsdom',
       setupFiles: './tests/setup.ts',
+      coverage: {
+        all: true,
+      },
     },
   })
 );
