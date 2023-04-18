@@ -5,7 +5,7 @@ import {
   ReactNode,
 } from 'react';
 
-import { Label } from '@/components/Label/Label';
+import { Label } from '@/components';
 
 export interface CheckBoxProps {
   label: ReactNode;

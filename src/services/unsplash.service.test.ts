@@ -1,30 +1,20 @@
-import EventEmitter from 'events';
 import { cardDetailsList } from 'tests/mockUnsplashData';
 
 describe('service', () => {
   test('getCardList', async () => {
-    const response = await fetch(import.meta.env.VITE_API_URL + '/photos');
-    expect(await response.json()).toEqual(cardDetailsList);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/photos`);
+    expect(await response.json()).toStrictEqual(cardDetailsList);
   });
-  test('jsdom AbortSignal does not work with fetch', async () => {
-    try {
-      const abortCtrl = new AbortController();
 
-      expect(
-        abortCtrl instanceof EventEmitter || abortCtrl instanceof EventTarget
-      ).not.toBeTruthy();
+  test('getCardById', async () => {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/photos/1`);
+    expect(await response.json()).toStrictEqual(cardDetailsList[0]);
+  });
 
-      const response = await fetch(import.meta.env.VITE_API_URL + '/photos', {
-        signal: abortCtrl.signal,
-      });
-
-      expect(await response.json()).toEqual([]); // todo: create issue on jsdom gihub repo
-    } catch (error) {
-      expect(error).toBeInstanceOf(TypeError);
-
-      expect((error as TypeError).message).toBe(
-        'The "emitter" argument must be an instance of EventEmitter or EventTarget. Received an instance of AbortSignal'
-      );
-    }
+  test('getCardListByQuery', async () => {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/search/photos?query=react`
+    );
+    expect(await response.json()).toStrictEqual([cardDetailsList[0]]);
   });
 });

@@ -1,23 +1,28 @@
-.dialog {
-  display: none;
-}
-
-.dialog[open] {
-  display: block;
-  padding: 0;
-  border: 3px solid cadetblue;
-  border-radius: calc(var(--border-radius) * 3);
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(var(--color-rgb), 0.25);
   z-index: var(--dialog-z-index);
 }
 
-.dialog::backdrop {
-  background-color: var(--color);
-  opacity: 0.25;
-}
-
-.inner {
+.dialog {
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  width: fit-content;
+  max-width: calc(100% - 2rem);
+  height: fit-content;
+  max-height: calc(100% - 2rem);
+  margin: auto;
+  border: 3px solid cadetblue;
+  border-radius: calc(var(--border-radius) * 3);
+  padding: 0;
+  user-select: text;
+  visibility: visible;
+  color: var(--color);
+  background-color: var(--background-color);
 }
 
 .header {

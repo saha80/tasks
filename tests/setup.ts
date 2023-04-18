@@ -1,4 +1,5 @@
-import { vi } from 'vitest';
+import 'whatwg-fetch'; // polyfill
+
 import { cleanup } from '@testing-library/react';
 import matchers from '@testing-library/jest-dom/matchers';
 import { rest } from 'msw';
@@ -19,7 +20,7 @@ export const server = setupServer(
   rest.get(
     `${import.meta.env.VITE_API_URL}/search/photos`,
     (request, responseComposition, context) => {
-      const { query } = request.params;
+      const query = request.url.searchParams.get('query');
 
       if (typeof query !== 'string') {
         return responseComposition(
@@ -34,7 +35,7 @@ export const server = setupServer(
         context.json(
           cardDetailsList.filter((card) =>
             [
-              card.user.name.toLowerCase().includes(lowerCaseQuery),
+              card.user.username.toLowerCase().includes(lowerCaseQuery),
               card.description?.toLowerCase().includes(lowerCaseQuery),
               card.alt_description?.toLowerCase().includes(lowerCaseQuery),
               card.location.country?.toLowerCase().includes(lowerCaseQuery),
@@ -45,18 +46,18 @@ export const server = setupServer(
     }
   ),
   rest.get(
-    `${import.meta.env.VITE_API_URL}/photos/:id`,
+    `${import.meta.env.VITE_API_URL}/photos/:photoId`,
     (request, responseComposition, context) => {
-      const { id } = request.params;
+      const { photoId } = request.params;
 
-      if (typeof id !== 'string') {
+      if (typeof photoId !== 'string') {
         return responseComposition(
           context.status(RESPONSE_STATUS_CODE.BAD_REQUEST),
           context.json({ errors: ['Bad Request'] })
         );
       }
 
-      const response = cardDetailsList.find(({ id }) => id === request.id);
+      const response = cardDetailsList.find(({ id }) => id === photoId);
       return response === undefined
         ? responseComposition(
             context.status(RESPONSE_STATUS_CODE.NOT_FOUND),
@@ -72,18 +73,12 @@ export const server = setupServer(
 
 expect.extend(matchers);
 
-beforeEach(() => {
+afterEach(cleanup);
+
+beforeAll(() => {
   server.listen();
 });
 
-afterEach(() => {
-  cleanup();
+afterAll(() => {
   server.close();
-});
-
-// https://github.com/jsdom/jsdom/issues/3294#issuecomment-1268330372
-beforeAll(() => {
-  HTMLDialogElement.prototype.show = vi.fn();
-  HTMLDialogElement.prototype.showModal = vi.fn();
-  HTMLDialogElement.prototype.close = vi.fn();
 });

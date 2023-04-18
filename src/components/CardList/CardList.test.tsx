@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { cardDetailsList } from 'tests/mockData';
 
-import { CardList } from './CardList';
+import { CardList } from '@/components';
 
 describe('CardList', () => {
   test('renders', async () => {

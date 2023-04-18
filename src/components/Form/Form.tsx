@@ -5,7 +5,7 @@ import {
   forwardRef,
 } from 'react';
 
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components';
 
 import styles from './Form.module.css';
 

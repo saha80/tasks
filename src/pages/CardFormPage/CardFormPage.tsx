@@ -1,26 +1,44 @@
-import { FC, useCallback, useState } from 'react';
+import { FC } from 'react';
 
-import { CardForm, CardFormProps, CardList, CardListProps } from '@/components';
+import { CardForm, Card } from '@/components';
+import { useDispatch, useSelector } from '@/app/store';
+import cardListStyles from '@/components/CardList/CardList.module.css';
+
+import { onSubmit } from './cardFormPageSlice';
+
+import styles from './CardFormPage.module.css';
 
 export const CardFormPage: FC = () => {
-  const [cards, setCards] = useState<CardListProps['children']>([]);
-
-  const onSubmit: CardFormProps['onSubmit'] = useCallback((card) => {
-    setCards((prevCards) => [
-      {
-        ...card,
-        id: String(Math.max(...prevCards.map(({ id }) => Number(id))) + 1),
-      },
-      ...prevCards,
-    ]);
-  }, []);
+  const dispatch = useDispatch();
+  const { cards } = useSelector((store) => store.cardFormPage);
 
   return (
     <div className="card-form-page">
       <h1>Card Form</h1>
-      <CardForm onSubmit={onSubmit} />
+      <CardForm
+        onSubmit={(card) => {
+          dispatch(onSubmit(card));
+        }}
+      />
       <hr />
-      {cards.length ? <CardList>{cards}</CardList> : 'No cards submited.'}
+      {cards.length ? (
+        <div className={cardListStyles.cardList}>
+          {cards.map((card) => (
+            <Card key={card.id} {...card}>
+              <div className={styles.card}>
+                <p>Collection: {card.collection}</p>
+                <p>Tags: {card.tags}</p>
+                <p>Visibility: {card.visibility.split('-').join(' ')}</p>
+                <p>
+                  Allow process data: {card.allowProcessData ? 'Yes' : 'No'}
+                </p>
+              </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        'No cards submited.'
+      )}
     </div>
   );
 };

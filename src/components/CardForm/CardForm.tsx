@@ -1,5 +1,6 @@
 import { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
+import { nanoid } from '@reduxjs/toolkit';
 
 import {
   CardProps,
@@ -10,15 +11,12 @@ import {
   Input,
   RadioGroup,
   Select,
-  TextArea,
   ValidationMessage,
 } from '@/components';
 import { toDateInputMinFormat } from '@/utils/date';
 import { readAsDataURL } from '@/utils/readAsDataURL';
 
 import styles from './CardForm.module.css';
-
-type InputCard = Omit<CardProps, 'id' | 'createdByURL'>;
 
 export interface CardFormProps {
   onSubmit: (card: InputCard) => void;
@@ -30,16 +28,21 @@ enum CardVisibilityType {
 }
 
 interface CardFieldValues {
-  title: string;
   description: string;
   createdBy: string;
   imgUrl: FileList;
-  collections: string;
+  collection: string;
   tags: string;
   visibility: CardVisibilityType;
-  creationDate: number;
+  creationDate: Date;
   allowProcessData: boolean;
 }
+
+export type InputCard = Omit<CardProps, 'createdByURL' | 'children'> &
+  Pick<
+    CardFieldValues,
+    'allowProcessData' | 'collection' | 'tags' | 'visibility'
+  >;
 
 export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
   const {
@@ -56,15 +59,24 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
   const onSuccess = useCallback(
     async (data: CardFieldValues) => {
       const card: InputCard = {
+        id: nanoid(),
         description: data.description,
         createdBy: data.createdBy.trim(),
         imgSrc: await readAsDataURL(data.imgUrl[0]),
-        creationTimestamp: data.creationDate,
-        modificationTimestamp: data.creationDate,
+        creationTimestamp: data.creationDate.getTime(),
+        modificationTimestamp: data.creationDate.getTime(),
         likes: 0,
+        collection: data.collection,
+        tags: data.tags
+          .split(',')
+          .map((tag) => tag.trim())
+          .filter(Boolean)
+          .join(', '),
+        visibility: data.visibility,
+        allowProcessData: data.allowProcessData,
       };
 
-      if (window.confirm('Add card?')) {
+      if (window.confirm('Information has been saved. Add card?')) {
         onSubmit(card);
         reset();
       }
@@ -80,20 +92,19 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
         className={styles.cardForm}
         submitMessage="Submit"
         submitClassName={styles.submit}
-        method="get"
+        method="post"
         name="card-form"
       >
         <Input
           type="text"
-          label="Enter title:"
-          {...register('title', {
+          label="Enter description:"
+          {...register('description', {
             required: true,
-            validate: (title) => Boolean(title.trim()) || 'Title required.',
+            validate: (description) =>
+              Boolean(description.trim()) || 'Description required.',
           })}
         />
-        <ValidationMessage fieldError={errors.title} />
-
-        <TextArea label="Enter description:" {...register('description')} />
+        <ValidationMessage fieldError={errors.description} />
 
         <Input
           type="text"
@@ -124,8 +135,8 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
         <ValidationMessage fieldError={errors.imgUrl} />
 
         <Select
-          label="Select topic:"
-          {...register('collections', {
+          label="Select collection:"
+          {...register('collection', {
             required: 'Please select an item in the list.',
           })}
         >
@@ -134,7 +145,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
             { value: 'travelling', label: 'Travelling' },
           ]}
         </Select>
-        <ValidationMessage fieldError={errors.collections} />
+        <ValidationMessage fieldError={errors.collection} />
 
         <Input
           type="text"
@@ -171,7 +182,7 @@ export const CardForm: FC<CardFormProps> = ({ onSubmit }) => {
           {...register('creationDate', {
             min: toDateInputMinFormat(new Date()),
             required: 'Please fill out this field.',
-            valueAsNumber: true,
+            valueAsDate: true,
           })}
         />
         <ValidationMessage fieldError={errors.creationDate} />

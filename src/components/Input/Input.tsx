@@ -5,7 +5,7 @@ import {
   forwardRef,
 } from 'react';
 
-import { Label } from '@/components/Label/Label';
+import { Label } from '@/components';
 
 import styles from './Input.module.css';
 

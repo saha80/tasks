@@ -12,7 +12,7 @@
 
   --app-margin: var(--header-height);
 
-  --dialog-z-index: 1;
+  --dialog-z-index: 2;
 
   --form-valid-color: greenyellow;
   --form-invalid-color: red;
@@ -35,10 +35,6 @@
     --footer-color: lightblue;
     --footer-background-color: midnightblue;
   }
-
-  ::backdrop {
-    --color: #000;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,10 +51,6 @@
 
     --footer-color: midnightblue;
     --footer-background-color: lightblue;
-  }
-
-  ::backdrop {
-    --color: #fff;
   }
 }
 
