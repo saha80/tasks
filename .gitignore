@@ -29,3 +29,8 @@ vite.config.ts.timestamp-*
 *.js
 *.js.map
 *.jsx
+
+cypress/videos
+cypress/screenshots
+cypress/fixtures/profile.json
+cypress/fixtures/users.json

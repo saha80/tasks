@@ -25,7 +25,6 @@ type ViteSSR = {
 );
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     interface ProcessEnv {
       readonly ACCESS_KEY: string;
