@@ -1,0 +1,6 @@
+.app {
+  padding: var(--app-margin);
+  background-color: var(--background-color);
+
+  min-height: calc(100vh - (var(--app-margin) * 2 + 24px + 2rem));
+}

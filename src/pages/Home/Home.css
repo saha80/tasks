@@ -1,0 +1,10 @@
+.search-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  background-color: var(--background-color);
+}
+
+.search-cards .search {
+  margin-block: 1rem;
+}

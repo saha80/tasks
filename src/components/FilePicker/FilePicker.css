@@ -1,0 +1,8 @@
+.file-picker input[type='file'] {
+  color: var(--input-color);
+  background-color: var(--input-background-color);
+
+  border: none;
+
+  margin-inline: 1rem;
+}

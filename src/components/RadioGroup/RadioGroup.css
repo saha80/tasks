@@ -1,0 +1,8 @@
+.radiogroup {
+  margin-block-start: 1rem;
+  max-width: max-content;
+}
+
+.radiogroup .label {
+  margin-block-start: 0;
+}
