@@ -1,5 +1,5 @@
 import { FC, ReactNode, useCallback } from 'react';
-import { MdThumbUp } from 'react-icons/md';
+import { MdThumbUp } from 'react-icons/md/index';
 
 import { Card as BaseCard } from '@/interfaces/Card';
 

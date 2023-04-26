@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.shared.json",
+  "compilerOptions": {
+    "sourceMap": true
+  },
+  "include": ["./server.ts", "./server.d.ts"]
+}

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { MdOutlineVisibility, MdThumbUp } from 'react-icons/md';
+import { MdOutlineVisibility, MdThumbUp } from 'react-icons/md/index';
 
 import { CardDetails as BaseCardDetails } from '@/interfaces/Card';
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { MdRotateRight } from 'react-icons/md';
+import { MdRotateRight } from 'react-icons/md/index';
 
 import styles from './Progress.module.css';
 

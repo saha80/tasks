@@ -18,7 +18,11 @@
   },
   "root": true,
   "parserOptions": {
-    "project": ["./tsconfig.json", "./tsconfig.node.json"],
+    "project": [
+      "./tsconfig.json",
+      "./tsconfig.node.json",
+      "./tsconfig.node.server.json"
+    ],
     "ecmaFeatures": {
       "jsx": true
     },

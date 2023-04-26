@@ -3,13 +3,19 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import * as RTK from '@reduxjs/toolkit';
 import userEvent from '@testing-library/user-event';
 
+import { configureStoreOptions } from '@/app/rootReducer';
 import { Home } from './Home';
 import { Provider } from 'react-redux';
-import { store } from '@/app/store';
+import type { Raw } from '@/utils/redux';
+
+const { configureStore } = (RTK as Raw<typeof RTK>).default ?? RTK;
 
 describe('Home', () => {
+  const store = configureStore(configureStoreOptions);
+
   test('renders', async () => {
     const { queryByRole, getByText } = render(
       <Provider store={store}>

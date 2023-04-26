@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 coverage
+vite.config.ts.timestamp-*
+*.tsbuildinfo
+*.js
+*.js.map
+*.jsx

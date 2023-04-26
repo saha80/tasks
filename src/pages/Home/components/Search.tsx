@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
-import { useDispatch, useSelector } from '@/app/store';
+import { useSelector } from '@/app/rootReducer';
 import { Search as BaseSearch, Form, SearchProps } from '@/components';
 
 import styles from './Search.module.css';

@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { CardForm, Card } from '@/components';
-import { useDispatch, useSelector } from '@/app/store';
+import { useSelector } from '@/app/rootReducer';
 import cardListStyles from '@/components/CardList/CardList.module.css';
 
 import { onSubmit } from './cardFormPageSlice';

@@ -1,13 +1,20 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
+import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
+import * as RTK from '@reduxjs/toolkit';
+import userEvent from '@testing-library/user-event';
 
 import { CardForm } from '@/components';
-import { store } from '@/app/store';
-import { vi } from 'vitest';
+import { configureStoreOptions } from '@/app/rootReducer';
+import type { Raw } from '@/utils/redux';
+
+// https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
+const { configureStore } = (RTK as Raw<typeof RTK>).default ?? RTK;
 
 // todo add more cases for cardForm on validation
 describe('CardForm', () => {
+  const store = configureStore(configureStoreOptions);
+
   test('renders', async () => {
     const onSubmit = vi.fn();
 

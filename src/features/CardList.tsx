@@ -7,7 +7,7 @@ import {
   Progress,
 } from '@/components';
 import { useGetCardList } from '@/services/unsplash.service';
-import { useSelector } from '@/app/store';
+import { useSelector } from '@/app/rootReducer';
 
 import { CardListByQuery } from './CardListByQuery';
 

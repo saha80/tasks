@@ -1,5 +1,5 @@
 import { FC, ReactComponentElement } from 'react';
-import { MdClose } from 'react-icons/md';
+import { MdClose } from 'react-icons/md/index';
 
 import { Button } from '@/components';
 

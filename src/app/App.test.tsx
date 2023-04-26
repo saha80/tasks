@@ -9,7 +9,7 @@ describe('App', () => {
     const router = createMemoryRouter(routeObject);
     render(<RouterProvider router={router} />);
 
-    expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument(); // fixme
     expect(screen.getByRole('link', { name: 'Card Form' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'About Us' })).toBeInTheDocument();
 
@@ -20,7 +20,7 @@ describe('App', () => {
     const router = createMemoryRouter(routeObject);
     render(<RouterProvider router={router} />);
 
-    expect(screen.getByText(/Current path:/i)).toContain(/Home/i);
+    expect(screen.getByText(/Current path:/i)).toContain(/Home/i); // fixme
 
     await userEvent.click(screen.getByRole('link', { name: 'Card Form' }));
     expect(screen.getByText(/Current path:/i)).toContain(/Card Form/i);

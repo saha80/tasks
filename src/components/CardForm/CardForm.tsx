@@ -1,6 +1,12 @@
-import { FC, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { nanoid } from '@reduxjs/toolkit';
+import * as RTK from '@reduxjs/toolkit';
+import type { FC } from 'react';
+
+import type { Raw } from '@/utils/redux';
+
+// https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
+const { nanoid } = (RTK as Raw<typeof RTK>).default ?? RTK;
 
 import {
   CardProps,

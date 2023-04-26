@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { GoMarkGithub } from 'react-icons/go';
+import { GoMarkGithub } from 'react-icons/go/index';
 
 import styles from './Footer.module.css';
 

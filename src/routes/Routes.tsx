@@ -1,6 +1,6 @@
-import { RouteObject, createBrowserRouter } from 'react-router-dom';
+import { RouteObject } from 'react-router-dom';
 
-import { App } from '@/App';
+import { App } from '@/app/App';
 import { AboutUs, CardFormPage, Home, PageNotFound } from '@/pages';
 
 export const ROOT_PATH = '/';
@@ -32,5 +32,3 @@ export const routeObject: RouteObject[] = [
     element: <App />,
   },
 ];
-
-export const router = createBrowserRouter(routeObject);

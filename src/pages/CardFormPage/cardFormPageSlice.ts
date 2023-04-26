@@ -1,5 +1,11 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InputCard } from '@/components/CardForm/CardForm';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import * as RTK from '@reduxjs/toolkit';
+
+import type { InputCard } from '@/components/CardForm/CardForm';
+
+import type { Raw } from '@/utils/redux';
+// https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
+const { createSlice } = (RTK as Raw<typeof RTK>).default ?? RTK;
 
 const initialState = {
   cards: [] as InputCard[],
