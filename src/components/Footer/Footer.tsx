@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 
 import { GoMarkGithub } from 'react-icons/go/index';
 

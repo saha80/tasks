@@ -15,7 +15,8 @@ import type {
 
 import { configureStoreOptions } from '@/app/rootReducer';
 import { routeObject } from '@/routes/Routes';
-import type { Raw } from '@/utils/redux';
+import type { Raw } from '@/interfaces/redux';
+import { unsplashApiSlice } from './services/unsplash.service';
 
 const { configureStore } = (RTK as Raw<typeof RTK>).default ?? RTK;
 
@@ -58,8 +59,8 @@ const handler = createStaticHandler(routeObject);
 
 export const render = async (
   destination: ExpressResponse,
-  /** @description `onPipe` fires after `stream.pipe(destination)`, but before `renderToPipeableStream` calls `destination.end()` */
-  onPipe: (destination: ExpressResponse) => void
+  /** @description fires after `stream.pipe(destination)`, but before `renderToPipeableStream` calls `destination.end()` */
+  onAllReady: () => void
 ) => {
   const context = await handler.query(createFetchRequest(destination.req));
 
@@ -71,6 +72,18 @@ export const render = async (
 
   const router = createStaticRouter(handler.dataRoutes, context);
 
+  store.dispatch(
+    unsplashApiSlice.endpoints.getCardList.initiate(
+      undefined
+    ) as unknown as RTK.AnyAction
+  );
+
+  await Promise.all(
+    store.dispatch(
+      unsplashApiSlice.util.getRunningQueriesThunk() as unknown as RTK.AnyAction
+    ) as unknown as unknown[]
+  );
+
   const stream = renderToPipeableStream(
     <StrictMode>
       <Provider store={store}>
@@ -81,7 +94,8 @@ export const render = async (
       bootstrapScriptContent: `window.__PRELOADED_STATE__=${JSON.stringify(
         structuredClone(store.getState())
       )}`,
-      onShellReady: () => onPipe(stream.pipe(destination)),
+      onShellReady: () => stream.pipe(destination),
+      onAllReady: () => onAllReady(),
     }
   );
 };

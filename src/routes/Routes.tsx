@@ -1,12 +1,17 @@
-import { RouteObject } from 'react-router-dom';
+import { lazy } from 'react';
+import { type RouteObject } from 'react-router-dom';
 
 import { App } from '@/app/App';
-import { AboutUs, CardFormPage, Home, PageNotFound } from '@/pages';
+import { PageNotFound } from '@/pages/PageNotFound/PageNotFound';
 
 export const ROOT_PATH = '/';
 
 export type RouteObjectPathRequired = RouteObject &
   Required<Pick<RouteObject, 'path'>>;
+
+const Home = lazy(() => import('@/pages/Home/Home'));
+const CardFormPage = lazy(() => import('@/pages/CardFormPage/CardFormPage'));
+const AboutUs = lazy(() => import('@/pages/AboutUs/AboutUs'));
 
 export const ROOT_CHILDREN: RouteObjectPathRequired[] = [
   {

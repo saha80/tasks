@@ -7,9 +7,9 @@ import {
 import { Provider } from 'react-redux';
 
 import { cardDetailsList } from 'tests/mockData';
-import { Cards } from './Cards';
+import { CardListDetails as Cards } from '@/features/CardListDetails';
 import { configureStoreOptions } from '@/app/rootReducer';
-import type { Raw } from '@/utils/redux';
+import type { Raw } from '@/interfaces/redux';
 
 const { configureStore } = (RTK as Raw<typeof RTK>).default ?? RTK;
 

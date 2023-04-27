@@ -1,11 +1,11 @@
 import {
-  ChangeEventHandler,
-  FocusEventHandler,
-  ReactNode,
   forwardRef,
+  type ChangeEventHandler,
+  type FocusEventHandler,
+  type ReactNode,
 } from 'react';
 
-import { Label } from '@/components';
+import { Label } from '@/components/Label/Label';
 
 import styles from './Select.module.css';
 

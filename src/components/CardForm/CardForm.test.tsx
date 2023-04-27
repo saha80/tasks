@@ -4,9 +4,10 @@ import { vi } from 'vitest';
 import * as RTK from '@reduxjs/toolkit';
 import userEvent from '@testing-library/user-event';
 
-import { CardForm } from '@/components';
+import type { Raw } from '@/interfaces/redux';
 import { configureStoreOptions } from '@/app/rootReducer';
-import type { Raw } from '@/utils/redux';
+
+import { CardForm } from './CardForm';
 
 // https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
 const { configureStore } = (RTK as Raw<typeof RTK>).default ?? RTK;

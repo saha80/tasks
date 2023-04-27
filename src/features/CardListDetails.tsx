@@ -1,5 +1,9 @@
-import { FC, useCallback, useRef, useState } from 'react';
-import { CardDetails, Dialog, Error, Progress } from '@/components';
+import { type FC, useCallback, useRef, useState } from 'react';
+
+import { CardDetails } from '@/components/CardDetails/CardDetails';
+import { Dialog } from '@/components/Dialog/Dialog';
+import { Error } from '@/components/Error/Error';
+import { Progress } from '@/components/Progress/Progress';
 import { DialogContent } from '@/components/Dialog/DialogContent';
 import { DialogTitle } from '@/components/Dialog/DialogTitle';
 import { useLazyGetCardById } from '@/services/unsplash.service';

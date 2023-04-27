@@ -3,5 +3,10 @@
   "compilerOptions": {
     "sourceMap": true
   },
-  "include": ["./server.ts", "./server.d.ts"]
+  "include": [
+    "./server.ts",
+    "./unsplashProxyServer.ts",
+    "./server.d.ts",
+    "./unsplashProxyServer.d.ts"
+  ]
 }

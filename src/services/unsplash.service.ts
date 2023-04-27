@@ -1,6 +1,7 @@
 import * as RTK from '@reduxjs/toolkit/dist/query/react';
+import * as RTKQuery from '@reduxjs/toolkit/dist/query/react';
 
-import type { Raw } from '@/utils/redux';
+import type { Raw } from '@/interfaces/redux';
 import type { Card, CardDetails } from '@/interfaces/Card';
 import type {
   PhotoByIdResponse,
@@ -11,7 +12,15 @@ import type {
 import { pathnameWithSearch } from '@/utils/URL';
 
 // https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
-const { createApi, fetchBaseQuery } = (RTK as Raw<typeof RTK>).default ?? RTK;
+const { fetchBaseQuery } = (RTK as Raw<typeof RTK>).default ?? RTK;
+
+const { buildCreateApi, coreModule, reactHooksModule } =
+  (RTKQuery as Raw<typeof RTKQuery>).default ?? RTKQuery;
+
+const createApi = buildCreateApi(
+  coreModule(),
+  reactHooksModule({ unstable__sideEffectsInRender: true })
+);
 
 const mapToCard = (photo: PhotoResponse): Card => {
   return {

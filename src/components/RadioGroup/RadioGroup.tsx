@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react';
+import { type ReactNode, forwardRef } from 'react';
 
 import styles from './RadioGroup.module.css';
 

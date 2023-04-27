@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { ROOT_CHILDREN } from '@/routes/Routes';
 import { useLocation } from 'react-router-dom';
 

@@ -1,24 +1,23 @@
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import * as RTK from '@reduxjs/toolkit';
-import type { FC } from 'react';
+import { type FC } from 'react';
 
-import type { Raw } from '@/utils/redux';
+import type { Raw } from '@/interfaces/redux';
 
 // https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
 const { nanoid } = (RTK as Raw<typeof RTK>).default ?? RTK;
 
-import {
-  CardProps,
-  CheckBox,
-  DatePicker,
-  FilePicker,
-  Form,
-  Input,
-  RadioGroup,
-  Select,
-  ValidationMessage,
-} from '@/components';
+import { type CardProps } from '@/components/Card/Card';
+import { CheckBox } from '@/components/CheckBox/CheckBox';
+import { DatePicker } from '@/components/DatePicker/DatePicker';
+import { FilePicker } from '@/components/FilePicker/FilePicker';
+import { Form } from '@/components/Form/Form';
+import { Input } from '@/components/Input/Input';
+import { RadioGroup } from '@/components/RadioGroup/RadioGroup';
+import { Select } from '@/components/Select/Select';
+import { ValidationMessage } from '@/components/ValidationMessage/ValidationMessage';
+
 import { toDateInputMinFormat } from '@/utils/date';
 import { readAsDataURL } from '@/utils/readAsDataURL';
 

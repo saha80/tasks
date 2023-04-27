@@ -1,4 +1,4 @@
-import { CardDetails } from '@/interfaces/Card';
+import { type CardDetails } from '@/interfaces/Card';
 
 export const cardDetails: CardDetails = {
   id: '1',

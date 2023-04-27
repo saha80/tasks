@@ -7,11 +7,11 @@ import * as RTK from '@reduxjs/toolkit';
 
 import { routeObject } from '@/routes/Routes';
 
-import { configureStoreOptions, rootReducer } from '@/app/rootReducer';
+import { configureStoreOptions, type rootReducer } from '@/app/rootReducer';
 
 import './index.css';
 
-import type { Raw } from '@/utils/redux';
+import type { Raw } from '@/interfaces/redux';
 
 // https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
 const { configureStore } = (RTK as Raw<typeof RTK>).default ?? RTK;

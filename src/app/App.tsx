@@ -1,8 +1,9 @@
-import { FC, Suspense } from 'react';
+import { type FC, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Footer, Header } from '@/components';
 import { Spinner } from '@/components/Spinner/Spinner';
+import { Header } from '@/components/Header/Header';
+import { Footer } from '@/components/Footer/Footer';
 
 import styles from './App.module.css';
 
@@ -17,3 +18,5 @@ export const App: FC = () => {
     </Suspense>
   );
 };
+
+export default App;

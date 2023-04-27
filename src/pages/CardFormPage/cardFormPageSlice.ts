@@ -3,7 +3,7 @@ import * as RTK from '@reduxjs/toolkit';
 
 import type { InputCard } from '@/components/CardForm/CardForm';
 
-import type { Raw } from '@/utils/redux';
+import type { Raw } from '@/interfaces/redux';
 // https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
 const { createSlice } = (RTK as Raw<typeof RTK>).default ?? RTK;
 

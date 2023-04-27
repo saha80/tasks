@@ -1,11 +1,11 @@
 import {
-  FormEventHandler,
-  FormHTMLAttributes,
-  ReactNode,
   forwardRef,
+  type FormEventHandler,
+  type FormHTMLAttributes,
+  type ReactNode,
 } from 'react';
 
-import { Button } from '@/components';
+import { Button } from '@/components/Button/Button';
 
 import styles from './Form.module.css';
 

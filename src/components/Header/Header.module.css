@@ -56,4 +56,5 @@
 .active.link {
   text-decoration: inherit;
   background-color: orange;
+  color: black;
 }

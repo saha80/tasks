@@ -9,7 +9,7 @@ import userEvent from '@testing-library/user-event';
 import { configureStoreOptions } from '@/app/rootReducer';
 import { Home } from './Home';
 import { Provider } from 'react-redux';
-import type { Raw } from '@/utils/redux';
+import type { Raw } from '@/interfaces/redux';
 
 const { configureStore } = (RTK as Raw<typeof RTK>).default ?? RTK;
 

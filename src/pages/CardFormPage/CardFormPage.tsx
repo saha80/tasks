@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { CardForm, Card } from '@/components';
+import { CardForm } from '@/components/CardForm/CardForm';
+import { Card } from '@/components/Card/Card';
 import { useSelector } from '@/app/rootReducer';
 import cardListStyles from '@/components/CardList/CardList.module.css';
 
@@ -43,3 +44,5 @@ export const CardFormPage: FC = () => {
     </div>
   );
 };
+
+export default CardFormPage;

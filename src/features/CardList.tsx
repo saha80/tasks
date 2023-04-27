@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 
 import {
   CardList as BaseCardList,
-  CardListProps as BaseCardListProps,
-  Error,
-  Progress,
-} from '@/components';
+  type CardListProps as BaseCardListProps,
+} from '@/components/CardList/CardList';
+import { Error } from '@/components/Error/Error';
+import { Progress } from '@/components/Progress/Progress';
 import { useGetCardList } from '@/services/unsplash.service';
 import { useSelector } from '@/app/rootReducer';
 

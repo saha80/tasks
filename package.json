@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "compile:server": "tsc --project ./tsconfig.node.server.json",
-    "dev": "yarn compile:server && node server",
+    "dev": "yarn compile:server && node unsplashProxyServer | node server",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "cypress:run": "cypress run",
-    "build:client": "vite build --outDir dist/client --ssrManifest",
-    "build:server": "vite build --outDir dist/server --ssr src/entry-server.tsx",
+    "build:client": "vite build --target esnext --outDir dist/client --ssrManifest",
+    "build:server": "vite build --target esnext --outDir dist/server --ssr src/entry-server.tsx",
     "build": "yarn build:client && yarn build:server",
-    "preview": "yarn compile:server && yarn build && cross-env NODE_ENV=production node server",
+    "preview": "yarn compile:server && yarn build && node unsplashProxyServer | cross-env NODE_ENV=production node server",
     "lint": "eslint . --ignore-path ./.gitignore && tsc --noEmit && prettier . --check --ignore-unknown --ignore-path ./.gitignore",
     "prepare": "husky install"
   },
