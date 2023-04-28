@@ -1,6 +1,7 @@
 .spinner {
+  display: flex;
   margin: auto;
-  width: 16rem;
+  font-size: 20rem;
   height: 100vh;
   animation: 2s ease-in-out 0s alternate infinite rotateSpinner;
 }

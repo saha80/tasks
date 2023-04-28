@@ -1,4 +1,4 @@
-import { type FC, Suspense } from 'react';
+import { Suspense, type FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Spinner } from '@/components/Spinner/Spinner';
@@ -9,13 +9,15 @@ import styles from './App.module.css';
 
 export const App: FC = () => {
   return (
-    <Suspense fallback={<Spinner />}>
+    <>
       <Header />
       <main className={styles.app}>
-        <Outlet />
+        <Suspense fallback={<Spinner />}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
-    </Suspense>
+    </>
   );
 };
 

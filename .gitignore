@@ -23,14 +23,16 @@ dist-ssr
 *.sln
 *.sw?
 
-coverage
+# Builds
 vite.config.ts.timestamp-*
 *.tsbuildinfo
 *.js
 *.js.map
 *.jsx
 
+# Tests
+coverage
 cypress/videos
 cypress/screenshots
-cypress/fixtures/profile.json
-cypress/fixtures/users.json
+.nyc_output
+instrumented
