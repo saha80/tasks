@@ -21,25 +21,32 @@ type ViteSSR = {
 
 const base = '/';
 
-const applyEnvMiddleware = async (app: Express.Express): Promise<ViteSSR> => {
+const createViteApp = async (
+  serverCreator: () => Express.Express
+): Promise<{
+  app: Express.Express;
+  vite: ViteSSR;
+}> => {
   const isProduction = process.env.NODE_ENV === 'production';
 
   if (isProduction) {
-    const compression = (await import('compression')).default;
-    const sirv = (await import('sirv')).default;
-
-    app.use(compression());
-    app.use(base, sirv('./dist/client', { extensions: [] }));
+    const { default: compression } = await import('compression');
+    const { default: sirv } = await import('sirv');
 
     return {
-      isProduction,
-      server: undefined,
-      ssrManifest: await fs.readFile(
-        './dist/client/ssr-manifest.json',
-        'utf-8'
-      ),
-      templateHtmlPath: './dist/client/index.html',
-      renderPath: './dist/server/entry-server.js',
+      app: serverCreator()
+        .use(compression())
+        .use(base, sirv('./dist/client', { extensions: [] })),
+      vite: {
+        isProduction,
+        server: undefined,
+        ssrManifest: await fs.readFile(
+          './dist/client/ssr-manifest.json',
+          'utf-8'
+        ),
+        templateHtmlPath: './dist/client/index.html',
+        renderPath: './dist/server/entry-server.js',
+      },
     };
   }
 
@@ -49,18 +56,19 @@ const applyEnvMiddleware = async (app: Express.Express): Promise<ViteSSR> => {
       middlewareMode: true,
       strictPort: true,
     },
-    appType: 'custom', // don't include Vite's default HTML handling middlewares
+    appType: 'custom', // do not include Vite's default HTML handling middlewares
     base,
   });
 
-  app.use(server.middlewares);
-
   return {
-    isProduction,
-    server,
-    ssrManifest: undefined,
-    templateHtmlPath: './index.html',
-    renderPath: './src/entry-server.tsx',
+    app: serverCreator().use(server.middlewares),
+    vite: {
+      isProduction,
+      server,
+      ssrManifest: undefined,
+      templateHtmlPath: './index.html',
+      renderPath: './src/entry-server.tsx',
+    },
   };
 };
 
@@ -85,8 +93,7 @@ const loadRender = async (vite: Readonly<ViteSSR>): Promise<Render> => {
   return (await module).render;
 };
 
-const app = express();
-const vite = await applyEnvMiddleware(app);
+const { app, vite } = await createViteApp(express);
 
 app
   .use('*', async (req, res, next) => {
@@ -105,6 +112,7 @@ app
       });
     } catch (e) {
       if (e instanceof Response) {
+        console.log(e);
         next(e);
       }
       vite.server?.ssrFixStacktrace(e as Error);
