@@ -1,12 +1,12 @@
 import { defineConfig } from 'cypress';
-import codeCoverage from '@cypress/code-coverage/task';
+import registerCodeCoverageTasks from '@cypress/code-coverage/task';
 
 export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:5173',
     specPattern: './cypress/**/*.cy.{ts,tsx}',
     setupNodeEvents: (on, config) => {
-      codeCoverage(on, config);
+      registerCodeCoverageTasks(on, config);
       return config;
     },
   },

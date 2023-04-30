@@ -75,13 +75,13 @@ export const render = async (
   store.dispatch(
     unsplashApiSlice.endpoints.getCardList.initiate(
       undefined
-    ) as unknown as RTK.AnyAction
+    ) as unknown as RTK.AnyAction // hack
   );
 
   await Promise.all(
     store.dispatch(
-      unsplashApiSlice.util.getRunningQueriesThunk() as unknown as RTK.AnyAction
-    ) as unknown as unknown[]
+      unsplashApiSlice.util.getRunningQueriesThunk() as unknown as RTK.AnyAction // hack
+    ) as unknown as unknown[] // hack
   );
 
   const stream = renderToPipeableStream(
@@ -95,7 +95,7 @@ export const render = async (
         structuredClone(store.getState())
       )}`,
       onShellReady: () => stream.pipe(destination),
-      onAllReady: () => onAllReady(),
+      onAllReady,
     }
   );
 };

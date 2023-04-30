@@ -82,7 +82,7 @@ const readHtmlTemplate = async (url: string, vite: Readonly<ViteSSR>) => {
 
 type Render = (
   destination: Express.Response,
-  onPipe: () => void
+  onAllReady: () => void
 ) => Promise<void>;
 
 const loadRender = async (vite: Readonly<ViteSSR>): Promise<Render> => {
