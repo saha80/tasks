@@ -35,4 +35,3 @@ coverage
 cypress/videos
 cypress/screenshots
 .nyc_output
-instrumented

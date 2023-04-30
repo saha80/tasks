@@ -76,7 +76,7 @@ expect.extend(matchers);
 afterEach(cleanup);
 
 beforeAll(() => {
-  server.listen();
+  server.listen({ onUnhandledRequest: 'error' });
 });
 
 afterAll(() => {
