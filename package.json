@@ -4,15 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "compile:server": "tsc --project ./tsconfig.node.server.json",
-    "dev": "yarn compile:server && node unsplashProxyServer | node server",
-    "vitest:coverage": "vitest run --coverage",
-    "cypress:coverage": "cypress run --e2e && nyc report",
+    "server:proxy": "ts-node -P ./tsconfig.node.server.json unsplashProxyServer",
+    "server:main": "ts-node -P ./tsconfig.node.server.json server",
+    "server:main:prod": "cross-env NODE_ENV=production ts-node -P ./tsconfig.node.server.json server",
+    "kill-process-on-port-5173": "kill-port 5173",
+    "dev": "npm-run-all kill-process-on-port-5173 --parallel server:*",
+    "coverage:vitest": "vitest run --coverage",
+    "coverage:cypress": "cypress run --e2e --browser chrome && nyc report",
+    "coverage": "run-p dev coverage:cypress",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --outDir dist/server --ssr src/entry-server.tsx",
-    "build": "yarn build:client && yarn build:server",
-    "preview": "yarn compile:server && yarn build && node unsplashProxyServer | cross-env NODE_ENV=production node server",
-    "lint": "eslint . --ignore-path ./.gitignore && tsc --noEmit && prettier . --check --ignore-unknown --ignore-path ./.gitignore",
+    "build": "run-p build:*",
+    "preview": "npm-run-all build --parallel server:proxy server:main:prod",
+    "lint": "eslint . --ignore-path ./.gitignore & tsc --noEmit & prettier . --check --ignore-unknown --ignore-path ./.gitignore",
     "prepare": "husky install"
   },
   "engines": {
@@ -33,7 +37,8 @@
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
-    "sirv": "^2.0.2"
+    "sirv": "^2.0.2",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.4",
@@ -67,8 +72,10 @@
     "husky": "^8.0.3",
     "jest": "^29.5.0",
     "jsdom": "^21.1.1",
+    "kill-port": "^2.0.1",
     "lint-staged": "^13.2.0",
     "msw": "^1.2.1",
+    "npm-run-all": "^4.1.5",
     "nyc": "^15.1.0",
     "prettier": "^2.8.7",
     "typescript": "^4.9.3",

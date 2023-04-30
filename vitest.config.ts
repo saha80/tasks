@@ -6,9 +6,6 @@ import viteConfig from './vite.config';
 export default mergeConfig(
   viteConfig,
   defineConfig({
-    build: {
-      sourcemap: true,
-    },
     test: {
       globals: true,
       environment: 'jsdom',
