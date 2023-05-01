@@ -1,11 +1,11 @@
 import {
-  ChangeEventHandler,
-  FocusEventHandler,
   forwardRef,
-  ReactNode,
+  type ChangeEventHandler,
+  type FocusEventHandler,
+  type ReactNode,
 } from 'react';
 
-import { Label } from '@/components';
+import { Label } from '@/components/Label/Label';
 
 import styles from './FilePicker.module.css';
 

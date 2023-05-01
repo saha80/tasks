@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 
 import styles from './AboutUs.module.css';
 
@@ -16,3 +16,5 @@ export const AboutUs: FC = () => (
     </p>
   </div>
 );
+
+export default AboutUs;

@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 
-import { MdOutlineVisibility, MdThumbUp } from 'react-icons/md';
+import { MdOutlineVisibility, MdThumbUp } from 'react-icons/md/index';
 
-import { CardDetails as BaseCardDetails } from '@/interfaces/Card';
+import { type CardDetails as BaseCardDetails } from '@/interfaces/Card';
 
 import styles from './CardDetails.module.css';
 

@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 
 import { Search } from './components/Search';
-import { Cards } from './components/Cards';
+import { CardListDetails as Cards } from '@/features/CardListDetails';
 
 import styles from './Home.module.css';
 
@@ -11,3 +11,5 @@ export const Home: FC = () => (
     <Cards />
   </div>
 );
+
+export default Home;

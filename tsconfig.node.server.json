@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.shared.json",
+  "compilerOptions": {
+    "sourceMap": true
+  },
+  "include": [
+    "./server.ts",
+    "./unsplashProxyServer.ts",
+    "./server.d.ts",
+    "./unsplashProxyServer.d.ts"
+  ]
+}

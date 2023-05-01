@@ -1,7 +1,7 @@
-import { FC, ReactNode, useCallback } from 'react';
-import { MdThumbUp } from 'react-icons/md';
+import { type FC, type ReactNode, useCallback } from 'react';
+import { MdThumbUp } from 'react-icons/md/index';
 
-import { Card as BaseCard } from '@/interfaces/Card';
+import { type Card as BaseCard } from '@/interfaces/Card';
 
 import styles from './Card.module.css';
 
@@ -33,7 +33,7 @@ export const Card: FC<CardProps> = ({
       <div className={styles.creationDetails}>
         <div>
           <p className={styles.createdBy}>
-            Created by: <a>{createdBy}</a>
+            Created by: <span>{createdBy}</span>
           </p>
           <p>Created at: {new Date(creationTimestamp).toDateString()}</p>
           {!Object.is(creationTimestamp, modificationTimestamp) && (

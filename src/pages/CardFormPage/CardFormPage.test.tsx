@@ -1,12 +1,18 @@
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
+import * as RTK from '@reduxjs/toolkit';
 import userEvent from '@testing-library/user-event';
 
 import { CardFormPage } from '@/pages/CardFormPage/CardFormPage';
-import { store } from '@/app/store';
+import { configureStoreOptions } from '@/app/rootReducer';
+import type { Raw } from '@/interfaces/redux';
+
+const { configureStore } = (RTK as Raw<typeof RTK>).default ?? RTK;
 
 describe('CardFormPage', () => {
+  const store = configureStore(configureStoreOptions);
+
   test('renders', () => {
     render(
       <Provider store={store}>

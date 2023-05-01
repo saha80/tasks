@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './PageNotFound.module.css';
@@ -9,3 +9,5 @@ export const PageNotFound: FC = () => (
     <Link to="/">Go to Home</Link>
   </div>
 );
+
+export default PageNotFound;

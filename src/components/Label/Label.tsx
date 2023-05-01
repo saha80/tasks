@@ -1,4 +1,4 @@
-import { FC, ReactElement, ReactNode } from 'react';
+import { type FC, type ReactElement, type ReactNode } from 'react';
 
 import styles from './Label.module.css';
 

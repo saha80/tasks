@@ -23,4 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 
+# Builds
+vite.config.ts.timestamp-*
+*.tsbuildinfo
+*.js
+*.js.map
+*.jsx
+
+# Tests
 coverage
+cypress/videos
+cypress/screenshots
+.nyc_output

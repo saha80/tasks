@@ -40,6 +40,7 @@
 
 .image {
   width: 100%;
+  aspect-ratio: auto 400 / 600;
 
   padding-bottom: 1rem;
   margin-bottom: 8px;
@@ -68,12 +69,8 @@
   background-color: var(--card-background-color);
 }
 
-.creationDetails a {
+.createdBy span {
   color: var(--card-color);
-  background-color: var(--card-background-color);
-}
-
-.createdBy a {
   background-color: lightgreen;
   border-radius: var(--border-radius);
   padding: 4px;

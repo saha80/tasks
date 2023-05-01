@@ -1,13 +1,26 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import * as RTK from '@reduxjs/toolkit/dist/query/react';
+import * as RTKQuery from '@reduxjs/toolkit/dist/query/react';
 
-import { Card, CardDetails } from '@/interfaces/Card';
-import {
+import type { Raw } from '@/interfaces/redux';
+import type { Card, CardDetails } from '@/interfaces/Card';
+import type {
   PhotoByIdResponse,
   PhotoResponse,
   SearchPhotosParams,
   SearchPhotosResponse,
 } from '@/interfaces/Unsplash';
 import { pathnameWithSearch } from '@/utils/URL';
+
+// https://github.com/reduxjs/redux-toolkit/issues/1960#issuecomment-1022277429
+const { fetchBaseQuery } = (RTK as Raw<typeof RTK>).default ?? RTK;
+
+const { buildCreateApi, coreModule, reactHooksModule } =
+  (RTKQuery as Raw<typeof RTKQuery>).default ?? RTKQuery;
+
+const createApi = buildCreateApi(
+  coreModule(),
+  reactHooksModule({ unstable__sideEffectsInRender: true })
+);
 
 const mapToCard = (photo: PhotoResponse): Card => {
   return {
@@ -43,10 +56,6 @@ export const unsplashApiSlice = createApi({
   reducerPath: 'unsplash',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
-    headers: new Headers({
-      ['Accept-Version']: import.meta.env.VITE_ACCEPT_VERSION,
-      ['Authorization']: `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`,
-    }),
   }),
   endpoints: (builder) => ({
     getCardList: builder.query<Card[], undefined>({

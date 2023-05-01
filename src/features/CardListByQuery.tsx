@@ -1,8 +1,11 @@
-import { FC } from 'react';
-import { CardList as BaseCardList, Error, Progress } from '@/components';
+import { type FC } from 'react';
+
+import { CardList as BaseCardList } from '@/components/CardList/CardList';
+import { Error } from '@/components/Error/Error';
+import { Progress } from '@/components/Progress/Progress';
 import { useGetCardListByQuery } from '@/services/unsplash.service';
 
-import { CardListProps } from './CardList';
+import { type CardListProps } from './CardList';
 
 export type CardListByQueryProps = CardListProps & {
   searchValue: string;

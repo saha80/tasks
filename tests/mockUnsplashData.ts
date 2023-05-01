@@ -1,4 +1,4 @@
-import * as Unsplash from '@/interfaces/Unsplash';
+import type * as Unsplash from '@/interfaces/Unsplash';
 
 const created_at = '2023-04-13T11:31:39.840Z';
 const updated_at = '2023-04-13T12:00:00.000Z';

@@ -1,10 +1,10 @@
-import { FC, ReactComponentElement } from 'react';
-import { MdClose } from 'react-icons/md';
+import { type FC, type ReactComponentElement } from 'react';
+import { MdClose } from 'react-icons/md/index';
 
-import { Button } from '@/components';
+import { Button } from '@/components/Button/Button';
 
-import { DialogContent, DialogContentProps } from './DialogContent';
-import { DialogTitle, DialogTitleProps } from './DialogTitle';
+import { type DialogContent, type DialogContentProps } from './DialogContent';
+import { type DialogTitle, type DialogTitleProps } from './DialogTitle';
 import styles from './Dialog.module.css';
 
 export interface DialogProps {

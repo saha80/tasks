@@ -1,10 +1,5 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["vite.config.ts", "vitest.config.ts"]
+  "extends": "./tsconfig.shared.json",
+  "compilerOptions": {},
+  "include": ["./vite.config.ts", "./vitest.config.ts", "./cypress.config.ts"]
 }

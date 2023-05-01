@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    /* Projects */
+    "composite": true,
+
+    /* Language and Environment */
+    "target": "ESNext",
+    "jsx": "react-jsx",
+    "lib": [
+      "ESNext"
+      // add lib when needed
+    ],
+
+    /* Modules */
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    /* JavaScript Support */
+    "allowJs": false,
+
+    /* Emit */
+    "noEmitOnError": true,
+    // "outDir": add outDir when needed
+
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+
+    /* Completeness */
+    "skipLibCheck": true
+  }
+  // "include": add include
+}

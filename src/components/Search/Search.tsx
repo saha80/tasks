@@ -1,6 +1,6 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
+import { type InputHTMLAttributes, forwardRef } from 'react';
 
-import { MdSearch } from 'react-icons/md';
+import { MdSearch } from 'react-icons/md/index';
 
 import styles from './Search.module.css';
 
